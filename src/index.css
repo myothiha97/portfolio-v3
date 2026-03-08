@@ -1,0 +1,176 @@
+@import url('https://fonts.cdnfonts.com/css/general-sans');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #010103;
+  font-family: 'General Sans', sans-serif;
+}
+
+@layer utilities {
+  .c-space {
+    @apply sm:px-10 px-5;
+  }
+
+  .head-text {
+    @apply sm:text-4xl text-3xl font-semibold text-gray_gradient;
+  }
+
+  .nav-ul {
+    @apply flex flex-col items-center gap-4 sm:flex-row md:gap-6 relative z-20;
+  }
+
+  .nav-li {
+    @apply text-neutral-400 hover:text-white font-generalsans max-sm:hover:bg-black-500 max-sm:w-full max-sm:rounded-md py-2 max-sm:px-5;
+  }
+
+  .nav-li_a {
+    @apply text-lg md:text-base hover:text-white transition-colors;
+  }
+
+  .nav-sidebar {
+    @apply absolute left-0 right-0 bg-black-200 backdrop-blur-sm transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block;
+  }
+
+  .text-gray_gradient {
+    @apply bg-gradient-to-r from-[#BEC1CF] from-60% via-[#D5D8EA] via-60% to-[#D5D8EA] to-100% bg-clip-text text-transparent;
+  }
+
+  /* button component */
+  .btn {
+    @apply flex gap-4 items-center justify-center cursor-pointer p-3 rounded-md bg-black-300 transition-all active:scale-95 text-white mx-auto;
+  }
+
+  .btn-ping {
+    @apply animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75;
+  }
+
+  .btn-ping_dot {
+    @apply relative inline-flex rounded-full h-3 w-3 bg-green-500;
+  }
+
+  /* hero section */
+  .hero_tag {
+    @apply text-center xl:text-6xl md:text-5xl sm:text-4xl text-3xl font-generalsans font-black !leading-normal;
+  }
+
+  /* contact section */
+  .contact-container {
+    @apply max-w-xl relative z-10 sm:px-10 px-5 mt-12;
+  }
+
+  .field-label {
+    @apply text-lg text-white-600;
+  }
+
+  .field-input {
+    @apply w-full bg-black-300 px-5 py-2 min-h-14 rounded-lg placeholder:text-white-500 text-lg text-white-800 shadow-black-200 shadow-2xl focus:outline-none;
+  }
+
+  .field-btn {
+    @apply bg-black-500 px-5 py-2 min-h-12 rounded-lg shadow-black-200 shadow-2xl flex justify-center items-center text-lg text-white gap-3;
+  }
+
+  .field-btn_arrow {
+    @apply w-2.5 h-2.5 object-contain invert brightness-0;
+  }
+}
+
+/* ====== Hero — Death Stranding Style ====== */
+
+.hero-atmosphere {
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(107, 140, 174, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 60%, rgba(140, 160, 180, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(80, 100, 120, 0.05) 0%, transparent 40%);
+}
+
+.hero-grain {
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  z-index: 5;
+}
+
+/* ====== Work Experience — Bridge Panel ====== */
+
+.bridge-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@keyframes bridge-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ====== DS2 Scan Lines ====== */
+
+.ds-scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.03) 2px,
+    rgba(255, 255, 255, 0.03) 4px
+  );
+}
+
+/* ====== Animations ====== */
+
+.waving-hand {
+  animation-name: wave-animation;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+
+.arrow-gradient {
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.1) 10%,
+    rgba(255, 255, 255, 0.000025) 50%,
+    rgba(255, 255, 255, 0.000025) 50%,
+    rgba(255, 255, 255, 0.025) 100%
+  );
+}
+
+@keyframes wave-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(14deg);
+  }
+  30% {
+    transform: rotate(-8deg);
+  }
+  40% {
+    transform: rotate(14deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+  60% {
+    transform: rotate(10deg);
+  }
+  70% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
