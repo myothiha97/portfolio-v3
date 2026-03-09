@@ -36,7 +36,7 @@ const NavItems = ({ onClick = () => {} }) => {
               <Link
                 to={item.href}
                 className={`text-[11px] tracking-[0.2em] uppercase font-light transition-colors duration-300 ${
-                  isActive ? 'text-white/90' : 'text-white/50 hover:text-white/75'
+                  isActive ? 'text-white' : 'text-white/70 hover:text-white/90'
                 }`}
                 onClick={onClick}>
                 {item.name}
@@ -49,7 +49,7 @@ const NavItems = ({ onClick = () => {} }) => {
           <li key={item.id}>
             <a
               href={item.href}
-              className="text-[11px] tracking-[0.2em] uppercase font-light text-white/50 hover:text-white/75 transition-colors duration-300"
+              className="text-[11px] tracking-[0.2em] uppercase font-light text-white/70 hover:text-white/90 transition-colors duration-300"
               onClick={(e) => handleClick(e, item.href)}>
               {item.name}
             </a>
@@ -79,7 +79,7 @@ const Navbar = () => {
         scrolled ? 'bg-[#010103]/95 backdrop-blur-md' : 'bg-transparent'
       }`}>
       {/* Top thin accent line */}
-      <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/[0.10] to-transparent" />
+      <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/[0.15] to-transparent" />
 
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center py-5 mx-auto c-space">
@@ -87,9 +87,9 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-3 group">
             {/* Small status dot */}
             <div className="relative">
-              <div className="w-1.5 h-1.5 rounded-full bg-white/30 group-hover:bg-white/50 transition-colors" />
+              <div className="w-1.5 h-1.5 rounded-full bg-white/50 group-hover:bg-white/70 transition-colors" />
             </div>
-            <span className="text-white/65 text-[11px] tracking-[0.35em] uppercase font-light group-hover:text-white/90 transition-colors">
+            <span className="text-white/80 text-[11px] tracking-[0.35em] uppercase font-light group-hover:text-white transition-colors">
               Myo Thiha Kyaw
             </span>
           </Link>
@@ -106,9 +106,9 @@ const Navbar = () => {
           <nav className="sm:flex hidden items-center gap-8">
             <NavItems />
             {/* Status indicator */}
-            <div className="flex items-center gap-2 ml-4 pl-4 border-l border-white/[0.10]">
-              <div className="w-1 h-1 rounded-full bg-green-500/70" />
-              <span className="text-white/40 text-[9px] tracking-[0.2em] uppercase font-light">Available</span>
+            <div className="flex items-center gap-2 ml-4 pl-4 border-l border-white/[0.15]">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-400/80 shadow-[0_0_4px_1px_rgba(74,222,128,0.4)]" />
+              <span className="text-white/75 text-[11px] tracking-[0.2em] uppercase font-light">Available</span>
             </div>
           </nav>
         </div>

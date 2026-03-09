@@ -81,8 +81,8 @@ const Contact = () => {
       {alert.show && <Alert {...alert} />}
 
       <div className="contact-label flex items-center gap-4 mb-16">
-        <span className="text-white/50 text-[11px] tracking-[0.4em] uppercase font-light">// Contact</span>
-        <div className="contact-label-line flex-1 h-[1px] bg-gradient-to-r from-white/15 to-transparent origin-left" />
+        <span className="text-white/70 text-[11px] tracking-[0.4em] uppercase font-light">// Contact</span>
+        <div className="contact-label-line flex-1 h-[1px] bg-gradient-to-r from-white/25 to-transparent origin-left" />
       </div>
 
       <div className="contact-content max-w-2xl mx-auto">
