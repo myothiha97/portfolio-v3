@@ -147,8 +147,8 @@ const WorkExperience = () => {
   return (
     <section ref={sectionRef} className="c-space my-20 sm:my-32" id="work">
       <div className="work-label flex items-center gap-4 mb-16">
-        <span className="text-white/50 text-[11px] tracking-[0.4em] uppercase font-light">// Experience</span>
-        <div className="work-label-line flex-1 h-[1px] bg-gradient-to-r from-white/15 to-transparent origin-left" />
+        <span className="text-white/70 text-[11px] tracking-[0.4em] uppercase font-light">// Experience</span>
+        <div className="work-label-line flex-1 h-[1px] bg-gradient-to-r from-white/25 to-transparent origin-left" />
       </div>
 
       <div className="work-grid grid lg:grid-cols-3 grid-cols-1 gap-5">

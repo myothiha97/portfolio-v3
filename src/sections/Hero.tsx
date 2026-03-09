@@ -124,8 +124,16 @@ const Hero = () => {
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="hero-circle absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] md:w-[450px] md:h-[450px] rounded-full border border-white/[0.07]">
-          <div className="absolute -top-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-white/20" />
-          <div className="absolute top-1/2 -right-[3px] -translate-y-1/2 w-[3px] h-[3px] rounded-full bg-white/15" />
+          {/* Orbiting moon with strong localized glow on circle */}
+          <div className="absolute -top-[3px] left-1/2 -translate-x-1/2">
+            {/* Large diffused glow illuminating the circle outline */}
+            <div className="absolute -inset-10 rounded-full bg-white/[0.15] blur-2xl" />
+            <div className="absolute -inset-5 rounded-full bg-white/[0.12] blur-lg animate-pulse" />
+            {/* Moon dot */}
+            <div className="relative w-[7px] h-[7px] rounded-full bg-white shadow-[0_0_12px_4px_rgba(255,255,255,0.5)]" />
+          </div>
+          {/* Secondary smaller dot */}
+          <div className="absolute top-1/2 -right-[3px] -translate-y-1/2 w-[3px] h-[3px] rounded-full bg-white/25" />
         </div>
         <div className="hero-line absolute w-[120px] sm:w-[200px] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-y-[180px] sm:-translate-y-[240px]" />
         <div className="hero-line absolute w-[80px] sm:w-[140px] h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent translate-y-[180px] sm:translate-y-[240px]" />
@@ -135,7 +143,7 @@ const Hero = () => {
         <p className="hero-greeting sm:text-2xl text-lg font-light tracking-[0.2em] uppercase text-white/70 text-center font-generalsans opacity-0">
           Hi, I am Myo <span className="waving-hand">👋</span>
         </p>
-        <h1 className="hero-title hero_tag text-white/95 opacity-0" style={{ letterSpacing: '0.04em' }}>
+        <h1 className="hero-title hero_tag text-[#c8c2bc] opacity-0" style={{ letterSpacing: '0.04em' }}>
           Full-Stack Engineer
         </h1>
         <p className="hero-subtitle text-white/55 text-center max-w-xl sm:text-base text-sm font-generalsans font-light tracking-wide leading-relaxed opacity-0">
