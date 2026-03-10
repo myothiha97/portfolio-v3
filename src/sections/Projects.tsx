@@ -70,7 +70,7 @@ const Projects = () => {
         {/* Left: Project info */}
         <div className="project-entrance flex flex-col justify-between">
           <div className="mb-8">
-            <p className="project-text text-white/40 text-[11px] tracking-[0.4em] uppercase font-light mb-6">
+            <p className="project-text text-white/50 text-[11px] tracking-[0.4em] uppercase font-light mb-6">
               {String(selectedProjectIndex + 1).padStart(2, '0')} / {String(projectCount).padStart(2, '0')}
             </p>
 
@@ -83,10 +83,10 @@ const Projects = () => {
             <h3 className="project-text text-white/95 text-2xl sm:text-3xl font-light tracking-wide mb-4">
               {currentProject.title}
             </h3>
-            <p className="project-text text-white/60 text-sm sm:text-base font-light leading-relaxed mb-3">
+            <p className="project-text text-white/70 text-sm sm:text-base font-light leading-relaxed mb-3">
               {currentProject.desc}
             </p>
-            <p className="project-text text-white/50 text-sm font-light leading-relaxed">{currentProject.subdesc}</p>
+            <p className="project-text text-white/60 text-sm font-light leading-relaxed">{currentProject.subdesc}</p>
           </div>
 
           <div>
@@ -94,9 +94,9 @@ const Projects = () => {
               {currentProject.tags.map((tag, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-1.5 px-3 py-1.5 border border-white/[0.10] rounded">
+                  className="flex items-center gap-1.5 px-3 py-1.5 border border-white/[0.14] rounded">
                   <img src={tag.path} alt={tag.name} className="w-4 h-4" />
-                  <span className="text-white/55 text-[11px] tracking-wider uppercase">{tag.name}</span>
+                  <span className="text-white/65 text-[11px] tracking-wider uppercase">{tag.name}</span>
                 </div>
               ))}
             </div>
@@ -104,14 +104,14 @@ const Projects = () => {
             {/* Navigation */}
             <div className="flex items-center gap-4 mt-8">
               <button
-                className="w-10 h-10 border border-white/[0.10] rounded flex items-center justify-center hover:border-white/25 transition-colors"
+                className="w-10 h-10 border border-white/[0.14] rounded flex items-center justify-center hover:border-white/25 transition-colors"
                 onClick={() => handleNavigation('previous')}>
-                <img src="/assets/left-arrow.png" alt="previous" className="w-3 h-3 opacity-60" />
+                <img src="/assets/left-arrow.png" alt="previous" className="w-3 h-3 opacity-70" />
               </button>
               <button
-                className="w-10 h-10 border border-white/[0.10] rounded flex items-center justify-center hover:border-white/25 transition-colors"
+                className="w-10 h-10 border border-white/[0.14] rounded flex items-center justify-center hover:border-white/25 transition-colors"
                 onClick={() => handleNavigation('next')}>
-                <img src="/assets/right-arrow.png" alt="next" className="w-3 h-3 opacity-60" />
+                <img src="/assets/right-arrow.png" alt="next" className="w-3 h-3 opacity-70" />
               </button>
             </div>
           </div>
@@ -120,12 +120,12 @@ const Projects = () => {
         {/* Right: Project visual — DS2-style data panel instead of broken video */}
         <div className="project-entrance relative">
           {/* DS2 frame corners */}
-          <div className="absolute -top-2 -left-2 w-5 h-5 border-l border-t border-white/[0.12] z-10" />
-          <div className="absolute -top-2 -right-2 w-5 h-5 border-r border-t border-white/[0.12] z-10" />
-          <div className="absolute -bottom-2 -left-2 w-5 h-5 border-l border-b border-white/[0.12] z-10" />
-          <div className="absolute -bottom-2 -right-2 w-5 h-5 border-r border-b border-white/[0.12] z-10" />
+          <div className="absolute -top-2 -left-2 w-5 h-5 border-l border-t border-white/[0.18] z-10" />
+          <div className="absolute -top-2 -right-2 w-5 h-5 border-r border-t border-white/[0.18] z-10" />
+          <div className="absolute -bottom-2 -left-2 w-5 h-5 border-l border-b border-white/[0.18] z-10" />
+          <div className="absolute -bottom-2 -right-2 w-5 h-5 border-r border-b border-white/[0.18] z-10" />
 
-          <div className="w-full h-80 sm:h-96 lg:h-full min-h-[360px] bg-black-200 border border-white/[0.08] rounded overflow-hidden relative flex items-center justify-center">
+          <div className="w-full h-80 sm:h-96 lg:h-full min-h-[360px] bg-black-200 border border-white/[0.10] rounded overflow-hidden relative flex items-center justify-center">
             {/* Grid background */}
             <div className="absolute inset-0 bridge-grid opacity-[0.02]" />
 

@@ -79,7 +79,7 @@ const Navbar = () => {
         scrolled ? 'bg-[#010103]/95 backdrop-blur-md' : 'bg-transparent'
       }`}>
       {/* Top thin accent line */}
-      <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/[0.15] to-transparent" />
+      <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/[0.18] to-transparent" />
 
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center py-5 mx-auto c-space">
@@ -87,9 +87,9 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-3 group">
             {/* Small status dot */}
             <div className="relative">
-              <div className="w-1.5 h-1.5 rounded-full bg-white/50 group-hover:bg-white/70 transition-colors" />
+              {/* <div className="w-1.5 h-1.5 rounded-full bg-white/50 group-hover:bg-white/70 transition-colors" /> */}
             </div>
-            <span className="text-white/80 text-[11px] tracking-[0.35em] uppercase font-light group-hover:text-white transition-colors">
+            <span className="text-white/85 text-[11px] tracking-[0.35em] uppercase font-light group-hover:text-white transition-colors">
               Myo Thiha Kyaw
             </span>
           </Link>
@@ -106,7 +106,7 @@ const Navbar = () => {
           <nav className="sm:flex hidden items-center gap-8">
             <NavItems />
             {/* Status indicator */}
-            <div className="flex items-center gap-2 ml-4 pl-4 border-l border-white/[0.15]">
+            <div className="flex items-center gap-2 ml-4 pl-4 border-l border-white/[0.18]">
               <div className="w-1.5 h-1.5 rounded-full bg-green-400/80 shadow-[0_0_4px_1px_rgba(74,222,128,0.4)]" />
               <span className="text-white/75 text-[11px] tracking-[0.2em] uppercase font-light">Available</span>
             </div>
@@ -123,7 +123,7 @@ const Navbar = () => {
 
       {/* Mobile sidebar */}
       <div
-        className={`absolute left-0 right-0 bg-[#010103]/98 backdrop-blur-md transition-all duration-300 ease-in-out overflow-hidden z-20 sm:hidden block border-b border-white/[0.04] ${
+        className={`absolute left-0 right-0 bg-[#010103]/98 backdrop-blur-md transition-all duration-300 ease-in-out overflow-hidden z-20 sm:hidden block border-b border-white/[0.06] ${
           isOpen ? 'max-h-screen' : 'max-h-0 border-b-0'
         }`}>
         <nav className="p-5">

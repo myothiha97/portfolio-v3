@@ -134,35 +134,35 @@ export const workExperiences = [
     pos: 'Senior Frontend Engineer',
     duration: '2024 - Present',
     title:
-      'Building fitness, wellness & spa management software for the Singapore market. Leading frontend architecture with React and TypeScript, driving performance optimizations and team best practices.',
+      'Leading frontend architecture for a gym, wellness & spa SaaS platform. Refactoring legacy code to high-performance technologies, designing robust API integrations, and owning CI/CD pipelines on AWS. Technical mentor promoting maintainability and performance.',
     icon: '/assets/framer.svg',
     animation: 'victory',
   },
   {
     id: 2,
-    name: 'SPOTV',
-    pos: 'Senior Frontend Engineer',
-    duration: '2024',
+    name: 'Codigo',
+    pos: 'Software Engineer → Lead',
+    duration: '2021 - 2024',
     title:
-      "Developed high-performance streaming platform features for one of Asia's leading sports broadcasting networks. Focused on real-time video delivery and responsive cross-platform experiences.",
-    icon: '/assets/figma.svg',
+      'Progressed SE → Senior → Lead over 3 years. Architected 7-Eleven Singapore e-commerce platform, engineered SPOTV\'s live streaming with Brightcove SDK, and built design systems for AIA and Trifecta. Improved API performance by 40%. Led teams of 3-4 developers.',
+    icon: '/assets/notion.svg',
     animation: 'clapping',
   },
   {
     id: 3,
-    name: 'Codigo',
-    pos: 'Lead Frontend Engineer',
-    duration: '2021 - 2024',
+    name: 'MM-Digital-Solutions',
+    pos: 'Software Engineer, Python',
+    duration: '2020 - 2021',
     title:
-      'Led frontend development at a Singapore app development company. Shipped products for clients including 7-Eleven, Resorts World Sentosa, and Yoga Movement. Mentored junior developers and established coding standards.',
-    icon: '/assets/notion.svg',
+      'Built end-to-end web crawlers and automation systems with Selenium, Scrapy, and Beautiful Soup. Delivered automation solutions for 5BB ISP. Developed ML prototypes for computer vision — parking analytics, security monitoring, and facial recognition.',
+    icon: '/assets/figma.svg',
     animation: 'salute',
   },
 ];
 
 export const skills = {
-  frontend: ['React', 'TypeScript', 'Next.js', 'Vue', 'Angular', 'Three.js', 'GSAP', 'Tailwind CSS'],
-  backend: ['Node.js', 'Go', 'Python', 'FastAPI', 'Express', 'REST API', 'GraphQL'],
-  infrastructure: ['Docker', 'PostgreSQL', 'Redis', 'CI/CD', 'Nginx', 'Linux'],
-  tools: ['Git', 'WebSocket', 'Module Federation', 'Webpack', 'Vite', 'Figma'],
+  frontend: ['React', 'Next.js', 'TypeScript', 'Vue.js', 'Angular', 'Tailwind CSS'],
+  backend: ['Node.js', 'Python', 'Go', 'Express', 'NestJS', 'Django'],
+  'database & infra': ['PostgreSQL', 'MySQL', 'Redis', 'Docker', 'AWS', 'CI/CD'],
+  'automation & tools': ['Git', 'Selenium', 'Scrapy', 'Linux', 'Vite', 'Kubernetes'],
 };
