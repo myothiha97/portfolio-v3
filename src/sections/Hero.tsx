@@ -123,7 +123,7 @@ const Hero = () => {
       <div className="absolute inset-0 hero-grain pointer-events-none" />
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="hero-circle absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] md:w-[450px] md:h-[450px] rounded-full border border-white/[0.07]">
+        <div className="hero-circle absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] md:w-[450px] md:h-[450px] rounded-full border border-white/[0.10]">
           {/* Orbiting moon with strong localized glow on circle */}
           <div className="absolute -top-[3px] left-1/2 -translate-x-1/2">
             {/* Large diffused glow illuminating the circle outline */}
@@ -144,11 +144,11 @@ const Hero = () => {
           Hi, I am Myo <span className="waving-hand">👋</span>
         </p>
         <h1 className="hero-title hero_tag text-[#c8c2bc] opacity-0" style={{ letterSpacing: '0.04em' }}>
-          Full-Stack Engineer
+          Software Engineer
         </h1>
         <p className="hero-subtitle text-white/55 text-center max-w-xl sm:text-base text-sm font-generalsans font-light tracking-wide leading-relaxed opacity-0">
-          Building scalable systems — from React frontends
-          <br className="hidden sm:block" /> to Go microservices and cloud infrastructure
+          Full Stack · Backend · DevOps · Automation
+          <br className="hidden sm:block" /> Python, Go, TypeScript
         </p>
       </div>
 

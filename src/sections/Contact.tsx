@@ -88,61 +88,61 @@ const Contact = () => {
       <div className="contact-content max-w-2xl mx-auto">
         <div className="contact-reveal mb-12">
           <h3 className="text-white/95 text-3xl sm:text-4xl font-light tracking-wide mb-4">Let&apos;s Connect</h3>
-          <p className="text-white/55 text-base font-light leading-relaxed">
+          <p className="text-white/65 text-base font-light leading-relaxed">
             Whether you&apos;re looking to build a new product, improve your existing platform, or bring a unique
             project to life — I&apos;m here to help.
           </p>
         </div>
 
         <div className="contact-reveal relative">
-          <div className="absolute -top-3 -left-3 w-5 h-5 border-l border-t border-white/[0.10]" />
-          <div className="absolute -top-3 -right-3 w-5 h-5 border-r border-t border-white/[0.10]" />
-          <div className="absolute -bottom-3 -left-3 w-5 h-5 border-l border-b border-white/[0.10]" />
-          <div className="absolute -bottom-3 -right-3 w-5 h-5 border-r border-b border-white/[0.10]" />
+          <div className="absolute -top-3 -left-3 w-5 h-5 border-l border-t border-white/[0.14]" />
+          <div className="absolute -top-3 -right-3 w-5 h-5 border-r border-t border-white/[0.14]" />
+          <div className="absolute -bottom-3 -left-3 w-5 h-5 border-l border-b border-white/[0.14]" />
+          <div className="absolute -bottom-3 -right-3 w-5 h-5 border-r border-b border-white/[0.14]" />
 
           <div className="absolute inset-0 bridge-grid opacity-[0.015] pointer-events-none" />
 
           <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="relative z-10 border border-white/[0.08] rounded-lg p-6 sm:p-10 space-y-6 bg-black-200/50">
-            <p className="text-white/25 text-[9px] tracking-[0.4em] uppercase font-light mb-4">TRANSMISSION.FORM</p>
+            className="relative z-10 border border-white/[0.10] rounded-lg p-6 sm:p-10 space-y-6 bg-black-200/50">
+            <p className="text-white/35 text-[9px] tracking-[0.4em] uppercase font-light mb-4">TRANSMISSION.FORM</p>
 
             <label className="block space-y-2">
-              <span className="text-white/55 text-xs tracking-[0.15em] uppercase font-light">Name</span>
+              <span className="text-white/65 text-xs tracking-[0.15em] uppercase font-light">Name</span>
               <input
                 type="text"
                 name="name"
                 value={form.name}
                 onChange={handleChange}
                 required
-                className="w-full bg-transparent border border-white/[0.10] px-4 py-3 text-white/85 text-sm font-light tracking-wide rounded focus:outline-none focus:border-white/25 transition-colors placeholder:text-white/25"
+                className="w-full bg-transparent border border-white/[0.14] px-4 py-3 text-white/85 text-sm font-light tracking-wide rounded focus:outline-none focus:border-white/25 transition-colors placeholder:text-white/30"
                 placeholder="Your name"
               />
             </label>
 
             <label className="block space-y-2">
-              <span className="text-white/55 text-xs tracking-[0.15em] uppercase font-light">Email</span>
+              <span className="text-white/65 text-xs tracking-[0.15em] uppercase font-light">Email</span>
               <input
                 type="email"
                 name="email"
                 value={form.email}
                 onChange={handleChange}
                 required
-                className="w-full bg-transparent border border-white/[0.10] px-4 py-3 text-white/85 text-sm font-light tracking-wide rounded focus:outline-none focus:border-white/25 transition-colors placeholder:text-white/25"
+                className="w-full bg-transparent border border-white/[0.14] px-4 py-3 text-white/85 text-sm font-light tracking-wide rounded focus:outline-none focus:border-white/25 transition-colors placeholder:text-white/30"
                 placeholder="your@email.com"
               />
             </label>
 
             <label className="block space-y-2">
-              <span className="text-white/55 text-xs tracking-[0.15em] uppercase font-light">Message</span>
+              <span className="text-white/65 text-xs tracking-[0.15em] uppercase font-light">Message</span>
               <textarea
                 name="message"
                 value={form.message}
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full bg-transparent border border-white/[0.10] px-4 py-3 text-white/85 text-sm font-light tracking-wide rounded focus:outline-none focus:border-white/25 transition-colors resize-none placeholder:text-white/25"
+                className="w-full bg-transparent border border-white/[0.14] px-4 py-3 text-white/85 text-sm font-light tracking-wide rounded focus:outline-none focus:border-white/25 transition-colors resize-none placeholder:text-white/30"
                 placeholder="Share your thoughts or project details..."
               />
             </label>
@@ -150,16 +150,16 @@ const Contact = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full border border-white/[0.12] py-3 text-white/60 text-xs tracking-[0.25em] uppercase font-light rounded hover:border-white/25 hover:text-white/90 transition-all duration-300 disabled:opacity-30">
+              className="w-full border border-white/[0.12] py-3 text-white/70 text-xs tracking-[0.25em] uppercase font-light rounded hover:border-white/25 hover:text-white/95 transition-all duration-300 disabled:opacity-30">
               {loading ? 'Transmitting...' : 'Transmit'}
             </button>
           </form>
         </div>
 
         <div className="contact-reveal mt-8 text-center">
-          <p className="text-white/35 text-xs tracking-wider">
+          <p className="text-white/45 text-xs tracking-wider">
             or reach me directly at{' '}
-            <a href="mailto:mthk97.dev@gmail.com" className="text-white/55 hover:text-white/75 transition-colors">
+            <a href="mailto:mthk97.dev@gmail.com" className="text-white/65 hover:text-white/85 transition-colors">
               mthk97.dev@gmail.com
             </a>
           </p>
