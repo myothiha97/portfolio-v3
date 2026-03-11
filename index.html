@@ -8,9 +8,16 @@
     <meta property="og:title" content="Myo Thiha Kyaw - Full-Stack Engineer" />
     <meta property="og:description" content="Senior engineer with 6+ years experience building across the full stack." />
     <title>Myo Thiha Kyaw - Full-Stack Engineer</title>
+    <style>
+      /* Inline critical styles to prevent FOUC during SSR hydration */
+      html, body { background: #010103; margin: 0; }
+      body { font-family: 'General Sans', sans-serif; }
+      #root { opacity: 0; transition: opacity 0.15s ease-in; }
+      #root.hydrated { opacity: 1; }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div id="root"><!--ssr-outlet--></div>
+    <script type="module" src="/src/entry-client.tsx"></script>
   </body>
 </html>
