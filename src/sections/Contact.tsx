@@ -7,7 +7,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import useAlert from '../hooks/useAlert';
 import Alert from '../components/Alert';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);

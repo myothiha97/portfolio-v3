@@ -4,10 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "node server.js",
+    "dev:client": "vite",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
+    "preview": "NODE_ENV=production node server.js",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -15,6 +18,8 @@
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@types/three": "^0.168.0",
+    "compression": "^1.8.1",
+    "express": "^5.2.1",
     "gsap": "^3.12.5",
     "leva": "^0.9.35",
     "maath": "^0.10.8",
@@ -24,6 +29,7 @@
     "react-globe.gl": "^2.27.2",
     "react-responsive": "^10.0.0",
     "react-router-dom": "^7.13.1",
+    "sirv": "^3.0.2",
     "three": "^0.167.1",
     "three-stdlib": "^2.32.2"
   },
