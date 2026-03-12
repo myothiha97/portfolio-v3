@@ -18,4 +18,11 @@ export default defineConfig({
       },
     ],
   },
+  ssr: {
+    // GSAP uses ESM imports internally but Node.js loads it as CJS,
+    // causing "Cannot use import statement outside a module".
+    // noExternal tells Vite to bundle these into the SSR output
+    // so they go through Vite's ESM transform pipeline.
+    noExternal: ['gsap', '@gsap/react'],
+  },
 })

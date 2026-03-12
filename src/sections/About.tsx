@@ -10,7 +10,7 @@ if (typeof window !== 'undefined') {
 
 const stats = [
   { value: '6+', label: 'Years Experience' },
-  { value: '10+', label: 'Projects Shipped' },
+  { value: '15+', label: 'Projects Shipped' },
   { value: '3', label: 'Companies' },
   { value: '20+', label: 'Technologies' },
 ];
@@ -120,7 +120,7 @@ const About = () => {
           <h2 className="about-reveal text-white/95 text-3xl sm:text-5xl font-light leading-tight tracking-wide mb-8">
             Software Engineer
             <br />
-            <span className="text-white/65">full stack · backend · DevOps · automation</span>
+            <span className="text-white/65">Full stack · Backend · DevOps · Automation</span>
           </h2>
 
           <div className="about-reveal max-w-2xl mb-12">
@@ -177,6 +177,22 @@ const About = () => {
             className="inline-flex items-center gap-2 text-white/55 hover:text-white/80 transition-colors">
             <span className="text-xs tracking-wider uppercase font-light text-white/65">mthk97.dev@gmail.com</span>
           </a>
+          <div className="inline-flex cursor-auto items-center gap-2 text-white/55 hover:text-white/80 transition-colors">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="opacity-70">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+            <span className="text-base tracking-wider uppercase font-light">+66927033226</span>
+          </div>
         </div>
       </div>
 
@@ -224,12 +240,10 @@ const About = () => {
           <p className="text-white/40 text-xs tracking-[0.2em] uppercase font-light mb-1">
             Bachelor of Engineering — Mechatronics, Robotics &amp; Automation
           </p>
-          <p className="text-white/40 text-xs tracking-[0.2em] uppercase font-light mb-4">
-            2014 - 2020 · Grade: A
-          </p>
+          <p className="text-white/40 text-xs tracking-[0.2em] uppercase font-light mb-4">2014 - 2020 · Grade: A</p>
           <p className="text-white/65 text-sm font-light leading-relaxed">
-            Multidisciplinary engineering combining electronics, mechanical systems, and computer science —
-            providing a systems-level perspective on software architecture and infrastructure design.
+            Multidisciplinary engineering combining electronics, mechanical systems, and computer science — providing a
+            systems-level perspective on software architecture and infrastructure design.
           </p>
         </div>
       </div>
