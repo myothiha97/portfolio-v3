@@ -58,7 +58,22 @@ import {
   SiGrafana,
   SiAnsible,
   SiDigitalocean,
+  SiMui,
+  SiMantine,
+  SiSqlalchemy,
+  SiRabbitmq,
+  SiApachekafka,
+  SiSocketdotio,
+  SiTrpc,
+  SiBabel,
+  SiEslint,
+  SiNpm,
+  SiPnpm,
+  SiYarn,
+  SiRadixui,
+  SiAntdesign,
 } from 'react-icons/si';
+
 import { FaAws, FaCss3Alt } from 'react-icons/fa';
 import { TbTestPipe, TbBrandGolang } from 'react-icons/tb';
 import type { IconType } from 'react-icons';
@@ -122,6 +137,22 @@ const iconMap: Record<string, IconType> = {
   SiJsonwebtokens,
   SiPlaywright: TbTestPipe,      // Playwright has no SI icon — use test pipe
   SiFiber: TbBrandGolang,        // Fiber is a Go framework — use Go brand icon
+  SiMui,
+  SiMantine,
+  SiSqlalchemy,
+  SiJotai: SiReact,              // Jotai has no SI icon — use React icon
+  SiZustand: SiReact,            // Zustand has no SI icon — use React icon
+  SiRabbitmq,
+  SiApachekafka,
+  SiSocketdotio,
+  SiTrpc,
+  SiBabel,
+  SiEslint,
+  SiNpm,
+  SiPnpm,
+  SiYarn,
+  SiRadixui,
+  SiAntdesign,
   SiVitest,
   SiPuppeteer,
   SiPrometheus,
@@ -195,6 +226,22 @@ const colorMap: Record<string, string> = {
   SiGrafana: '#F46800',
   SiAnsible: '#EE0000',
   SiDigitalocean: '#0080FF',
+  SiRabbitmq: '#FF6600',
+  SiApachekafka: '#FFFFFF',
+  SiSocketdotio: '#FFFFFF',
+  SiTrpc: '#398CCB',
+  SiBabel: '#F9DC3E',
+  SiEslint: '#4B32C3',
+  SiNpm: '#CB3837',
+  SiPnpm: '#F69220',
+  SiYarn: '#2C8EBB',
+  SiRadixui: '#FFFFFF',
+  SiAntdesign: '#0170FE',
+  SiMui: '#007FFF',
+  SiMantine: '#339AF0',
+  SiSqlalchemy: '#D71F00',
+  SiJotai: '#FFFFFF',
+  SiZustand: '#FF6B35',
 };
 
 // Fallback for icons that don't exist in react-icons

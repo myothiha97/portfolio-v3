@@ -215,104 +215,192 @@ export interface Skill {
   icon: string; // react-icons import key
 }
 
+export interface SkillSubGroup {
+  group: string;
+  skills: Skill[];
+}
+
 export interface SkillCategory {
   category: string;
-  tag: string; // short label for HUD badge
-  skills: Skill[];
+  tag: string;
+  subGroups: SkillSubGroup[];
 }
 
 export const skillCategories: SkillCategory[] = [
   {
     category: 'Frontend',
     tag: 'UI',
-    // Ordered: Languages → Frameworks → Tools → Libraries
-    skills: [
-      // Languages
-      { name: 'TypeScript', icon: 'SiTypescript' },
-      { name: 'JavaScript', icon: 'SiJavascript' },
-      { name: 'HTML5', icon: 'SiHtml5' },
-      { name: 'CSS3', icon: 'SiCss3' },
-      // Frameworks
-      { name: 'React', icon: 'SiReact' },
-      { name: 'Next.js', icon: 'SiNextdotjs' },
-      { name: 'Vue.js', icon: 'SiVuedotjs' },
-      { name: 'Angular', icon: 'SiAngular' },
-      { name: 'Svelte', icon: 'SiSvelte' },
-      { name: 'Qwik', icon: 'SiQwik' },
-      // Tools
-      { name: 'Vite', icon: 'SiVite' },
-      { name: 'Webpack', icon: 'SiWebpack' },
-      { name: 'SASS', icon: 'SiSass' },
-      { name: 'Tailwind CSS', icon: 'SiTailwindcss' },
-      { name: 'GSAP', icon: 'SiGreensock' },
-      { name: 'Three.js', icon: 'SiThreedotjs' },
-      // Libraries
-      { name: 'Redux', icon: 'SiRedux' },
-      { name: 'React Query', icon: 'SiReactquery' },
-      { name: 'Recoil', icon: 'SiRecoil' },
-      { name: 'Chakra UI', icon: 'SiChakraui' },
-      { name: 'Bootstrap', icon: 'SiBootstrap' },
+    subGroups: [
+      {
+        group: 'Languages',
+        skills: [
+          { name: 'TypeScript', icon: 'SiTypescript' },
+          { name: 'JavaScript', icon: 'SiJavascript' },
+          { name: 'HTML5', icon: 'SiHtml5' },
+          { name: 'CSS3', icon: 'SiCss3' },
+        ],
+      },
+      {
+        group: 'Frameworks',
+        skills: [
+          { name: 'React', icon: 'SiReact' },
+          { name: 'Next.js', icon: 'SiNextdotjs' },
+          { name: 'Vue.js', icon: 'SiVuedotjs' },
+          { name: 'Angular', icon: 'SiAngular' },
+          { name: 'Svelte', icon: 'SiSvelte' },
+          { name: 'Qwik', icon: 'SiQwik' },
+        ],
+      },
+      {
+        group: 'Build Tools',
+        skills: [
+          { name: 'Vite', icon: 'SiVite' },
+          { name: 'Webpack', icon: 'SiWebpack' },
+          { name: 'Babel', icon: 'SiBabel' },
+          { name: 'ESLint', icon: 'SiEslint' },
+          { name: 'npm', icon: 'SiNpm' },
+          { name: 'pnpm', icon: 'SiPnpm' },
+          { name: 'Yarn', icon: 'SiYarn' },
+        ],
+      },
+      {
+        group: 'Tooling',
+        skills: [
+          { name: 'GSAP', icon: 'SiGreensock' },
+          { name: 'Sass', icon: 'SiSass' },
+          { name: 'Tailwind CSS', icon: 'SiTailwindcss' },
+          { name: 'Three.js', icon: 'SiThreedotjs' },
+          { name: 'Redux', icon: 'SiRedux' },
+          { name: 'React Query', icon: 'SiReactquery' },
+          { name: 'Recoil', icon: 'SiRecoil' },
+          { name: 'Jotai', icon: 'SiJotai' },
+          { name: 'Zustand', icon: 'SiZustand' },
+          { name: 'Chakra UI', icon: 'SiChakraui' },
+          { name: 'MUI', icon: 'SiMui' },
+          { name: 'Radix UI', icon: 'SiRadixui' },
+          { name: 'Ant Design', icon: 'SiAntdesign' },
+        ],
+      },
     ],
   },
   {
-    category: 'Backend & Database',
+    category: 'Backend',
     tag: 'SRV',
-    skills: [
-      { name: 'Node.js', icon: 'SiNodedotjs' },
-      { name: 'Go', icon: 'SiGo' },
-      { name: 'Python', icon: 'SiPython' },
-      { name: 'Rust', icon: 'SiRust' },
-      { name: 'Lua', icon: 'SiLua' },
-      { name: 'FastAPI', icon: 'SiFastapi' },
-      { name: 'Express', icon: 'SiExpress' },
-      { name: 'NestJS', icon: 'SiNestjs' },
-      { name: 'Django', icon: 'SiDjango' },
-      { name: 'Gin', icon: 'SiGin' },
-      { name: 'Fiber', icon: 'SiFiber' },
-      { name: 'GraphQL', icon: 'SiGraphql' },
-      { name: 'PostgreSQL', icon: 'SiPostgresql' },
-      { name: 'MySQL', icon: 'SiMysql' },
-      { name: 'MongoDB', icon: 'SiMongodb' },
-      { name: 'Redis', icon: 'SiRedis' },
-      { name: 'Firebase', icon: 'SiFirebase' },
-      { name: 'Supabase', icon: 'SiSupabase' },
-      { name: 'Prisma', icon: 'SiPrisma' },
-      { name: 'JWT', icon: 'SiJsonwebtokens' },
+    subGroups: [
+      {
+        group: 'Languages',
+        skills: [
+          { name: 'Node.js', icon: 'SiNodedotjs' },
+          { name: 'Go', icon: 'SiGo' },
+          { name: 'Python', icon: 'SiPython' },
+          { name: 'Rust', icon: 'SiRust' },
+          { name: 'Lua', icon: 'SiLua' },
+        ],
+      },
+      {
+        group: 'Frameworks',
+        skills: [
+          { name: 'Express', icon: 'SiExpress' },
+          { name: 'NestJS', icon: 'SiNestjs' },
+          { name: 'FastAPI', icon: 'SiFastapi' },
+          { name: 'Django', icon: 'SiDjango' },
+          { name: 'Gin', icon: 'SiGin' },
+          { name: 'Fiber', icon: 'SiFiber' },
+        ],
+      },
+      {
+        group: 'Databases',
+        skills: [
+          { name: 'PostgreSQL', icon: 'SiPostgresql' },
+          { name: 'MySQL', icon: 'SiMysql' },
+          { name: 'MongoDB', icon: 'SiMongodb' },
+          { name: 'Redis', icon: 'SiRedis' },
+          { name: 'Firebase', icon: 'SiFirebase' },
+          { name: 'Supabase', icon: 'SiSupabase' },
+        ],
+      },
+      {
+        group: 'Tooling',
+        skills: [
+          { name: 'Prisma', icon: 'SiPrisma' },
+          { name: 'GraphQL', icon: 'SiGraphql' },
+          { name: 'tRPC', icon: 'SiTrpc' },
+          { name: 'Socket.IO', icon: 'SiSocketdotio' },
+          { name: 'RabbitMQ', icon: 'SiRabbitmq' },
+          { name: 'Kafka', icon: 'SiApachekafka' },
+          { name: 'JWT', icon: 'SiJsonwebtokens' },
+        ],
+      },
     ],
   },
   {
     category: 'DevOps & Cloud',
     tag: 'OPS',
-    skills: [
-      { name: 'Docker', icon: 'SiDocker' },
-      { name: 'Kubernetes', icon: 'SiKubernetes' },
-      { name: 'AWS', icon: 'SiAmazonwebservices' },
-      { name: 'GitHub Actions', icon: 'SiGithubactions' },
-      { name: 'Nginx', icon: 'SiNginx' },
-      { name: 'Linux', icon: 'SiLinux' },
-      { name: 'Terraform', icon: 'SiTerraform' },
-      { name: 'Git', icon: 'SiGit' },
-      { name: 'Datadog', icon: 'SiDatadog' },
-      { name: 'Prometheus', icon: 'SiPrometheus' },
-      { name: 'Grafana', icon: 'SiGrafana' },
-      { name: 'Ansible', icon: 'SiAnsible' },
-      { name: 'DigitalOcean', icon: 'SiDigitalocean' },
+    subGroups: [
+      {
+        group: 'Containers & Cloud',
+        skills: [
+          { name: 'Docker', icon: 'SiDocker' },
+          { name: 'Kubernetes', icon: 'SiKubernetes' },
+          { name: 'AWS', icon: 'SiAmazonwebservices' },
+          { name: 'DigitalOcean', icon: 'SiDigitalocean' },
+        ],
+      },
+      {
+        group: 'CI/CD & VCS',
+        skills: [
+          { name: 'GitHub Actions', icon: 'SiGithubactions' },
+          { name: 'Git', icon: 'SiGit' },
+          { name: 'Ansible', icon: 'SiAnsible' },
+          { name: 'Terraform', icon: 'SiTerraform' },
+        ],
+      },
+      {
+        group: 'Infrastructure',
+        skills: [
+          { name: 'Nginx', icon: 'SiNginx' },
+          { name: 'Linux', icon: 'SiLinux' },
+        ],
+      },
+      {
+        group: 'Monitoring',
+        skills: [
+          { name: 'Datadog', icon: 'SiDatadog' },
+          { name: 'Prometheus', icon: 'SiPrometheus' },
+          { name: 'Grafana', icon: 'SiGrafana' },
+        ],
+      },
     ],
   },
   {
     category: 'Automation & Testing',
     tag: 'AUTO',
-    skills: [
-      { name: 'Selenium', icon: 'SiSelenium' },
-      { name: 'Scrapy', icon: 'SiScrapy' },
-      { name: 'Jest', icon: 'SiJest' },
-      { name: 'Cypress', icon: 'SiCypress' },
-      { name: 'Playwright', icon: 'SiPlaywright' },
-      { name: 'Vitest', icon: 'SiVitest' },
-      { name: 'Puppeteer', icon: 'SiPuppeteer' },
-      { name: 'Machine Learning', icon: 'SiTensorflow' },
-      { name: 'Figma', icon: 'SiFigma' },
-      { name: 'Jira', icon: 'SiJira' },
+    subGroups: [
+      {
+        group: 'Web Scraping',
+        skills: [
+          { name: 'Selenium', icon: 'SiSelenium' },
+          { name: 'Scrapy', icon: 'SiScrapy' },
+          { name: 'Puppeteer', icon: 'SiPuppeteer' },
+        ],
+      },
+      {
+        group: 'Testing',
+        skills: [
+          { name: 'Jest', icon: 'SiJest' },
+          { name: 'Vitest', icon: 'SiVitest' },
+          { name: 'Cypress', icon: 'SiCypress' },
+          { name: 'Playwright', icon: 'SiPlaywright' },
+        ],
+      },
+      {
+        group: 'Tooling',
+        skills: [
+          { name: 'Machine Learning', icon: 'SiTensorflow' },
+          { name: 'Figma', icon: 'SiFigma' },
+          { name: 'Jira', icon: 'SiJira' },
+        ],
+      },
     ],
   },
 ];
