@@ -10,9 +10,9 @@ if (typeof window !== 'undefined') {
 }
 
 const SkillTile = ({ name, icon }: { name: string; icon: string }) => (
-  <div className="skill-tile group flex items-center gap-2 px-3 py-2 rounded-md bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-300 cursor-default">
-    <SkillIcon iconKey={icon} size={14} />
-    <span className="text-white/50 text-[10px] tracking-[0.1em] uppercase font-light group-hover:text-white/80 transition-colors duration-300">
+  <div className="skill-tile group flex items-center gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 rounded-md bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-300 cursor-default">
+    <SkillIcon iconKey={icon} size={13} />
+    <span className="text-white/50 text-[9px] sm:text-[10px] tracking-[0.1em] uppercase font-light group-hover:text-white/80 transition-colors duration-300">
       {name}
     </span>
   </div>
@@ -57,13 +57,13 @@ const Skills = () => {
 
   return (
     <section ref={sectionRef} className="c-space my-20 sm:my-32" id="skills">
-      <div className="flex items-center gap-4 mb-12">
+      <div className="flex items-center gap-4 mb-8 sm:mb-12">
         <span className="text-white/60 text-[11px] tracking-[0.4em] uppercase font-light">// Tech Stack</span>
         <div className="skills-label-line flex-1 h-[1px] bg-gradient-to-r from-white/15 to-transparent origin-left" />
       </div>
 
       {/* Status bar */}
-      <div className="flex items-center justify-between mb-10">
+      <div className="flex items-center justify-between mb-6 sm:mb-10">
         <span className="text-white/30 text-[10px] tracking-[0.3em] uppercase font-light">
           {totalSkills} Technologies
         </span>
@@ -74,7 +74,7 @@ const Skills = () => {
       </div>
 
       {/* 2x2 category grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {skillCategories.map((cat, catIdx) => (
           <div
             key={cat.category}
@@ -93,15 +93,15 @@ const Skills = () => {
             </div>
 
             {/* Skills body */}
-            <div className="p-4">
-              <div className="flex flex-col gap-4">
+            <div className="p-3 sm:p-4">
+              <div className="flex flex-col gap-3 sm:gap-4">
                 {cat.subGroups!.map((group, groupIdx) => (
                   <div key={group.group}>
-                    {groupIdx > 0 && <div className="h-[1px] bg-white/[0.05] mb-4" />}
-                    <p className="text-white/20 text-[9px] tracking-[0.35em] uppercase font-mono mb-2.5">
+                    {groupIdx > 0 && <div className="h-[1px] bg-white/[0.05] mb-3 sm:mb-4" />}
+                    <p className="text-white/20 text-[9px] tracking-[0.35em] uppercase font-mono mb-2">
                       {group.group}
                     </p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {group.skills.map((skill) => (
                         <SkillTile key={skill.name} name={skill.name} icon={skill.icon} />
                       ))}
