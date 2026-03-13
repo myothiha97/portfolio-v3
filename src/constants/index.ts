@@ -278,6 +278,7 @@ export const skillCategories: SkillCategory[] = [
           { name: 'Chakra UI', icon: 'SiChakraui' },
           { name: 'MUI', icon: 'SiMui' },
           { name: 'Radix UI', icon: 'SiRadixui' },
+          { name: 'Ant Design', icon: 'SiAntdesign' },
         ],
       },
     ],

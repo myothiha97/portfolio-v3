@@ -71,6 +71,7 @@ import {
   SiPnpm,
   SiYarn,
   SiRadixui,
+  SiAntdesign,
 } from 'react-icons/si';
 
 import { FaAws, FaCss3Alt } from 'react-icons/fa';
@@ -151,6 +152,7 @@ const iconMap: Record<string, IconType> = {
   SiPnpm,
   SiYarn,
   SiRadixui,
+  SiAntdesign,
   SiVitest,
   SiPuppeteer,
   SiPrometheus,
@@ -234,6 +236,7 @@ const colorMap: Record<string, string> = {
   SiPnpm: '#F69220',
   SiYarn: '#2C8EBB',
   SiRadixui: '#FFFFFF',
+  SiAntdesign: '#0170FE',
   SiMui: '#007FFF',
   SiMantine: '#339AF0',
   SiSqlalchemy: '#D71F00',
