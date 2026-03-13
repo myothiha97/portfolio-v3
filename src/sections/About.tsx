@@ -2,7 +2,6 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { skills } from '../constants/index';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -62,23 +61,6 @@ const About = () => {
         y: 20,
         duration: 0.7,
         stagger: 0.12,
-        ease: 'power2.out',
-      });
-
-      // Tech Stack animations
-      gsap.from('.skills-label-line', {
-        scrollTrigger: { trigger: '.skills-section', start: 'top 80%' },
-        scaleX: 0,
-        duration: 1.2,
-        ease: 'power3.inOut',
-      });
-
-      gsap.from('.skill-card', {
-        scrollTrigger: { trigger: '.skills-grid', start: 'top 85%' },
-        opacity: 0,
-        y: 30,
-        duration: 0.6,
-        stagger: 0.1,
         ease: 'power2.out',
       });
 
@@ -193,38 +175,6 @@ const About = () => {
             </svg>
             <span className="text-base tracking-wider uppercase font-light">+66927033226</span>
           </div>
-        </div>
-      </div>
-
-      {/* Tech Stack */}
-      <div className="skills-section mt-20 sm:mt-32">
-        <div className="flex items-center gap-4 mb-16">
-          <span className="text-white/60 text-[11px] tracking-[0.4em] uppercase font-light">// Tech Stack</span>
-          <div className="skills-label-line flex-1 h-[1px] bg-gradient-to-r from-white/15 to-transparent origin-left" />
-        </div>
-
-        <div className="skills-grid grid sm:grid-cols-2 grid-cols-1 gap-6">
-          {Object.entries(skills).map(([category, items]) => (
-            <div key={category} className="skill-card relative">
-              <div className="absolute -top-1.5 -left-1.5 w-4 h-4 border-l border-t border-white/[0.14]" />
-              <div className="absolute -top-1.5 -right-1.5 w-4 h-4 border-r border-t border-white/[0.14]" />
-              <div className="absolute -bottom-1.5 -left-1.5 w-4 h-4 border-l border-b border-white/[0.14]" />
-              <div className="absolute -bottom-1.5 -right-1.5 w-4 h-4 border-r border-b border-white/[0.14]" />
-
-              <div className="border border-white/[0.10] rounded-lg p-6 bg-black-200/50">
-                <p className="text-white/50 text-[10px] tracking-[0.4em] uppercase font-light mb-4">{category}</p>
-                <div className="flex flex-wrap gap-2">
-                  {items.map((item) => (
-                    <span
-                      key={item}
-                      className="px-3 py-1.5 border border-white/[0.14] rounded text-white/65 text-xs tracking-wider font-light hover:border-white/20 hover:text-white/80 transition-all duration-300">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
 

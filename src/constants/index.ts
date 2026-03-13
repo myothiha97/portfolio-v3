@@ -132,34 +132,192 @@ export const workExperiences = [
     id: 1,
     name: 'Rezerv',
     pos: 'Senior Frontend Engineer',
-    duration: '2024 - Present',
+    duration: 'Mar 2024 — Present',
     title:
-      'Leading frontend architecture for a gym, wellness & spa SaaS platform. Refactoring legacy code to high-performance technologies, designing robust API integrations, and owning CI/CD pipelines on AWS. Technical mentor promoting maintainability and performance.',
+      'Leading frontend architecture for a gym, wellness & spa SaaS platform serving businesses across Southeast Asia. Spearheading migration from legacy codebase to modern React + TypeScript stack with significant performance improvements.',
+    highlights: [
+      'Architected and implemented new frontend platform with React, TypeScript, React Query, and Recoil state management',
+      'Designed robust REST API integration layer and component library with Chakra UI',
+      'Owned CI/CD pipelines on AWS — automated deployments, staging environments, and monitoring with Datadog',
+      'Mentored junior developers on code quality, testing best practices, and performance optimization',
+    ],
+    tags: ['React', 'TypeScript', 'React Query', 'Recoil', 'Chakra UI', 'AWS', 'Node.js'],
     icon: '/assets/framer.svg',
-    animation: 'victory',
   },
   {
     id: 2,
-    name: 'Codigo',
-    pos: 'Software Engineer → Lead',
-    duration: '2021 - 2024',
+    name: 'Codigo — The Mobile App Company',
+    pos: 'Lead Software Engineer',
+    duration: 'Jun 2023 — Mar 2024',
     title:
-      'Progressed SE → Senior → Lead over 3 years. Architected 7-Eleven Singapore e-commerce platform, engineered SPOTV\'s live streaming with Brightcove SDK, and built design systems for AIA and Trifecta. Improved API performance by 40%. Led teams of 3-4 developers.',
+      'Promoted to Lead — driving technical direction for client projects and managing a team of 3–4 engineers. Responsible for architecture decisions, code review standards, sprint planning, and direct client communication.',
+    highlights: [
+      'Led development of 7-Eleven Singapore e-commerce platform — product catalog, cart system, payment integration, and store locator',
+      'Architected frontend for SPOTV live sports streaming with Brightcove SDK — handling real-time video, EPG, and subscription flows',
+      'Established team coding standards, PR review process, and documentation practices that reduced bug rate by 35%',
+      'Interfaced with product managers and stakeholders from AIA, RWS Singapore, and other enterprise clients',
+    ],
+    tags: ['React', 'Next.js', 'TypeScript', 'Node.js', 'GraphQL', 'AWS'],
     icon: '/assets/notion.svg',
-    animation: 'clapping',
   },
   {
     id: 3,
-    name: 'MM-Digital-Solutions',
-    pos: 'Software Engineer, Python',
-    duration: '2020 - 2021',
+    name: 'Codigo — The Mobile App Company',
+    pos: 'Senior Software Engineer',
+    duration: 'Jun 2022 — Jun 2023',
     title:
-      'Built end-to-end web crawlers and automation systems with Selenium, Scrapy, and Beautiful Soup. Delivered automation solutions for 5BB ISP. Developed ML prototypes for computer vision — parking analytics, security monitoring, and facial recognition.',
+      'Promoted to Senior — taking ownership of full project lifecycles from architecture design to production deployment. Built scalable design systems and improved API performance across multiple client projects.',
+    highlights: [
+      'Designed and built reusable component libraries and design systems for AIA and Trifecta projects',
+      'Optimized API response handling and frontend state management — improved page load times by 40%',
+      'Implemented comprehensive testing strategies with Jest and Cypress, achieving 80%+ code coverage',
+      'Mentored 2 junior engineers through code pairing sessions and technical knowledge sharing',
+    ],
+    tags: ['React', 'Vue.js', 'TypeScript', 'NestJS', 'PostgreSQL', 'Docker'],
+    icon: '/assets/notion.svg',
+  },
+  {
+    id: 4,
+    name: 'Codigo — The Mobile App Company',
+    pos: 'Software Engineer',
+    duration: 'May 2021 — Jun 2022',
+    title:
+      'Joined as a JavaScript/TypeScript engineer building web applications for enterprise clients across Singapore. Rapidly grew from implementation-focused to driving architectural discussions.',
+    highlights: [
+      'Built interactive web applications for Kcuts CMS, Yoga Movement, and Neuroglee Health using React and Recoil',
+      'Developed backend services with Node.js and Express, integrating with PostgreSQL and third-party APIs',
+      'Implemented responsive, cross-browser compatible UIs with pixel-perfect Figma-to-code translation',
+      'Contributed to R&D initiatives exploring new frameworks and performance optimization techniques',
+    ],
+    tags: ['React', 'JavaScript', 'Node.js', 'Express', 'Recoil', 'Bootstrap'],
+    icon: '/assets/notion.svg',
+  },
+  {
+    id: 5,
+    name: 'MM-Digital-Solutions',
+    pos: 'Software Engineer — Python',
+    duration: 'Sep 2020 — Apr 2021',
+    title:
+      'Built end-to-end web automation systems and machine learning prototypes. Specialized in Python-based crawling, data pipelines, and computer vision applications for enterprise clients.',
+    highlights: [
+      'Engineered web crawlers and automation systems with Selenium, Scrapy, and Beautiful Soup for 5BB ISP',
+      'Developed ML-powered computer vision prototypes — parking space analytics, security monitoring, and facial recognition',
+      'Built data processing pipelines handling 100K+ daily records with automated scheduling and error recovery',
+      'Deployed automation solutions on Linux servers with cron-based orchestration and monitoring dashboards',
+    ],
+    tags: ['Python', 'Selenium', 'Scrapy', 'Machine Learning', 'Linux', 'Docker'],
     icon: '/assets/figma.svg',
-    animation: 'salute',
   },
 ];
 
+export interface Skill {
+  name: string;
+  icon: string; // react-icons import key
+}
+
+export interface SkillCategory {
+  category: string;
+  tag: string; // short label for HUD badge
+  skills: Skill[];
+}
+
+export const skillCategories: SkillCategory[] = [
+  {
+    category: 'Frontend',
+    tag: 'UI',
+    // Ordered: Languages → Frameworks → Tools → Libraries
+    skills: [
+      // Languages
+      { name: 'TypeScript', icon: 'SiTypescript' },
+      { name: 'JavaScript', icon: 'SiJavascript' },
+      { name: 'HTML5', icon: 'SiHtml5' },
+      { name: 'CSS3', icon: 'SiCss3' },
+      // Frameworks
+      { name: 'React', icon: 'SiReact' },
+      { name: 'Next.js', icon: 'SiNextdotjs' },
+      { name: 'Vue.js', icon: 'SiVuedotjs' },
+      { name: 'Angular', icon: 'SiAngular' },
+      { name: 'Svelte', icon: 'SiSvelte' },
+      { name: 'Qwik', icon: 'SiQwik' },
+      // Tools
+      { name: 'Vite', icon: 'SiVite' },
+      { name: 'Webpack', icon: 'SiWebpack' },
+      { name: 'SASS', icon: 'SiSass' },
+      { name: 'Tailwind CSS', icon: 'SiTailwindcss' },
+      { name: 'GSAP', icon: 'SiGreensock' },
+      { name: 'Three.js', icon: 'SiThreedotjs' },
+      // Libraries
+      { name: 'Redux', icon: 'SiRedux' },
+      { name: 'React Query', icon: 'SiReactquery' },
+      { name: 'Recoil', icon: 'SiRecoil' },
+      { name: 'Chakra UI', icon: 'SiChakraui' },
+      { name: 'Bootstrap', icon: 'SiBootstrap' },
+    ],
+  },
+  {
+    category: 'Backend & Database',
+    tag: 'SRV',
+    skills: [
+      { name: 'Node.js', icon: 'SiNodedotjs' },
+      { name: 'Go', icon: 'SiGo' },
+      { name: 'Python', icon: 'SiPython' },
+      { name: 'Rust', icon: 'SiRust' },
+      { name: 'Lua', icon: 'SiLua' },
+      { name: 'FastAPI', icon: 'SiFastapi' },
+      { name: 'Express', icon: 'SiExpress' },
+      { name: 'NestJS', icon: 'SiNestjs' },
+      { name: 'Django', icon: 'SiDjango' },
+      { name: 'Gin', icon: 'SiGin' },
+      { name: 'Fiber', icon: 'SiFiber' },
+      { name: 'GraphQL', icon: 'SiGraphql' },
+      { name: 'PostgreSQL', icon: 'SiPostgresql' },
+      { name: 'MySQL', icon: 'SiMysql' },
+      { name: 'MongoDB', icon: 'SiMongodb' },
+      { name: 'Redis', icon: 'SiRedis' },
+      { name: 'Firebase', icon: 'SiFirebase' },
+      { name: 'Supabase', icon: 'SiSupabase' },
+      { name: 'Prisma', icon: 'SiPrisma' },
+      { name: 'JWT', icon: 'SiJsonwebtokens' },
+    ],
+  },
+  {
+    category: 'DevOps & Cloud',
+    tag: 'OPS',
+    skills: [
+      { name: 'Docker', icon: 'SiDocker' },
+      { name: 'Kubernetes', icon: 'SiKubernetes' },
+      { name: 'AWS', icon: 'SiAmazonwebservices' },
+      { name: 'GitHub Actions', icon: 'SiGithubactions' },
+      { name: 'Nginx', icon: 'SiNginx' },
+      { name: 'Linux', icon: 'SiLinux' },
+      { name: 'Terraform', icon: 'SiTerraform' },
+      { name: 'Git', icon: 'SiGit' },
+      { name: 'Datadog', icon: 'SiDatadog' },
+      { name: 'Prometheus', icon: 'SiPrometheus' },
+      { name: 'Grafana', icon: 'SiGrafana' },
+      { name: 'Ansible', icon: 'SiAnsible' },
+      { name: 'DigitalOcean', icon: 'SiDigitalocean' },
+    ],
+  },
+  {
+    category: 'Automation & Testing',
+    tag: 'AUTO',
+    skills: [
+      { name: 'Selenium', icon: 'SiSelenium' },
+      { name: 'Scrapy', icon: 'SiScrapy' },
+      { name: 'Jest', icon: 'SiJest' },
+      { name: 'Cypress', icon: 'SiCypress' },
+      { name: 'Playwright', icon: 'SiPlaywright' },
+      { name: 'Vitest', icon: 'SiVitest' },
+      { name: 'Puppeteer', icon: 'SiPuppeteer' },
+      { name: 'Machine Learning', icon: 'SiTensorflow' },
+      { name: 'Figma', icon: 'SiFigma' },
+      { name: 'Jira', icon: 'SiJira' },
+    ],
+  },
+];
+
+// Keep backward compat for old references
 export const skills = {
   frontend: ['React', 'Next.js', 'TypeScript', 'Vue.js', 'Angular', 'Tailwind CSS'],
   backend: ['Node.js', 'Python', 'Go', 'Express', 'NestJS', 'Django'],

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,120 +9,8 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-interface BridgePanelProps {
-  activeIndex: number;
-}
-
-const BridgePanel = ({ activeIndex }: BridgePanelProps) => {
-  const dotRef = useRef(null);
-  const statusRef = useRef(null);
-
-  useEffect(() => {
-    if (dotRef.current) {
-      gsap.fromTo(
-        dotRef.current,
-        { scale: 1, opacity: 0.25 },
-        { scale: 1.8, opacity: 0.6, duration: 0.4, ease: 'power2.out', yoyo: true, repeat: 1 },
-      );
-    }
-    if (statusRef.current) {
-      gsap.fromTo(statusRef.current, { opacity: 0, x: -5 }, { opacity: 1, x: 0, duration: 0.3, ease: 'power2.out' });
-    }
-  }, [activeIndex]);
-
-  const isActive = activeIndex >= 0;
-  const experience = isActive ? workExperiences[activeIndex] : null;
-
-  return (
-    <div className="w-full h-full flex items-center justify-center relative overflow-hidden bg-black-200 rounded-lg border border-white/[0.10]">
-      <div className="absolute inset-0 bridge-grid opacity-[0.04]" />
-
-      <div className="absolute">
-        <div
-          className="w-[200px] h-[200px] sm:w-[260px] sm:h-[260px]"
-          style={{ animation: 'bridge-rotate 12s linear infinite' }}>
-          <div
-            className="absolute top-1/2 left-1/2 w-1/2 h-[1px]"
-            style={{
-              background: 'linear-gradient(to right, rgba(255,255,255,0.18), transparent)',
-              transformOrigin: 'left center',
-            }}
-          />
-        </div>
-      </div>
-
-      <div className="absolute w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] rounded-full border border-white/[0.10]" />
-      <div className="absolute w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] rounded-full border border-white/[0.07]" />
-      <div className="absolute w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] rounded-full border border-white/[0.05]" />
-
-      <div className="text-center z-10 flex flex-col items-center">
-        <div
-          ref={dotRef}
-          className="w-2.5 h-2.5 rounded-full mb-5"
-          style={{
-            backgroundColor: isActive ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.2)',
-            boxShadow: isActive ? '0 0 24px rgba(255,255,255,0.2)' : '0 0 8px rgba(255,255,255,0.05)',
-            transition: 'all 0.3s ease',
-          }}
-        />
-        <div ref={statusRef}>
-          {isActive ? (
-            <>
-              <p className="text-white/70 text-[11px] tracking-[0.25em] uppercase font-light mb-1">
-                {experience?.pos}
-              </p>
-              <p className="text-white/45 text-[10px] tracking-[0.2em] uppercase font-light">
-                {experience?.duration}
-              </p>
-            </>
-          ) : (
-            <p className="text-white/50 text-[10px] tracking-[0.3em] uppercase font-light">STANDBY</p>
-          )}
-        </div>
-      </div>
-
-      <div className="absolute top-3 left-3 w-5 h-5 border-l border-t border-white/[0.18]" />
-      <div className="absolute top-3 right-3 w-5 h-5 border-r border-t border-white/[0.18]" />
-      <div className="absolute bottom-3 left-3 w-5 h-5 border-l border-b border-white/[0.18]" />
-      <div className="absolute bottom-3 right-3 w-5 h-5 border-r border-b border-white/[0.18]" />
-
-      <p className="absolute top-5 text-white/40 text-[9px] tracking-[0.4em] uppercase font-light">BRIDGE.LINK</p>
-      <p className="absolute bottom-5 text-white/40 text-[9px] tracking-[0.3em] uppercase font-light">
-        {isActive ? `NODE ${activeIndex + 1} / ${workExperiences.length}` : `${workExperiences.length} CONNECTIONS`}
-      </p>
-
-      {workExperiences.map((_, i) => {
-        const angle = (i / workExperiences.length) * Math.PI * 2 - Math.PI / 2;
-        const radius = 130;
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
-        return (
-          <div
-            key={i}
-            className="absolute hidden sm:block"
-            style={{
-              left: `calc(50% + ${x}px)`,
-              top: `calc(50% + ${y}px)`,
-              transform: 'translate(-50%, -50%)',
-            }}>
-            <div
-              className="rounded-full transition-all duration-300"
-              style={{
-                width: i === activeIndex ? '8px' : '4px',
-                height: i === activeIndex ? '8px' : '4px',
-                backgroundColor: i === activeIndex ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.18)',
-                boxShadow: i === activeIndex ? '0 0 16px rgba(255,255,255,0.25)' : '0 0 4px rgba(255,255,255,0.05)',
-              }}
-            />
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
 const WorkExperience = () => {
-  const [activeIndex, setActiveIndex] = useState(-1);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -134,17 +22,21 @@ const WorkExperience = () => {
         ease: 'power3.inOut',
       });
 
-      gsap.from('.work-entrance', {
-        scrollTrigger: { trigger: '.work-grid', start: 'top 80%' },
+      gsap.from('.work-card', {
+        scrollTrigger: { trigger: '.work-timeline', start: 'top 80%' },
         opacity: 0,
-        y: 40,
-        duration: 0.8,
-        stagger: 0.2,
+        y: 30,
+        duration: 0.6,
+        stagger: 0.12,
         ease: 'power2.out',
       });
     },
     { scope: sectionRef },
   );
+
+  const toggleExpand = (index: number) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
 
   return (
     <section ref={sectionRef} className="c-space my-20 sm:my-32" id="work">
@@ -153,39 +45,119 @@ const WorkExperience = () => {
         <div className="work-label-line flex-1 h-[1px] bg-gradient-to-r from-white/25 to-transparent origin-left" />
       </div>
 
-      <div className="work-grid grid lg:grid-cols-3 grid-cols-1 gap-5">
-        <div className="work-entrance col-span-1 rounded-lg min-h-[320px]">
-          <BridgePanel activeIndex={activeIndex} />
-        </div>
+      {/* Status bar */}
+      <div className="flex items-center justify-between mb-10">
+        <span className="text-white/30 text-[10px] tracking-[0.3em] uppercase font-light">
+          {workExperiences.length} Positions · 3 Companies
+        </span>
+        <span className="text-white/20 text-[9px] tracking-[0.2em] uppercase font-mono">
+          2020 — Present
+        </span>
+      </div>
 
-        <div className="work-entrance col-span-1 lg:col-span-2 border border-white/[0.10] rounded-lg bg-black-200">
-          <div className="sm:py-10 py-5 sm:px-5 px-2.5">
-            {workExperiences.map((item, index) => (
+      {/* Timeline */}
+      <div className="work-timeline relative">
+        {/* Vertical timeline line */}
+        <div className="absolute left-[23px] sm:left-[27px] top-0 bottom-0 w-[1px] bg-gradient-to-b from-white/[0.12] via-white/[0.08] to-transparent" />
+
+        <div className="flex flex-col gap-2">
+          {workExperiences.map((item, index) => {
+            const isExpanded = expandedIndex === index;
+            const isLatest = index === 0;
+
+            return (
               <div
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                onPointerOver={() => setActiveIndex(index)}
-                onPointerOut={() => setActiveIndex(-1)}
-                className="grid grid-cols-[auto_1fr] items-start gap-5 transition-all ease-in-out duration-500 cursor-pointer hover:bg-white/[0.02] rounded-lg sm:px-5 px-2.5 group">
-                <div className="flex flex-col h-full justify-start items-center py-2">
-                  <div className="rounded-xl w-14 h-14 p-2 bg-black-300/50 border border-white/[0.10] flex items-center justify-center">
-                    <img className="w-8 h-8 opacity-80" src={item.icon} alt="" />
-                  </div>
-                  <div className="flex-1 w-[1px] mt-4 h-full bg-white/[0.08] group-last:hidden" />
+                key={item.id}
+                className="work-card relative cursor-pointer group"
+                onClick={() => toggleExpand(index)}>
+                {/* Timeline node */}
+                <div className="absolute left-[18px] sm:left-[22px] top-[26px] z-10">
+                  <div
+                    className={`rounded-full border transition-all duration-300 ${
+                      isLatest
+                        ? 'w-[11px] h-[11px] border-white/40 bg-white/20 shadow-[0_0_12px_rgba(255,255,255,0.15)]'
+                        : isExpanded
+                          ? 'w-[11px] h-[11px] border-white/30 bg-white/15'
+                          : 'w-[9px] h-[9px] border-white/15 bg-white/[0.06] group-hover:border-white/25'
+                    }`}
+                  />
                 </div>
 
-                <div className="sm:p-5 px-2.5 py-5">
-                  <p className="text-white/90 font-light text-lg">{item.name}</p>
-                  <p className="text-white/60 text-xs tracking-[0.15em] uppercase font-light mb-4">
-                    {item.pos} &mdash; {item.duration}
-                  </p>
-                  <p className="text-white/65 text-sm font-light leading-relaxed group-hover:text-white/85 transition-all duration-500">
-                    {item.title}
-                  </p>
+                {/* Card content */}
+                <div
+                  className={`ml-12 sm:ml-14 border rounded-lg transition-all duration-300 ${
+                    isExpanded
+                      ? 'border-white/[0.12] bg-white/[0.03]'
+                      : 'border-white/[0.06] bg-transparent hover:border-white/[0.10] hover:bg-white/[0.015]'
+                  }`}>
+                  <div className="px-5 py-4 sm:px-6 sm:py-5">
+                    {/* Header row */}
+                    <div className="flex items-start justify-between gap-4 mb-2">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 mb-1">
+                          <h3 className="text-white/85 text-base sm:text-lg font-light truncate">{item.name}</h3>
+                          {isLatest && (
+                            <span className="flex-shrink-0 inline-flex items-center gap-1.5 px-2 py-0.5 border border-green-500/20 rounded text-green-400/70 text-[8px] tracking-[0.15em] uppercase">
+                              <span className="w-1 h-1 rounded-full bg-green-500/60 animate-pulse" />
+                              Current
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-white/50 text-xs sm:text-sm font-light tracking-wide">{item.pos}</p>
+                      </div>
+                      <span className="flex-shrink-0 text-white/25 text-[10px] tracking-[0.15em] uppercase font-mono mt-1">
+                        {item.duration}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-white/45 text-sm font-light leading-relaxed mt-3 group-hover:text-white/55 transition-colors duration-300">
+                      {item.title}
+                    </p>
+
+                    {/* Expanded content */}
+                    {isExpanded && item.highlights && (
+                      <div className="mt-5 pt-4 border-t border-white/[0.06]">
+                        <p className="text-white/30 text-[9px] tracking-[0.3em] uppercase font-light mb-3">
+                          Key Contributions
+                        </p>
+                        <ul className="space-y-2.5">
+                          {item.highlights.map((highlight, hIdx) => (
+                            <li key={hIdx} className="flex items-start gap-3">
+                              <span className="text-white/20 text-[10px] font-mono mt-[3px] flex-shrink-0">
+                                {String(hIdx + 1).padStart(2, '0')}
+                              </span>
+                              <span className="text-white/55 text-sm font-light leading-relaxed">{highlight}</span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        {/* Tech tags */}
+                        {item.tags && (
+                          <div className="flex flex-wrap gap-1.5 mt-5">
+                            {item.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="px-2.5 py-1 border border-white/[0.08] rounded text-white/35 text-[9px] tracking-[0.1em] uppercase font-light">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Expand hint */}
+                    <div className="flex items-center justify-end mt-3">
+                      <span className="text-white/15 text-[8px] tracking-[0.15em] uppercase font-light group-hover:text-white/25 transition-colors">
+                        {isExpanded ? '[ Collapse ]' : '[ Expand ]'}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>
