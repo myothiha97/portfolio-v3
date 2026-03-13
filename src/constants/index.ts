@@ -279,7 +279,7 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    category: 'Backend & Database',
+    category: 'Backend',
     tag: 'SRV',
     subGroups: [
       {
@@ -315,14 +315,14 @@ export const skillCategories: SkillCategory[] = [
         ],
       },
       {
-        group: 'ORM & Auth',
+        group: 'Tooling',
         skills: [
           { name: 'Prisma', icon: 'SiPrisma' },
-          { name: 'SQLAlchemy', icon: 'SiSqlalchemy' },
-          { name: 'GORM', icon: 'SiGorm' },
-          { name: 'Diesel', icon: 'SiDiesel' },
-          { name: 'SeaORM', icon: 'SiSeaorm' },
           { name: 'GraphQL', icon: 'SiGraphql' },
+          { name: 'tRPC', icon: 'SiTrpc' },
+          { name: 'Socket.IO', icon: 'SiSocketdotio' },
+          { name: 'RabbitMQ', icon: 'SiRabbitmq' },
+          { name: 'Kafka', icon: 'SiApachekafka' },
           { name: 'JWT', icon: 'SiJsonwebtokens' },
         ],
       },

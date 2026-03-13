@@ -61,6 +61,10 @@ import {
   SiMui,
   SiMantine,
   SiSqlalchemy,
+  SiRabbitmq,
+  SiApachekafka,
+  SiSocketdotio,
+  SiTrpc,
 } from 'react-icons/si';
 import { FaAws, FaCss3Alt } from 'react-icons/fa';
 import { TbTestPipe, TbBrandGolang } from 'react-icons/tb';
@@ -128,11 +132,12 @@ const iconMap: Record<string, IconType> = {
   SiMui,
   SiMantine,
   SiSqlalchemy,
-  SiGorm: TbBrandGolang,         // GORM is a Go ORM — use Go brand icon
-  SiDiesel: SiRust,              // Diesel is a Rust ORM — use Rust icon
-  SiSeaorm: SiRust,              // SeaORM is a Rust async ORM — use Rust icon
   SiJotai: SiReact,              // Jotai has no SI icon — use React icon
   SiZustand: SiReact,            // Zustand has no SI icon — use React icon
+  SiRabbitmq,
+  SiApachekafka,
+  SiSocketdotio,
+  SiTrpc,
   SiVitest,
   SiPuppeteer,
   SiPrometheus,
@@ -206,12 +211,13 @@ const colorMap: Record<string, string> = {
   SiGrafana: '#F46800',
   SiAnsible: '#EE0000',
   SiDigitalocean: '#0080FF',
+  SiRabbitmq: '#FF6600',
+  SiApachekafka: '#231F20',
+  SiSocketdotio: '#FFFFFF',
+  SiTrpc: '#398CCB',
   SiMui: '#007FFF',
   SiMantine: '#339AF0',
   SiSqlalchemy: '#D71F00',
-  SiGorm: '#00ADD8',
-  SiDiesel: '#CE422B',
-  SiSeaorm: '#CE422B',
   SiJotai: '#FFFFFF',
   SiZustand: '#FF6B35',
 };
