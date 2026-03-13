@@ -212,7 +212,7 @@ const colorMap: Record<string, string> = {
   SiAnsible: '#EE0000',
   SiDigitalocean: '#0080FF',
   SiRabbitmq: '#FF6600',
-  SiApachekafka: '#231F20',
+  SiApachekafka: '#FFFFFF',
   SiSocketdotio: '#FFFFFF',
   SiTrpc: '#398CCB',
   SiMui: '#007FFF',

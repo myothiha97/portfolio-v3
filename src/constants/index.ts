@@ -252,19 +252,19 @@ export const skillCategories: SkillCategory[] = [
         ],
       },
       {
-        group: 'Tools',
+        group: 'Build Tools',
         skills: [
           { name: 'Vite', icon: 'SiVite' },
           { name: 'Webpack', icon: 'SiWebpack' },
-          { name: 'SASS', icon: 'SiSass' },
-          { name: 'Tailwind CSS', icon: 'SiTailwindcss' },
           { name: 'GSAP', icon: 'SiGreensock' },
-          { name: 'Three.js', icon: 'SiThreedotjs' },
         ],
       },
       {
-        group: 'Libraries',
+        group: 'Tooling',
         skills: [
+          { name: 'Sass', icon: 'SiSass' },
+          { name: 'Tailwind CSS', icon: 'SiTailwindcss' },
+          { name: 'Three.js', icon: 'SiThreedotjs' },
           { name: 'Redux', icon: 'SiRedux' },
           { name: 'React Query', icon: 'SiReactquery' },
           { name: 'Recoil', icon: 'SiRecoil' },
