@@ -94,32 +94,21 @@ const Skills = () => {
 
             {/* Skills body */}
             <div className="p-4">
-              {cat.subGroups ? (
-                /* Sub-grouped layout (Frontend) */
-                <div className="flex flex-col gap-4">
-                  {cat.subGroups.map((group, groupIdx) => (
-                    <div key={group.group}>
-                      {/* Sub-group separator + label */}
-                      {groupIdx > 0 && <div className="h-[1px] bg-white/[0.05] mb-4" />}
-                      <p className="text-white/20 text-[9px] tracking-[0.35em] uppercase font-mono mb-2.5">
-                        {group.group}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {group.skills.map((skill) => (
-                          <SkillTile key={skill.name} name={skill.name} icon={skill.icon} />
-                        ))}
-                      </div>
+              <div className="flex flex-col gap-4">
+                {cat.subGroups!.map((group, groupIdx) => (
+                  <div key={group.group}>
+                    {groupIdx > 0 && <div className="h-[1px] bg-white/[0.05] mb-4" />}
+                    <p className="text-white/20 text-[9px] tracking-[0.35em] uppercase font-mono mb-2.5">
+                      {group.group}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {group.skills.map((skill) => (
+                        <SkillTile key={skill.name} name={skill.name} icon={skill.icon} />
+                      ))}
                     </div>
-                  ))}
-                </div>
-              ) : (
-                /* Flat layout (all other categories) */
-                <div className="flex flex-wrap gap-2">
-                  {cat.skills!.map((skill) => (
-                    <SkillTile key={skill.name} name={skill.name} icon={skill.icon} />
-                  ))}
-                </div>
-              )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         ))}
