@@ -256,12 +256,11 @@ export const skillCategories: SkillCategory[] = [
         skills: [
           { name: 'Vite', icon: 'SiVite' },
           { name: 'Webpack', icon: 'SiWebpack' },
-          { name: 'esbuild', icon: 'SiEsbuild' },
           { name: 'Babel', icon: 'SiBabel' },
-          { name: 'PostCSS', icon: 'SiPostcss' },
           { name: 'ESLint', icon: 'SiEslint' },
-          { name: 'Prettier', icon: 'SiPrettier' },
           { name: 'npm', icon: 'SiNpm' },
+          { name: 'pnpm', icon: 'SiPnpm' },
+          { name: 'Yarn', icon: 'SiYarn' },
         ],
       },
       {
