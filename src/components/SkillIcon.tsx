@@ -65,7 +65,14 @@ import {
   SiApachekafka,
   SiSocketdotio,
   SiTrpc,
+  SiBabel,
+  SiEslint,
+  SiPrettier,
+  SiEsbuild,
+  SiPostcss,
+  SiNpm,
 } from 'react-icons/si';
+
 import { FaAws, FaCss3Alt } from 'react-icons/fa';
 import { TbTestPipe, TbBrandGolang } from 'react-icons/tb';
 import type { IconType } from 'react-icons';
@@ -138,6 +145,12 @@ const iconMap: Record<string, IconType> = {
   SiApachekafka,
   SiSocketdotio,
   SiTrpc,
+  SiBabel,
+  SiEslint,
+  SiPrettier,
+  SiEsbuild,
+  SiPostcss,
+  SiNpm,
   SiVitest,
   SiPuppeteer,
   SiPrometheus,
@@ -215,6 +228,12 @@ const colorMap: Record<string, string> = {
   SiApachekafka: '#FFFFFF',
   SiSocketdotio: '#FFFFFF',
   SiTrpc: '#398CCB',
+  SiBabel: '#F9DC3E',
+  SiEslint: '#4B32C3',
+  SiPrettier: '#F7B93E',
+  SiEsbuild: '#FFCF00',
+  SiPostcss: '#DD3A0A',
+  SiNpm: '#CB3837',
   SiMui: '#007FFF',
   SiMantine: '#339AF0',
   SiSqlalchemy: '#D71F00',
