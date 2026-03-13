@@ -215,43 +215,64 @@ export interface Skill {
   icon: string; // react-icons import key
 }
 
+export interface SkillSubGroup {
+  group: string;
+  skills: Skill[];
+}
+
 export interface SkillCategory {
   category: string;
-  tag: string; // short label for HUD badge
-  skills: Skill[];
+  tag: string;
+  skills?: Skill[];
+  subGroups?: SkillSubGroup[];
 }
 
 export const skillCategories: SkillCategory[] = [
   {
     category: 'Frontend',
     tag: 'UI',
-    // Ordered: Languages → Frameworks → Tools → Libraries
-    skills: [
-      // Languages
-      { name: 'TypeScript', icon: 'SiTypescript' },
-      { name: 'JavaScript', icon: 'SiJavascript' },
-      { name: 'HTML5', icon: 'SiHtml5' },
-      { name: 'CSS3', icon: 'SiCss3' },
-      // Frameworks
-      { name: 'React', icon: 'SiReact' },
-      { name: 'Next.js', icon: 'SiNextdotjs' },
-      { name: 'Vue.js', icon: 'SiVuedotjs' },
-      { name: 'Angular', icon: 'SiAngular' },
-      { name: 'Svelte', icon: 'SiSvelte' },
-      { name: 'Qwik', icon: 'SiQwik' },
-      // Tools
-      { name: 'Vite', icon: 'SiVite' },
-      { name: 'Webpack', icon: 'SiWebpack' },
-      { name: 'SASS', icon: 'SiSass' },
-      { name: 'Tailwind CSS', icon: 'SiTailwindcss' },
-      { name: 'GSAP', icon: 'SiGreensock' },
-      { name: 'Three.js', icon: 'SiThreedotjs' },
-      // Libraries
-      { name: 'Redux', icon: 'SiRedux' },
-      { name: 'React Query', icon: 'SiReactquery' },
-      { name: 'Recoil', icon: 'SiRecoil' },
-      { name: 'Chakra UI', icon: 'SiChakraui' },
-      { name: 'Bootstrap', icon: 'SiBootstrap' },
+    subGroups: [
+      {
+        group: 'Languages',
+        skills: [
+          { name: 'TypeScript', icon: 'SiTypescript' },
+          { name: 'JavaScript', icon: 'SiJavascript' },
+          { name: 'HTML5', icon: 'SiHtml5' },
+          { name: 'CSS3', icon: 'SiCss3' },
+        ],
+      },
+      {
+        group: 'Frameworks',
+        skills: [
+          { name: 'React', icon: 'SiReact' },
+          { name: 'Next.js', icon: 'SiNextdotjs' },
+          { name: 'Vue.js', icon: 'SiVuedotjs' },
+          { name: 'Angular', icon: 'SiAngular' },
+          { name: 'Svelte', icon: 'SiSvelte' },
+          { name: 'Qwik', icon: 'SiQwik' },
+        ],
+      },
+      {
+        group: 'Tools',
+        skills: [
+          { name: 'Vite', icon: 'SiVite' },
+          { name: 'Webpack', icon: 'SiWebpack' },
+          { name: 'SASS', icon: 'SiSass' },
+          { name: 'Tailwind CSS', icon: 'SiTailwindcss' },
+          { name: 'GSAP', icon: 'SiGreensock' },
+          { name: 'Three.js', icon: 'SiThreedotjs' },
+        ],
+      },
+      {
+        group: 'Libraries',
+        skills: [
+          { name: 'Redux', icon: 'SiRedux' },
+          { name: 'React Query', icon: 'SiReactquery' },
+          { name: 'Recoil', icon: 'SiRecoil' },
+          { name: 'Chakra UI', icon: 'SiChakraui' },
+          { name: 'Bootstrap', icon: 'SiBootstrap' },
+        ],
+      },
     ],
   },
   {

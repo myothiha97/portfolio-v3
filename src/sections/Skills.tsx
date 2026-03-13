@@ -9,6 +9,21 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const SkillTile = ({ name, icon }: { name: string; icon: string }) => (
+  <div className="skill-tile group flex items-center gap-2 px-3 py-2 rounded-md bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-300 cursor-default">
+    <SkillIcon iconKey={icon} size={14} />
+    <span className="text-white/50 text-[10px] tracking-[0.1em] uppercase font-light group-hover:text-white/80 transition-colors duration-300">
+      {name}
+    </span>
+  </div>
+);
+
+const totalSkills = skillCategories.reduce((acc, cat) => {
+  if (cat.skills) return acc + cat.skills.length;
+  if (cat.subGroups) return acc + cat.subGroups.reduce((a, g) => a + g.skills.length, 0);
+  return acc;
+}, 0);
+
 const Skills = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -16,7 +31,6 @@ const Skills = () => {
     if (!sectionRef.current) return;
     const section = sectionRef.current;
 
-    // Label line wipe-in
     const labelLine = section.querySelector('.skills-label-line');
     if (labelLine) {
       gsap.from(labelLine, {
@@ -27,7 +41,6 @@ const Skills = () => {
       });
     }
 
-    // Cards slide in from alternating left/right
     const cards = section.querySelectorAll<HTMLElement>('.skill-card');
     cards.forEach((card, i) => {
       const fromLeft = i % 2 === 0;
@@ -52,7 +65,7 @@ const Skills = () => {
       {/* Status bar */}
       <div className="flex items-center justify-between mb-10">
         <span className="text-white/30 text-[10px] tracking-[0.3em] uppercase font-light">
-          {skillCategories.reduce((acc, cat) => acc + cat.skills.length, 0)} Technologies
+          {totalSkills} Technologies
         </span>
         <div className="flex items-center gap-2">
           <div className="w-1.5 h-1.5 rounded-full bg-green-500/70 animate-pulse" />
@@ -79,20 +92,34 @@ const Skills = () => {
               <span className="text-white/15 text-[9px] tracking-[0.2em] uppercase font-mono">[{cat.tag}]</span>
             </div>
 
-            {/* Skill tiles */}
+            {/* Skills body */}
             <div className="p-4">
-              <div className="flex flex-wrap gap-3">
-                {cat.skills.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="skill-tile group flex items-center gap-2 px-3 py-2 rounded-md bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-300 cursor-default">
-                    <SkillIcon iconKey={skill.icon} size={16} />
-                    <span className="text-white/50 text-[10px] tracking-[0.1em] uppercase font-light group-hover:text-white/80 transition-colors duration-300">
-                      {skill.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              {cat.subGroups ? (
+                /* Sub-grouped layout (Frontend) */
+                <div className="flex flex-col gap-4">
+                  {cat.subGroups.map((group, groupIdx) => (
+                    <div key={group.group}>
+                      {/* Sub-group separator + label */}
+                      {groupIdx > 0 && <div className="h-[1px] bg-white/[0.05] mb-4" />}
+                      <p className="text-white/20 text-[9px] tracking-[0.35em] uppercase font-mono mb-2.5">
+                        {group.group}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {group.skills.map((skill) => (
+                          <SkillTile key={skill.name} name={skill.name} icon={skill.icon} />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                /* Flat layout (all other categories) */
+                <div className="flex flex-wrap gap-2">
+                  {cat.skills!.map((skill) => (
+                    <SkillTile key={skill.name} name={skill.name} icon={skill.icon} />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         ))}
