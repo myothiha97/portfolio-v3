@@ -82,7 +82,7 @@ const Projects = () => {
               <img className="w-10 h-10 shadow-sm" src={currentProject.logo} alt="logo" />
             </div>
 
-            <h3 className="project-text text-white/95 text-2xl sm:text-3xl font-light tracking-wide mb-4">
+            <h3 className="project-text text-white/95 text-xl sm:text-2xl md:text-3xl font-light tracking-wide mb-3 sm:mb-4">
               {currentProject.title}
             </h3>
             <p className="project-text text-white/70 text-sm sm:text-base font-light leading-relaxed mb-3">
@@ -92,13 +92,13 @@ const Projects = () => {
           </div>
 
           <div>
-            <div className="project-text flex items-center gap-3 flex-wrap mb-6">
+            <div className="project-text flex items-center gap-2 sm:gap-3 flex-wrap mb-4 sm:mb-6">
               {currentProject.tags.map((tag, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-1.5 px-3 py-1.5 border border-white/[0.14] rounded">
-                  <img src={tag.path} alt={tag.name} className="w-4 h-4" />
-                  <span className="text-white/65 text-[11px] tracking-wider uppercase">{tag.name}</span>
+                  className="flex items-center gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 border border-white/[0.14] rounded">
+                  <img src={tag.path} alt={tag.name} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <span className="text-white/65 text-[9px] sm:text-[11px] tracking-wider uppercase">{tag.name}</span>
                 </div>
               ))}
             </div>
@@ -142,27 +142,27 @@ const Projects = () => {
             {/* Center project visualization */}
             <div className="text-center z-10 px-8">
               {/* Project number large */}
-              <p className="text-white/[0.04] text-[120px] sm:text-[160px] font-light leading-none select-none">
+              <p className="text-white/[0.04] text-[80px] sm:text-[160px] font-light leading-none select-none">
                 {String(selectedProjectIndex + 1).padStart(2, '0')}
               </p>
 
               {/* Decorative circle */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] rounded-full border border-white/[0.03]" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] rounded-full border border-white/[0.02]" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] h-[140px] sm:w-[220px] sm:h-[220px] rounded-full border border-white/[0.03]" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90px] h-[90px] sm:w-[150px] sm:h-[150px] rounded-full border border-white/[0.02]" />
 
               {/* Project title overlay */}
-              <p className="text-white/30 text-[10px] tracking-[0.4em] uppercase font-light mt-[-40px]">
+              <p className="text-white/50 text-[10px] tracking-[0.4em] uppercase font-light mt-[-40px]">
                 {currentProject.tags.map((t) => t.name).join(' · ')}
               </p>
             </div>
 
             {/* Top label */}
-            <p className="absolute top-4 left-5 text-white/25 text-[9px] tracking-[0.4em] uppercase font-light">
+            <p className="absolute top-4 left-5 text-white/40 text-[9px] tracking-[0.4em] uppercase font-light">
               PROJECT.DATA
             </p>
 
             {/* Bottom label */}
-            <p className="absolute bottom-4 right-5 text-white/25 text-[9px] tracking-[0.3em] uppercase font-light">
+            <p className="absolute bottom-4 right-5 text-white/40 text-[9px] tracking-[0.3em] uppercase font-light">
               {currentProject.title.toUpperCase().slice(0, 20)}
             </p>
           </div>

@@ -88,11 +88,11 @@ const Contact = () => {
       </div>
 
       <div className="contact-content max-w-2xl mx-auto">
-        <div className="contact-reveal mb-12">
-          <h3 className="text-white/95 text-3xl sm:text-4xl font-light tracking-wide mb-4">Let&apos;s Connect</h3>
+        <div className="contact-reveal mb-8 sm:mb-12">
+          <h3 className="text-white/95 text-2xl sm:text-3xl md:text-4xl font-light tracking-wide mb-4">Let&apos;s Connect</h3>
           <p className="text-white/65 text-base font-light leading-relaxed">
             Whether you&apos;re looking to build a new product, improve your existing platform, or bring a unique
-            project to life — I&apos;m here to help.
+            project to life, I&apos;m here to help.
           </p>
         </div>
 
@@ -108,7 +108,7 @@ const Contact = () => {
             ref={formRef}
             onSubmit={handleSubmit}
             className="relative z-10 border border-white/[0.10] rounded-lg p-6 sm:p-10 space-y-6 bg-black-200/50">
-            <p className="text-white/35 text-[9px] tracking-[0.4em] uppercase font-light mb-4">TRANSMISSION.FORM</p>
+            <p className="text-white/50 text-[9px] tracking-[0.4em] uppercase font-light mb-4">TRANSMISSION.FORM</p>
 
             <label className="block space-y-2">
               <span className="text-white/65 text-xs tracking-[0.15em] uppercase font-light">Name</span>
@@ -159,7 +159,7 @@ const Contact = () => {
         </div>
 
         <div className="contact-reveal mt-8 text-center">
-          <p className="text-white/45 text-xs tracking-wider">
+          <p className="text-white/60 text-xs tracking-wider">
             or reach me directly at{' '}
             <a href="mailto:mthk97.dev@gmail.com" className="text-white/65 hover:text-white/85 transition-colors">
               mthk97.dev@gmail.com

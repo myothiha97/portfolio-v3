@@ -61,6 +61,7 @@ const NavItems = ({ onClick = () => {} }) => {
 };
 
 const Navbar = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -84,12 +85,20 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center py-5 mx-auto c-space">
           {/* Logo area */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link
+            to="/"
+            onClick={(e) => {
+              if (location.pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+            className="flex items-center gap-3 group">
             {/* Small status dot */}
             <div className="relative">
               {/* <div className="w-1.5 h-1.5 rounded-full bg-white/50 group-hover:bg-white/70 transition-colors" /> */}
             </div>
-            <span className="text-white/85 text-[11px] tracking-[0.35em] uppercase font-light group-hover:text-white transition-colors">
+            <span className="text-white/85 text-[10px] sm:text-[11px] tracking-[0.25em] sm:tracking-[0.35em] uppercase font-light group-hover:text-white transition-colors">
               Myo Thiha Kyaw
             </span>
           </Link>
