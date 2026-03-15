@@ -14,74 +14,95 @@ const WorkExperience = () => {
 
   useGSAP(
     () => {
-      // Section label line
+      // ── 1. Section header line draw ──
       gsap.set('.work-label-line', { scaleX: 0 });
       gsap.to('.work-label-line', {
         scrollTrigger: { trigger: '.work-label', start: 'top 88%' },
         scaleX: 1,
-        duration: 1.2,
+        duration: 1.4,
         ease: 'power3.inOut',
       });
 
-      // Vertical timeline line draws as you scroll (scrub)
-      gsap.set('.timeline-line', { scaleY: 0 });
-      gsap.to('.timeline-line', {
+      // ── 2. Status bar fade ──
+      gsap.set('.status-bar', { opacity: 0, y: 12 });
+      gsap.to('.status-bar', {
+        scrollTrigger: { trigger: '.work-label', start: 'top 82%' },
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        delay: 0.4,
+        ease: 'power2.out',
+      });
+
+      // ── 3. Timeline progress — scrub-linked glow line ──
+      gsap.set('.timeline-progress', { scaleY: 0 });
+      gsap.to('.timeline-progress', {
         scrollTrigger: {
           trigger: '.work-timeline',
-          start: 'top 80%',
-          end: 'bottom 30%',
-          scrub: 1.2,
+          start: 'top 75%',
+          end: 'bottom 25%',
+          scrub: 1,
         },
         scaleY: 1,
         ease: 'none',
       });
 
-      // Year labels — slide in from left
-      gsap.utils.toArray<HTMLElement>('.year-label').forEach((el) => {
-        gsap.set(el, { opacity: 0, x: -14 });
-        gsap.to(el, {
-          scrollTrigger: { trigger: el, start: 'top 86%' },
-          opacity: 1,
-          x: 0,
-          duration: 0.5,
-          ease: 'power2.out',
+      // ── 4. Each company block — orchestrated entrance ──
+      document.querySelectorAll('.exp-block').forEach((block) => {
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: block, start: 'top 84%' },
         });
-      });
 
-      // Timeline nodes — pop in with back ease
-      gsap.utils.toArray<HTMLElement>('.timeline-node').forEach((el) => {
-        gsap.set(el, { scale: 0, opacity: 0 });
-        gsap.to(el, {
-          scrollTrigger: { trigger: el, start: 'top 86%' },
-          scale: 1,
-          opacity: 1,
-          duration: 0.45,
-          ease: 'back.out(2.5)',
-        });
-      });
+        // Year label
+        const year = block.querySelector('.year-marker');
+        if (year) {
+          gsap.set(year, { opacity: 0, x: -20 });
+          tl.to(year, { opacity: 1, x: 0, duration: 0.5, ease: 'power3.out' }, 0);
+        }
 
-      // Company cards — slide up + fade in
-      gsap.utils.toArray<HTMLElement>('.company-block').forEach((el) => {
-        gsap.set(el, { opacity: 0, y: 40 });
-        gsap.to(el, {
-          scrollTrigger: { trigger: el, start: 'top 84%' },
-          opacity: 1,
-          y: 0,
-          duration: 0.65,
-          ease: 'power2.out',
-        });
-      });
+        // Node pop + ripple
+        const node = block.querySelector('.timeline-node');
+        const ripple = block.querySelector('.node-ripple');
+        if (node) {
+          gsap.set(node, { scale: 0, opacity: 0 });
+          tl.to(node, { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(3)' }, 0.1);
+        }
+        if (ripple) {
+          gsap.set(ripple, { scale: 0.5, opacity: 0.5 });
+          tl.to(ripple, { scale: 3, opacity: 0, duration: 1.2, ease: 'power2.out' }, 0.25);
+        }
 
-      // Highlight bullets — stagger slide in from right
-      gsap.utils.toArray<HTMLElement>('.highlight-item').forEach((el) => {
-        gsap.set(el, { opacity: 0, x: 14 });
-        gsap.to(el, {
-          scrollTrigger: { trigger: el, start: 'top 90%' },
-          opacity: 1,
-          x: 0,
-          duration: 0.4,
-          ease: 'power2.out',
-        });
+        // Connector line draw
+        const connector = block.querySelector('.connector-line');
+        if (connector) {
+          gsap.set(connector, { scaleX: 0 });
+          tl.to(connector, { scaleX: 1, duration: 0.4, ease: 'power2.inOut' }, 0.2);
+        }
+
+        // Card float up
+        const card = block.querySelector('.company-card');
+        if (card) {
+          gsap.set(card, { opacity: 0, y: 44, scale: 0.97 });
+          tl.to(card, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out' }, 0.15);
+        }
+
+        // Role blocks stagger
+        const roles = block.querySelectorAll('.role-block');
+        if (roles.length > 0) {
+          gsap.set(roles, { opacity: 0, y: 20 });
+          tl.to(roles, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, 0.45);
+        }
+
+        // Highlights cascade
+        const highlights = block.querySelectorAll('.highlight-item');
+        if (highlights.length > 0) {
+          gsap.set(highlights, { opacity: 0, x: 16 });
+          tl.to(
+            highlights,
+            { opacity: 1, x: 0, duration: 0.3, stagger: 0.04, ease: 'power2.out' },
+            0.6,
+          );
+        }
       });
     },
     { scope: sectionRef },
@@ -94,89 +115,128 @@ const WorkExperience = () => {
     <section ref={sectionRef} className="c-space my-20 sm:my-32" id="work">
       {/* Section label */}
       <div className="work-label flex items-center gap-4 mb-16">
-        <span className="text-white/70 text-[11px] tracking-[0.4em] uppercase font-light">// Experience</span>
+        <span className="text-white/70 text-[11px] tracking-[0.4em] uppercase font-light">
+          // Experience
+        </span>
         <div className="work-label-line flex-1 h-[1px] bg-gradient-to-r from-white/25 to-transparent origin-left" />
       </div>
 
       {/* Status bar */}
-      <div className="flex items-center justify-between mb-10">
-        <span className="text-white/30 text-[10px] tracking-[0.3em] uppercase font-light">
+      <div className="status-bar flex items-center justify-between mb-12">
+        <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase font-light">
           {totalPositions} Positions · {companyCount} Companies
         </span>
-        <span className="text-white/20 text-[9px] tracking-[0.2em] uppercase font-mono">Jan 2020 — Present</span>
+        <span className="text-white/30 text-[9px] tracking-[0.2em] uppercase font-mono">
+          Jan 2020 — Present
+        </span>
       </div>
 
       {/* Timeline */}
       <div className="work-timeline relative">
-        {/* Vertical timeline line — scrubbed by scroll */}
-        <div className="timeline-line absolute left-[calc(3.5rem+19px)] sm:left-[calc(4rem+19px)] top-0 bottom-0 w-[1px] bg-gradient-to-b from-white/[0.15] via-white/[0.08] to-transparent origin-top" />
+        {/* Timeline track (subtle background rail) */}
+        <div className="absolute left-[calc(3.5rem+19px)] sm:left-[calc(4.5rem+19px)] top-0 bottom-0 w-[2px] bg-white/[0.05] rounded-full" />
 
-        <div className="flex flex-col gap-10">
+        {/* Timeline progress (animated glowing fill — scrub-linked) */}
+        <div className="timeline-progress absolute left-[calc(3.5rem+19px)] sm:left-[calc(4.5rem+19px)] top-0 bottom-0 w-[2px] rounded-full origin-top bg-gradient-to-b from-blue-400/50 via-blue-500/25 to-cyan-400/10 shadow-[0_0_8px_rgba(96,165,250,0.2)]" />
+
+        <div className="flex flex-col gap-14">
           {workCompanies.map((company) => {
             const earliestDuration = company.roles[company.roles.length - 1].duration;
             const yearMatch = earliestDuration.match(/\d{4}/);
             const startYear = yearMatch ? yearMatch[0] : '';
+            const totalRoles = company.roles.length;
 
             return (
-              <div key={company.id} className="company-block flex">
-                {/* Year column — desktop only */}
-                <div className="year-label w-14 sm:w-16 flex-shrink-0 pt-[21px] hidden sm:block">
-                  <span className="text-white/20 text-[9px] tracking-[0.15em] font-mono text-right block pr-4">
+              <div key={company.id} className="exp-block relative flex">
+                {/* ── Year column ── */}
+                <div className="year-marker w-14 sm:w-[4.5rem] flex-shrink-0 pt-6">
+                  <span className="text-white/40 text-xs sm:text-sm font-mono tracking-widest text-right block pr-4">
                     {startYear}
                   </span>
                 </div>
 
-                {/* Node column */}
-                <div className="w-10 flex-shrink-0 relative pt-[17px] ml-14 sm:ml-0">
-                  <div
-                    className={`timeline-node rounded-full border ${
-                      company.isLatest
-                        ? 'w-[11px] h-[11px] border-white/40 bg-white/20 shadow-[0_0_14px_rgba(255,255,255,0.2)]'
-                        : 'w-[9px] h-[9px] border-white/20 bg-white/[0.07]'
-                    }`}
-                  />
+                {/* ── Node column ── */}
+                <div className="w-10 flex-shrink-0 flex justify-center pt-[22px] relative">
+                  {/* Node with ripple */}
+                  <div className="timeline-node relative">
+                    <div
+                      className={`node-ripple absolute rounded-full ${
+                        company.isLatest
+                          ? 'w-4 h-4 -inset-0.5 bg-blue-400/25'
+                          : 'w-3 h-3 inset-0 bg-white/10'
+                      }`}
+                    />
+                    <div
+                      className={`relative z-10 rounded-full border-2 ${
+                        company.isLatest
+                          ? 'w-4 h-4 border-blue-400/70 bg-blue-500/30 shadow-[0_0_20px_rgba(96,165,250,0.4)]'
+                          : 'w-3 h-3 border-white/30 bg-white/[0.1]'
+                      }`}
+                    />
+                  </div>
                 </div>
 
-                {/* Company card */}
-                <div className="flex-1 border border-white/[0.08] rounded-lg bg-white/[0.02] overflow-hidden">
+                {/* ── Connector ── */}
+                <div className="w-4 sm:w-6 flex-shrink-0 flex items-start pt-[29px]">
+                  <div className="connector-line h-[1px] w-full bg-gradient-to-r from-blue-400/25 to-white/[0.06] origin-left" />
+                </div>
+
+                {/* ── Company card ── */}
+                <div className="company-card flex-1 rounded-xl border border-white/[0.1] bg-gradient-to-br from-white/[0.06] via-white/[0.03] to-transparent overflow-hidden transition-all duration-500 hover:border-white/[0.18] hover:shadow-[0_8px_48px_rgba(96,165,250,0.04)]">
                   {/* Company header */}
-                  <div className="flex items-center gap-3 px-5 sm:px-6 py-4 border-b border-white/[0.06]">
-                    <h3 className="text-white/80 text-base sm:text-lg font-light">{company.name}</h3>
-                    {company.isLatest && (
-                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 border border-green-500/20 rounded text-green-400/70 text-[8px] tracking-[0.15em] uppercase">
-                        <span className="w-1 h-1 rounded-full bg-green-500/60 animate-pulse" />
-                        Current
-                      </span>
+                  <div className="px-6 sm:px-8 pt-6 pb-4">
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <h3 className="text-white text-lg sm:text-xl font-medium tracking-wide">
+                        {company.name}
+                      </h3>
+                      {company.isLatest && (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-400/25 rounded-full text-emerald-400/80 text-[8px] tracking-[0.15em] uppercase font-medium">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/70 animate-pulse" />
+                          Current
+                        </span>
+                      )}
+                    </div>
+                    {totalRoles > 1 && (
+                      <p className="text-white/30 text-[10px] tracking-[0.25em] uppercase font-mono mt-2">
+                        {totalRoles} Roles · Career Progression
+                      </p>
                     )}
+                    <div className="mt-4 h-[1px] bg-gradient-to-r from-blue-400/20 via-white/[0.06] to-transparent" />
                   </div>
 
-                  {/* Roles — stacked with dividers */}
-                  <div className="divide-y divide-white/[0.04]">
-                    {company.roles.map((role, rIdx) => (
-                      <div key={rIdx} className="px-5 sm:px-6 py-5">
-                        {/* Role title + duration */}
-                        <div className="flex items-start justify-between gap-4 mb-2">
-                          <p className="text-white/65 text-sm sm:text-base font-light tracking-wide">{role.pos}</p>
-                          <span className="flex-shrink-0 text-white/25 text-[10px] tracking-[0.15em] uppercase font-mono mt-0.5">
-                            {role.duration}
-                          </span>
-                        </div>
-
-                        {/* Summary */}
-                        <p className="text-white/38 text-sm font-light leading-relaxed mb-4">{role.title}</p>
-
-                        {/* Highlights */}
-                        <ul className="space-y-2">
-                          {role.highlights.map((highlight, hIdx) => (
-                            <li key={hIdx} className="highlight-item flex items-start gap-3">
-                              <span className="text-white/25 text-xs mt-[3px] flex-shrink-0 font-mono">›</span>
-                              <span className="text-white/50 text-sm font-light leading-relaxed">{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
+                  {/* Roles */}
+                  {company.roles.map((role, rIdx) => (
+                    <div
+                      key={rIdx}
+                      className={`role-block px-6 sm:px-8 py-5 ${rIdx > 0 ? 'border-t border-white/[0.06]' : ''}`}>
+                      {/* Role header */}
+                      <div className="flex items-start justify-between gap-4 mb-3">
+                        <h4 className="text-white/90 text-sm sm:text-[15px] font-normal tracking-wide">
+                          {role.pos}
+                        </h4>
+                        <span className="flex-shrink-0 px-3 py-1 bg-white/[0.05] border border-white/[0.1] rounded-full text-white/45 text-[9px] tracking-[0.15em] uppercase font-mono whitespace-nowrap">
+                          {role.duration}
+                        </span>
                       </div>
-                    ))}
-                  </div>
+
+                      {/* Summary */}
+                      <p className="text-white/55 text-sm font-light leading-relaxed mb-5">
+                        {role.title}
+                      </p>
+
+                      {/* Highlights */}
+                      <div className="space-y-2.5">
+                        {role.highlights.map((highlight, hIdx) => (
+                          <div key={hIdx} className="highlight-item flex items-start gap-3">
+                            <div className="w-1.5 h-1.5 rounded-full bg-blue-400/50 mt-[6px] flex-shrink-0 ring-[2.5px] ring-blue-400/[0.12]" />
+                            <span className="text-white/70 text-[13px] font-light leading-relaxed">
+                              {highlight}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             );
