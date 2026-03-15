@@ -5,9 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { workCompanies } from '../constants/index';
 
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+gsap.registerPlugin(ScrollTrigger);
 
 const WorkExperience = () => {
   const sectionRef = useRef<HTMLElement>(null);
