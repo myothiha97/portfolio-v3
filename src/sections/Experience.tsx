@@ -168,10 +168,10 @@ const WorkExperience = () => {
 
       {/* Status bar */}
       <div className="status-bar flex items-center justify-between mb-12">
-        <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase font-light">
+        <span className="text-white/60 text-xs tracking-[0.3em] uppercase font-medium">
           {totalPositions} Positions · {companyCount} Companies
         </span>
-        <span className="text-white/30 text-[9px] tracking-[0.2em] uppercase font-mono">
+        <span className="text-white/50 text-[10px] tracking-[0.2em] uppercase font-mono font-medium">
           Jan 2020 — Present
         </span>
       </div>
@@ -248,7 +248,7 @@ const WorkExperience = () => {
                         <h4 className="text-white/90 text-base sm:text-lg font-normal tracking-wide mb-1">
                           {role.pos}
                         </h4>
-                        <span className="inline-block px-3 py-0.5 bg-white/[0.05] border border-white/[0.1] rounded-full text-white/45 text-[9px] tracking-[0.15em] uppercase font-mono">
+                        <span className="inline-block px-3 py-0.5 bg-blue-500/[0.08] border border-blue-400/20 rounded-full text-blue-300/70 text-[9px] tracking-[0.15em] uppercase font-mono">
                           {role.duration}
                         </span>
                       </div>
