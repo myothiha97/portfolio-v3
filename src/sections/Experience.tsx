@@ -220,7 +220,7 @@ const WorkExperience = () => {
                 {/* ── Company card ── */}
                 <div className="company-card flex-1 rounded-xl border border-white/[0.1] bg-gradient-to-br from-white/[0.06] via-white/[0.03] to-transparent overflow-hidden transition-all duration-500 hover:border-white/[0.18] hover:shadow-[0_8px_48px_rgba(96,165,250,0.04)]">
                   {/* Company header */}
-                  <div className="px-6 sm:px-8 pt-6 pb-4">
+                  <div className="px-6 sm:px-8 pt-5 pb-3">
                     <div className="flex items-center gap-3 flex-wrap">
                       <h3 className="text-white text-lg sm:text-xl font-medium tracking-wide">
                         {company.name}
@@ -237,7 +237,7 @@ const WorkExperience = () => {
                         {totalRoles} Roles · Career Progression
                       </p>
                     )}
-                    <div className="mt-4 h-[1px] bg-gradient-to-r from-blue-400/20 via-white/[0.06] to-transparent" />
+                    <div className="mt-3 h-[1px] bg-gradient-to-r from-blue-400/20 via-white/[0.06] to-transparent" />
                   </div>
 
                   {/* Roles */}
@@ -246,11 +246,11 @@ const WorkExperience = () => {
                       key={rIdx}
                       className={`role-block px-6 sm:px-8 py-5 ${rIdx > 0 ? 'border-t border-white/[0.06]' : ''}`}>
                       {/* Role header */}
-                      <div className="flex items-start justify-between gap-4 mb-3">
-                        <h4 className="text-white/90 text-sm sm:text-[15px] font-normal tracking-wide">
+                      <div className="mb-3">
+                        <h4 className="text-white/90 text-base sm:text-lg font-normal tracking-wide mb-1">
                           {role.pos}
                         </h4>
-                        <span className="flex-shrink-0 px-3 py-1 bg-white/[0.05] border border-white/[0.1] rounded-full text-white/45 text-[9px] tracking-[0.15em] uppercase font-mono whitespace-nowrap">
+                        <span className="inline-block px-3 py-0.5 bg-white/[0.05] border border-white/[0.1] rounded-full text-white/45 text-[9px] tracking-[0.15em] uppercase font-mono">
                           {role.duration}
                         </span>
                       </div>
