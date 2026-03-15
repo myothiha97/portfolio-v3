@@ -132,80 +132,100 @@ export const workExperiences = [
     id: 1,
     name: 'Rezerv',
     pos: 'Senior Frontend Engineer',
-    duration: 'Mar 2024 — Present',
+    duration: 'Oct 2024 — Present',
     title:
-      'Leading frontend architecture for a gym, wellness & spa SaaS platform serving businesses across Southeast Asia. Spearheading migration from legacy codebase to modern React + TypeScript stack with significant performance improvements.',
+      'Leading frontend architecture for a gym, wellness & spa SaaS platform. Owning the full delivery lifecycle — performance optimization, API integrations, CI/CD pipelines, and AWS infrastructure — while mentoring the team on clean code and scalability.',
     highlights: [
-      'Architected and implemented new frontend platform with React, TypeScript, React Query, and Recoil state management',
-      'Designed robust REST API integration layer and component library with Chakra UI',
-      'Owned CI/CD pipelines on AWS — automated deployments, staging environments, and monitoring with Datadog',
-      'Mentored junior developers on code quality, testing best practices, and performance optimization',
+      'Led development, maintenance, and enhancement of a scalable frontend codebase aligned with business and project objectives',
+      'Optimized application performance using modern tools and frontend architecture best practices for a fast, seamless user experience',
+      'Refactored and modernized legacy code, migrating to maintainable, high-performance technologies to improve development efficiency',
+      'Researched, designed, and implemented robust API integrations ensuring smooth data flow and system interoperability across services',
+      'Owned the frontend deployment lifecycle — established and managed CI/CD pipelines for streamlined delivery and continuous improvement',
+      'Collaborated with DevOps to manage AWS infrastructure for frontend hosting, enhancing reliability, scalability, and performance',
+      'Acted as a technical mentor, promoting clean code, maintainability, and performance-focused development culture',
     ],
-    tags: ['React', 'TypeScript', 'React Query', 'Recoil', 'Chakra UI', 'AWS', 'Node.js'],
+    tags: ['React', 'TypeScript', 'Node.js', 'AWS', 'CI/CD', 'React Query'],
     icon: '/assets/framer.svg',
   },
   {
     id: 2,
     name: 'Codigo — The Mobile App Company',
     pos: 'Lead Software Engineer',
-    duration: 'Jun 2023 — Mar 2024',
+    duration: 'Jan 2024 — Oct 2024',
     title:
-      'Promoted to Lead — driving technical direction for client projects and managing a team of 3–4 engineers. Responsible for architecture decisions, code review standards, sprint planning, and direct client communication.',
+      'Led technical direction for enterprise client projects at a Singapore mobile & web agency. Architected centralized design systems, engineered a live sports streaming platform, and owned CI/CD infrastructure across production environments.',
     highlights: [
-      'Led development of 7-Eleven Singapore e-commerce platform — product catalog, cart system, payment integration, and store locator',
-      'Architected frontend for SPOTV live sports streaming with Brightcove SDK — handling real-time video, EPG, and subscription flows',
-      'Established team coding standards, PR review process, and documentation practices that reduced bug rate by 35%',
-      'Interfaced with product managers and stakeholders from AIA, RWS Singapore, and other enterprise clients',
+      'Architected a centralized design system for AIA Singapore and Trifecta — ensuring cross-project UI consistency and long-term architectural scalability',
+      'Engineered a high-concurrency live video streaming platform for international sports broadcasting; led a team of 4 with Next.js App Router and Brightcove SDK for adaptive bitrate streaming',
+      'Hardened system infrastructure with advanced authentication and high-concurrency optimizations; managed AWS deployment with Nginx load balancing for global availability',
+      'Accelerated deployment cycles by designing and maintaining CI/CD pipelines, reducing manual intervention across production environments',
+      'Authored comprehensive technical documentation and audited internal workflows to eliminate architectural redundancies and technical debt',
     ],
-    tags: ['React', 'Next.js', 'TypeScript', 'Node.js', 'GraphQL', 'AWS'],
+    tags: ['React', 'Next.js', 'TypeScript', 'Node.js', 'AWS', 'Nginx', 'Brightcove SDK'],
     icon: '/assets/notion.svg',
   },
   {
     id: 3,
     name: 'Codigo — The Mobile App Company',
     pos: 'Senior Software Engineer',
-    duration: 'Jun 2022 — Jun 2023',
+    duration: 'Jan 2023 — Dec 2023',
     title:
-      'Promoted to Senior — taking ownership of full project lifecycles from architecture design to production deployment. Built scalable design systems and improved API performance across multiple client projects.',
+      'Took ownership of the 7-Eleven Singapore e-commerce platform, leading a team of 3 developers. Implemented advanced scalability strategies and interfaced directly with stakeholders to translate business requirements into scalable software.',
     highlights: [
-      'Designed and built reusable component libraries and design systems for AIA and Trifecta projects',
-      'Optimized API response handling and frontend state management — improved page load times by 40%',
-      'Implemented comprehensive testing strategies with Jest and Cypress, achieving 80%+ code coverage',
-      'Mentored 2 junior engineers through code pairing sessions and technical knowledge sharing',
+      'Led development of the 7-Eleven Singapore e-commerce platform — managed a team of 3 developers for high-quality technical execution and on-time delivery',
+      'Implemented advanced API caching, design patterns, and fine-grained performance tuning to optimize web application responsiveness',
+      'Facilitated technical alignment with business goals by communicating directly with stakeholders to translate requirements into scalable solutions',
+      'Collaborated with cross-functional teams (UI/UX, QA, Product) for feature research and iterative improvements to UX and system reliability',
     ],
-    tags: ['React', 'Vue.js', 'TypeScript', 'NestJS', 'PostgreSQL', 'Docker'],
+    tags: ['React', 'Next.js', 'TypeScript', 'Node.js', 'GraphQL', 'AWS'],
     icon: '/assets/notion.svg',
   },
   {
     id: 4,
     name: 'Codigo — The Mobile App Company',
     pos: 'Software Engineer',
-    duration: 'May 2021 — Jun 2022',
+    duration: 'Sep 2021 — Jan 2023',
     title:
-      'Joined as a JavaScript/TypeScript engineer building web applications for enterprise clients across Singapore. Rapidly grew from implementation-focused to driving architectural discussions.',
+      'Built full-stack web applications for enterprise clients across Singapore. Rapidly grew from implementation to architecture — improving API performance by 40% and contributing to system design decisions.',
     highlights: [
-      'Built interactive web applications for Kcuts CMS, Yoga Movement, and Neuroglee Health using React and Recoil',
-      'Developed backend services with Node.js and Express, integrating with PostgreSQL and third-party APIs',
-      'Implemented responsive, cross-browser compatible UIs with pixel-perfect Figma-to-code translation',
-      'Contributed to R&D initiatives exploring new frameworks and performance optimization techniques',
+      'Developed and optimized full-stack web applications using Node.js, TypeScript, and React for high-quality software delivery',
+      'Refactored legacy codebases and improved API performance by 40% through efficient data-fetching strategies and React Query',
+      'Collaborated with UI/UX, QA, and business teams to translate requirements into technical features',
+      'Contributed to architectural discussions to enhance system design and long-term codebase maintainability',
     ],
-    tags: ['React', 'JavaScript', 'Node.js', 'Express', 'Recoil', 'Bootstrap'],
+    tags: ['React', 'TypeScript', 'Node.js', 'React Query', 'GraphQL'],
     icon: '/assets/notion.svg',
   },
   {
     id: 5,
+    name: 'Freelance',
+    pos: 'Full Stack Developer',
+    duration: 'Aug 2020 — Sep 2021',
+    title:
+      'Delivered multiple full-stack projects remotely using React, Vue.js, Angular, Node.js, Python (Django), and PHP (Laravel). Gained end-to-end experience across architecture design, performance optimization, and production deployment.',
+    highlights: [
+      'Developed and delivered projects across React, Vue.js, and AngularJS frontends with Node.js (Express, NestJS, Next.js), Python (Django), and PHP (Laravel) backends',
+      'Diagnosed and resolved complex performance challenges through effective caching strategies, code refactoring, and industry best practices',
+      'Strengthened problem-solving, adaptability, and client communication skills through diverse projects across various domains',
+    ],
+    tags: ['React', 'Vue.js', 'Node.js', 'Python', 'Django', 'PHP', 'Docker'],
+    icon: '/assets/framer.svg',
+  },
+  {
+    id: 6,
     name: 'MM-Digital-Solutions',
     pos: 'Software Engineer — Python',
-    duration: 'Sep 2020 — Apr 2021',
+    duration: 'Jan 2020 — Mar 2021',
     title:
-      'Built end-to-end web automation systems and machine learning prototypes. Specialized in Python-based crawling, data pipelines, and computer vision applications for enterprise clients.',
+      'Built end-to-end Python automation and ML systems for enterprise clients. Specialized in web crawling, data pipelines, and computer vision — including CV systems for parking detection, security monitoring, and facial recognition.',
     highlights: [
-      'Engineered web crawlers and automation systems with Selenium, Scrapy, and Beautiful Soup for 5BB ISP',
-      'Developed ML-powered computer vision prototypes — parking space analytics, security monitoring, and facial recognition',
-      'Built data processing pipelines handling 100K+ daily records with automated scheduling and error recovery',
-      'Deployed automation solutions on Linux servers with cron-based orchestration and monitoring dashboards',
+      'Engineered fully automated web crawlers with Selenium, Scrapy, and Beautiful Soup for large-scale data extraction and business intelligence',
+      'Built automation systems and cron-based task schedulers on Linux (Ubuntu) for 5BB ISP, streamlining backend workflows',
+      'Conducted R&D in data analysis and ML using NumPy, Pandas, Matplotlib, Scikit-learn, and TensorFlow',
+      'Developed ML prototypes: parking space detection (CV), real-time person detection for security systems, and facial/hair recognition for personalized recommendations',
+      'Integrated ML models and APIs into production-ready Python applications for advanced data insights and predictive capabilities',
     ],
-    tags: ['Python', 'Selenium', 'Scrapy', 'Machine Learning', 'Linux', 'Docker'],
+    tags: ['Python', 'Selenium', 'Scrapy', 'TensorFlow', 'Machine Learning', 'Linux', 'Docker'],
     icon: '/assets/figma.svg',
   },
 ];
@@ -399,6 +419,123 @@ export const skillCategories: SkillCategory[] = [
           { name: 'Machine Learning', icon: 'SiTensorflow' },
           { name: 'Figma', icon: 'SiFigma' },
           { name: 'Jira', icon: 'SiJira' },
+        ],
+      },
+    ],
+  },
+];
+
+export interface WorkRole {
+  pos: string;
+  duration: string;
+  title: string;
+  highlights: string[];
+}
+
+export interface WorkCompany {
+  id: number;
+  name: string;
+  isLatest?: boolean;
+  roles: WorkRole[];
+}
+
+export const workCompanies: WorkCompany[] = [
+  {
+    id: 1,
+    name: 'Rezerv',
+    isLatest: true,
+    roles: [
+      {
+        pos: 'Senior Frontend Engineer',
+        duration: 'Oct 2024 — Present',
+        title:
+          'Leading frontend architecture for a gym, wellness & spa SaaS platform. Owning the full delivery lifecycle — performance optimization, API integrations, CI/CD pipelines, and AWS infrastructure — while mentoring the team on clean code and scalability.',
+        highlights: [
+          'Led development, maintenance, and enhancement of a scalable frontend codebase aligned with business and project objectives',
+          'Optimized application performance using modern tools and frontend architecture best practices for a fast, seamless user experience',
+          'Refactored and modernized legacy code, migrating to maintainable, high-performance technologies to improve development efficiency',
+          'Designed and implemented robust API integrations ensuring smooth data flow and system interoperability across services',
+          'Owned the frontend deployment lifecycle — established and managed CI/CD pipelines for streamlined delivery',
+          'Collaborated with DevOps to manage AWS infrastructure for frontend hosting, enhancing reliability and scalability',
+          'Acted as a technical mentor, promoting clean code, maintainability, and performance-focused development culture',
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Codigo — The Mobile App Company',
+    roles: [
+      {
+        pos: 'Lead Software Engineer',
+        duration: 'Jan 2024 — Oct 2024',
+        title:
+          'Led technical direction for enterprise client projects. Architected centralized design systems, engineered a live sports streaming platform, and owned CI/CD infrastructure across production environments.',
+        highlights: [
+          'Architected a centralized design system for AIA Singapore and Trifecta — ensuring cross-project UI consistency and long-term architectural scalability',
+          'Engineered a high-concurrency live video streaming platform with Brightcove SDK, Next.js App Router, and adaptive bitrate streaming; led a team of 4',
+          'Hardened infrastructure with advanced authentication and high-concurrency optimizations; managed AWS deployment with Nginx load balancing for global availability',
+          'Accelerated deployment cycles by designing and maintaining CI/CD pipelines, reducing manual intervention across environments',
+          'Authored technical documentation and audited internal workflows to eliminate architectural redundancies and technical debt',
+        ],
+      },
+      {
+        pos: 'Senior Software Engineer',
+        duration: 'Jan 2023 — Dec 2023',
+        title:
+          'Led the 7-Eleven Singapore e-commerce platform, managing a team of 3 developers. Implemented advanced scalability strategies and interfaced directly with stakeholders.',
+        highlights: [
+          'Led development of the 7-Eleven Singapore e-commerce platform — managed 3 developers for high-quality execution and on-time delivery',
+          'Implemented advanced API caching, design patterns, and fine-grained performance tuning to optimize web application responsiveness',
+          'Facilitated technical alignment with business goals by communicating directly with stakeholders to translate requirements into scalable solutions',
+          'Collaborated with cross-functional teams (UI/UX, QA, Product) for feature research and iterative improvements',
+        ],
+      },
+      {
+        pos: 'Software Engineer',
+        duration: 'Sep 2021 — Jan 2023',
+        title:
+          'Built full-stack web applications for enterprise clients. Improved API performance by 40% and contributed to system design decisions.',
+        highlights: [
+          'Developed and optimized full-stack applications using Node.js, TypeScript, and React for enterprise clients',
+          'Refactored legacy codebases and improved API performance by 40% through efficient data-fetching strategies and React Query',
+          'Collaborated with UI/UX, QA, and business teams to translate requirements into technical features',
+          'Contributed to architectural discussions to enhance system design and long-term codebase maintainability',
+        ],
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: 'Freelance',
+    roles: [
+      {
+        pos: 'Full Stack Developer',
+        duration: 'Aug 2020 — Sep 2021',
+        title:
+          'Delivered multiple full-stack projects remotely using React, Vue.js, Angular, Node.js, Python (Django), and PHP (Laravel). End-to-end experience across architecture design and production deployment.',
+        highlights: [
+          'Built and delivered projects across React, Vue.js, and AngularJS frontends with Node.js, Python (Django), and PHP (Laravel) backends',
+          'Diagnosed and resolved complex performance challenges through effective caching strategies and code refactoring',
+          'Strengthened problem-solving and client communication skills through diverse projects across various domains',
+        ],
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: 'MM-Digital-Solutions',
+    roles: [
+      {
+        pos: 'Software Engineer — Python',
+        duration: 'Jan 2020 — Mar 2021',
+        title:
+          'Built end-to-end Python automation and ML systems for enterprise clients. Specialized in web crawling, data pipelines, and computer vision prototypes.',
+        highlights: [
+          'Engineered automated web crawlers with Selenium, Scrapy, and Beautiful Soup for large-scale data extraction and business intelligence',
+          'Built automation systems and cron-based task schedulers on Linux (Ubuntu) for 5BB ISP, streamlining backend workflows',
+          'Conducted extensive R&D in data analysis and ML using NumPy, Pandas, Matplotlib, Scikit-learn, and TensorFlow',
+          'Developed ML prototypes: parking space detection (CV), real-time person detection for security systems, and facial/hair recognition',
         ],
       },
     ],
