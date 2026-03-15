@@ -39,70 +39,117 @@ const WorkExperience = () => {
       gsap.to('.timeline-progress', {
         scrollTrigger: {
           trigger: '.work-timeline',
-          start: 'top 75%',
-          end: 'bottom 25%',
-          scrub: 1,
+          start: 'top 70%',
+          end: 'bottom 20%',
+          scrub: 0.8,
         },
         scaleY: 1,
         ease: 'none',
       });
 
-      // ── 4. Each company block — orchestrated entrance ──
-      document.querySelectorAll('.exp-block').forEach((block) => {
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: block, start: 'top 84%' },
+      // ── 4. Year labels — fade in (no x translation to avoid artifacts) ──
+      gsap.utils.toArray<HTMLElement>('.year-marker').forEach((el) => {
+        gsap.set(el, { opacity: 0 });
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 86%' },
+          opacity: 1,
+          duration: 0.6,
+          ease: 'power2.out',
         });
+      });
 
-        // Year label
-        const year = block.querySelector('.year-marker');
-        if (year) {
-          gsap.set(year, { opacity: 0, x: -20 });
-          tl.to(year, { opacity: 1, x: 0, duration: 0.5, ease: 'power3.out' }, 0);
-        }
+      // ── 5. Timeline nodes — pop in with bounce ──
+      gsap.utils.toArray<HTMLElement>('.timeline-node').forEach((el) => {
+        gsap.set(el, { scale: 0, opacity: 0 });
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 86%' },
+          scale: 1,
+          opacity: 1,
+          duration: 0.5,
+          ease: 'back.out(3)',
+        });
+      });
 
-        // Node pop + ripple
-        const node = block.querySelector('.timeline-node');
-        const ripple = block.querySelector('.node-ripple');
-        if (node) {
-          gsap.set(node, { scale: 0, opacity: 0 });
-          tl.to(node, { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(3)' }, 0.1);
-        }
-        if (ripple) {
-          gsap.set(ripple, { scale: 0.5, opacity: 0.5 });
-          tl.to(ripple, { scale: 3, opacity: 0, duration: 1.2, ease: 'power2.out' }, 0.25);
-        }
+      // ── 6. Node activation — turn blue when block enters viewport ──
+      gsap.utils.toArray<HTMLElement>('.node-dot').forEach((el) => {
+        gsap.to(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 70%',
+            toggleActions: 'play none none reverse',
+          },
+          borderColor: 'rgba(96, 165, 250, 0.7)',
+          backgroundColor: 'rgba(59, 130, 246, 0.3)',
+          boxShadow: '0 0 20px rgba(96, 165, 250, 0.4)',
+          width: '1rem',
+          height: '1rem',
+          duration: 0.4,
+          ease: 'power2.out',
+        });
+      });
 
-        // Connector line draw
-        const connector = block.querySelector('.connector-line');
-        if (connector) {
-          gsap.set(connector, { scaleX: 0 });
-          tl.to(connector, { scaleX: 1, duration: 0.4, ease: 'power2.inOut' }, 0.2);
-        }
+      // ── 7. Node ripple — expanding ring when node activates ──
+      gsap.utils.toArray<HTMLElement>('.node-ripple').forEach((el) => {
+        gsap.set(el, { scale: 0.8, opacity: 0 });
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 70%' },
+          scale: 3.5,
+          opacity: 0,
+          duration: 1.2,
+          ease: 'power2.out',
+          onStart: () => {
+            gsap.set(el, { opacity: 0.5 });
+          },
+        });
+      });
 
-        // Card float up
-        const card = block.querySelector('.company-card');
-        if (card) {
-          gsap.set(card, { opacity: 0, y: 44, scale: 0.97 });
-          tl.to(card, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out' }, 0.15);
-        }
+      // ── 8. Connector lines — draw from left to right ──
+      gsap.utils.toArray<HTMLElement>('.connector-line').forEach((el) => {
+        gsap.set(el, { scaleX: 0 });
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 86%' },
+          scaleX: 1,
+          duration: 0.5,
+          delay: 0.1,
+          ease: 'power2.inOut',
+        });
+      });
 
-        // Role blocks stagger
-        const roles = block.querySelectorAll('.role-block');
-        if (roles.length > 0) {
-          gsap.set(roles, { opacity: 0, y: 20 });
-          tl.to(roles, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, 0.45);
-        }
+      // ── 9. Company cards — float up with scale ──
+      gsap.utils.toArray<HTMLElement>('.company-card').forEach((el) => {
+        gsap.set(el, { opacity: 0, y: 44, scale: 0.97 });
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 88%' },
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: 'power3.out',
+        });
+      });
 
-        // Highlights cascade
-        const highlights = block.querySelectorAll('.highlight-item');
-        if (highlights.length > 0) {
-          gsap.set(highlights, { opacity: 0, x: 16 });
-          tl.to(
-            highlights,
-            { opacity: 1, x: 0, duration: 0.3, stagger: 0.04, ease: 'power2.out' },
-            0.6,
-          );
-        }
+      // ── 10. Role blocks — stagger reveal ──
+      gsap.utils.toArray<HTMLElement>('.role-block').forEach((el) => {
+        gsap.set(el, { opacity: 0, y: 20 });
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 90%' },
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: 'power2.out',
+        });
+      });
+
+      // ── 11. Highlights — cascade from left ──
+      gsap.utils.toArray<HTMLElement>('.highlight-item').forEach((el) => {
+        gsap.set(el, { opacity: 0, x: 16 });
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 92%' },
+          opacity: 1,
+          x: 0,
+          duration: 0.35,
+          ease: 'power2.out',
+        });
       });
     },
     { scope: sectionRef },
@@ -157,22 +204,11 @@ const WorkExperience = () => {
 
                 {/* ── Node column ── */}
                 <div className="w-10 flex-shrink-0 flex justify-center pt-[22px] relative">
-                  {/* Node with ripple */}
                   <div className="timeline-node relative">
-                    <div
-                      className={`node-ripple absolute rounded-full ${
-                        company.isLatest
-                          ? 'w-4 h-4 -inset-0.5 bg-blue-400/25'
-                          : 'w-3 h-3 inset-0 bg-white/10'
-                      }`}
-                    />
-                    <div
-                      className={`relative z-10 rounded-full border-2 ${
-                        company.isLatest
-                          ? 'w-4 h-4 border-blue-400/70 bg-blue-500/30 shadow-[0_0_20px_rgba(96,165,250,0.4)]'
-                          : 'w-3 h-3 border-white/30 bg-white/[0.1]'
-                      }`}
-                    />
+                    {/* Ripple ring (animated on scroll) */}
+                    <div className="node-ripple absolute w-3 h-3 inset-0 rounded-full bg-blue-400/25" />
+                    {/* Solid node — starts grey, animates to blue on scroll */}
+                    <div className="node-dot relative z-10 w-3 h-3 rounded-full border-2 border-white/25 bg-white/[0.08]" />
                   </div>
                 </div>
 
