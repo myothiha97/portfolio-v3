@@ -23,7 +23,7 @@ const Footer = () => {
           </a>
         </div>
 
-        <p className="text-white/40 text-[10px] tracking-wider font-light">Built with React + TypeScript</p>
+        <p className="text-white/55 text-[10px] tracking-wider font-light">Built with React + TypeScript</p>
       </div>
     </footer>
   );
