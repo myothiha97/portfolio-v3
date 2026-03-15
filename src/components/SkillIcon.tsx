@@ -209,7 +209,7 @@ const colorMap: Record<string, string> = {
   SiNodedotjs: '#339933',
   SiExpress: '#FFFFFF',
   SiNestjs: '#E0234E',
-  SiDjango: '#092E20',
+  SiDjango: '#2BA977',
   SiFastapi: '#009688',
   SiGraphql: '#E10098',
   SiPostgresql: '#4169E1',

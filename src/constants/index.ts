@@ -25,8 +25,10 @@ export const myProjects = [
     tags: [
       { id: 1, name: 'Next.js', path: '/assets/react.svg' },
       { id: 2, name: 'TypeScript', path: '/assets/typescript.png' },
-      { id: 3, name: 'Tailwind', path: '/assets/react.svg' },
-      { id: 4, name: 'React Query', path: '/assets/react.svg' },
+      { id: 3, name: 'Node.js', path: '/assets/react.svg' },
+      { id: 4, name: 'AWS', path: '/assets/react.svg' },
+      { id: 5, name: 'Tailwind', path: '/assets/react.svg' },
+      { id: 6, name: 'React Query', path: '/assets/react.svg' },
     ],
   },
   {
@@ -46,8 +48,10 @@ export const myProjects = [
     tags: [
       { id: 1, name: 'React', path: '/assets/react.svg' },
       { id: 2, name: 'TypeScript', path: '/assets/typescript.png' },
-      { id: 3, name: 'Sass', path: '/assets/react.svg' },
-      { id: 4, name: 'Redux', path: '/assets/react.svg' },
+      { id: 3, name: 'Node.js', path: '/assets/react.svg' },
+      { id: 4, name: 'AWS', path: '/assets/react.svg' },
+      { id: 5, name: 'Sass', path: '/assets/react.svg' },
+      { id: 6, name: 'Redux', path: '/assets/react.svg' },
     ],
   },
   {
@@ -67,8 +71,10 @@ export const myProjects = [
     tags: [
       { id: 1, name: 'Next.js', path: '/assets/react.svg' },
       { id: 2, name: 'TypeScript', path: '/assets/typescript.png' },
-      { id: 3, name: 'Tailwind', path: '/assets/react.svg' },
-      { id: 4, name: 'Recoil', path: '/assets/react.svg' },
+      { id: 3, name: 'Node.js', path: '/assets/react.svg' },
+      { id: 4, name: 'AWS', path: '/assets/react.svg' },
+      { id: 5, name: 'Tailwind', path: '/assets/react.svg' },
+      { id: 6, name: 'Recoil', path: '/assets/react.svg' },
     ],
   },
   {
@@ -88,8 +94,10 @@ export const myProjects = [
     tags: [
       { id: 1, name: 'Next.js', path: '/assets/react.svg' },
       { id: 2, name: 'TypeScript', path: '/assets/typescript.png' },
-      { id: 3, name: 'Tailwind', path: '/assets/react.svg' },
-      { id: 4, name: 'MUI', path: '/assets/react.svg' },
+      { id: 3, name: 'Node.js', path: '/assets/react.svg' },
+      { id: 4, name: 'AWS', path: '/assets/react.svg' },
+      { id: 5, name: 'Tailwind', path: '/assets/react.svg' },
+      { id: 6, name: 'MUI', path: '/assets/react.svg' },
     ],
   },
   {
@@ -110,7 +118,9 @@ export const myProjects = [
       { id: 1, name: 'Next.js', path: '/assets/react.svg' },
       { id: 2, name: 'React', path: '/assets/react.svg' },
       { id: 3, name: 'TypeScript', path: '/assets/typescript.png' },
-      { id: 4, name: 'Tailwind', path: '/assets/react.svg' },
+      { id: 4, name: 'Node.js', path: '/assets/react.svg' },
+      { id: 5, name: 'AWS', path: '/assets/react.svg' },
+      { id: 6, name: 'Tailwind', path: '/assets/react.svg' },
     ],
   },
   {
@@ -130,8 +140,10 @@ export const myProjects = [
     tags: [
       { id: 1, name: 'Next.js', path: '/assets/react.svg' },
       { id: 2, name: 'TypeScript', path: '/assets/typescript.png' },
-      { id: 3, name: 'React Query', path: '/assets/react.svg' },
-      { id: 4, name: 'Recoil', path: '/assets/react.svg' },
+      { id: 3, name: 'Node.js', path: '/assets/react.svg' },
+      { id: 4, name: 'AWS', path: '/assets/react.svg' },
+      { id: 5, name: 'React Query', path: '/assets/react.svg' },
+      { id: 6, name: 'Recoil', path: '/assets/react.svg' },
     ],
   },
   {
@@ -151,8 +163,10 @@ export const myProjects = [
     tags: [
       { id: 1, name: 'Next.js', path: '/assets/react.svg' },
       { id: 2, name: 'TypeScript', path: '/assets/typescript.png' },
-      { id: 3, name: 'Tailwind', path: '/assets/react.svg' },
-      { id: 4, name: 'Brightcove', path: '/assets/react.svg' },
+      { id: 3, name: 'Node.js', path: '/assets/react.svg' },
+      { id: 4, name: 'AWS', path: '/assets/react.svg' },
+      { id: 5, name: 'Tailwind', path: '/assets/react.svg' },
+      { id: 6, name: 'Brightcove', path: '/assets/react.svg' },
     ],
   },
   {
@@ -172,8 +186,10 @@ export const myProjects = [
     tags: [
       { id: 1, name: 'Next.js', path: '/assets/react.svg' },
       { id: 2, name: 'TypeScript', path: '/assets/typescript.png' },
-      { id: 3, name: 'Tailwind', path: '/assets/react.svg' },
-      { id: 4, name: 'Recoil', path: '/assets/react.svg' },
+      { id: 3, name: 'Node.js', path: '/assets/react.svg' },
+      { id: 4, name: 'AWS', path: '/assets/react.svg' },
+      { id: 5, name: 'Tailwind', path: '/assets/react.svg' },
+      { id: 6, name: 'Recoil', path: '/assets/react.svg' },
     ],
   },
   {
@@ -185,18 +201,17 @@ export const myProjects = [
     texture: '/textures/project/project3.mp4',
     logo: '/assets/project-logo3.png',
     logoStyle: {
-      backgroundColor: '#60f5a1',
-      background:
-        'linear-gradient(0deg, #60F5A150, #60F5A150), linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(208, 213, 221, 0.8) 100%)',
-      border: '0.2px solid rgba(208, 213, 221, 1)',
-      boxShadow: '0px 0px 60px 0px rgba(35, 131, 96, 0.3)',
+      backgroundColor: '#0E2A1F',
+      border: '0.2px solid #1A3D2A',
+      boxShadow: '0px 0px 60px 0px rgba(35, 131, 96, 0.4)',
     },
     spotlight: '/assets/spotlight3.png',
     tags: [
       { id: 1, name: 'Next.js', path: '/assets/react.svg' },
       { id: 2, name: 'Angular', path: '/assets/typescript.png' },
       { id: 3, name: 'Node.js', path: '/assets/react.svg' },
-      { id: 4, name: 'Sass', path: '/assets/react.svg' },
+      { id: 4, name: 'AWS', path: '/assets/react.svg' },
+      { id: 5, name: 'Sass', path: '/assets/react.svg' },
     ],
   },
   {
@@ -216,8 +231,10 @@ export const myProjects = [
     tags: [
       { id: 1, name: 'React', path: '/assets/react.svg' },
       { id: 2, name: 'TypeScript', path: '/assets/typescript.png' },
-      { id: 3, name: 'Sass', path: '/assets/react.svg' },
-      { id: 4, name: 'Redux', path: '/assets/react.svg' },
+      { id: 3, name: 'Node.js', path: '/assets/react.svg' },
+      { id: 4, name: 'AWS', path: '/assets/react.svg' },
+      { id: 5, name: 'Sass', path: '/assets/react.svg' },
+      { id: 6, name: 'Redux', path: '/assets/react.svg' },
     ],
   },
 ];
