@@ -63,8 +63,11 @@ const BeyondCode = () => {
   const maxIdx = beyondCards.length - visible;
   const clampedCurrent = Math.min(current, maxIdx);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const offset = clampedCurrent * (cardWidth + gap);
+
+  const initialTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const startTimer = (max: number) => {
     if (timerRef.current) clearInterval(timerRef.current);
@@ -73,9 +76,30 @@ const BeyondCode = () => {
     }, 4000);
   };
 
+  const stopTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    if (initialTimerRef.current) clearTimeout(initialTimerRef.current);
+  };
+
+  // Only run the auto-slide timer when the carousel is visible in the viewport
   useEffect(() => {
-    startTimer(maxIdx);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Short initial delay so the user sees the first card, then slides begin
+          initialTimerRef.current = setTimeout(() => startTimer(maxIdx), 1500);
+        } else {
+          stopTimer();
+        }
+      },
+      { threshold: 0.3 },
+    );
+
+    observer.observe(el);
+    return () => { observer.disconnect(); stopTimer(); };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [maxIdx]);
 
@@ -83,7 +107,7 @@ const BeyondCode = () => {
   const next = () => { startTimer(maxIdx); setCurrent((c) => Math.min(maxIdx, c + 1)); };
 
   return (
-    <div className="mt-20 sm:mt-32">
+    <div ref={sectionRef} className="mt-20 sm:mt-32">
       <div className="flex items-center gap-4 mb-16">
         <span className="text-white/75 text-[11px] tracking-[0.4em] uppercase font-normal">
           // Beyond Code

@@ -27,7 +27,10 @@ setTimeout(() => {
   loader.classList.add('fade-out');
 
   // Reveal main content 0.5s after fade starts — syncs with the transition midpoint
-  setTimeout(() => root.classList.add('hydrated'), 500);
+  setTimeout(() => {
+    root.classList.add('hydrated');
+    window.dispatchEvent(new CustomEvent('portfolio:ready'));
+  }, 500);
 
   loader.addEventListener('transitionend', () => {
     loader.remove();

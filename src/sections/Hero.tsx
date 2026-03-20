@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Button from '../components/Button';
@@ -90,9 +90,18 @@ const ParticleField = () => {
 
 const Hero = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const onReady = () => setReady(true);
+    window.addEventListener('portfolio:ready', onReady, { once: true });
+    return () => window.removeEventListener('portfolio:ready', onReady);
+  }, []);
 
   useGSAP(
     () => {
+      if (!ready) return;
+
       const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
       tl.fromTo('.hero-line', { scaleX: 0 }, { scaleX: 1, duration: 1.5, stagger: 0.1, ease: 'power3.inOut' })
@@ -114,7 +123,7 @@ const Hero = () => {
         ease: 'none',
       });
     },
-    { scope: containerRef },
+    { scope: containerRef, dependencies: [ready] },
   );
 
   return (
