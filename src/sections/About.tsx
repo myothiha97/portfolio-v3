@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -6,6 +6,176 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
+
+const beyondCards = [
+  {
+    title: 'Problem Solving',
+    desc: 'Approaching every challenge with first-principles thinking, breaking down complex problems into clear, elegant solutions under ambiguity.',
+  },
+  {
+    title: 'Innovation & R&D',
+    desc: 'Driven by curiosity to explore emerging technologies, from AI/ML systems to novel architecture patterns that push boundaries.',
+  },
+  {
+    title: 'Lifelong Learning',
+    desc: 'Constantly expanding across disciplines, from mechatronics roots to software, systems thinking, and scientific exploration.',
+  },
+  {
+    title: 'Writing & Knowledge Sharing',
+    desc: 'Documenting learnings, authoring technical content, and contributing to open-source projects that help the community grow.',
+  },
+  {
+    title: 'Systems Architecture',
+    desc: 'Passionate about designing scalable, maintainable systems: modeling data flows, service boundaries, and architecture patterns that stand the test of time.',
+  },
+  {
+    title: 'Exploration & Side Projects',
+    desc: 'Building things outside of work is how I stay honest with myself. From systems tools in Go to automation experiments, side projects are where real curiosity lives.',
+  },
+];
+
+const BeyondCode = () => {
+  const [current, setCurrent] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Measure container on mount + resize
+  useEffect(() => {
+    const update = () => {
+      if (containerRef.current) setContainerWidth(containerRef.current.offsetWidth);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  const isMobile = containerWidth > 0 && containerWidth < 640;
+  // Desktop: show 3 cards + peek of 4th (3.25 slots)
+  // Mobile: show 1 card + peek of 2nd (1.15 slots)
+  const peekRatio = isMobile ? 1.15 : 3.35;
+  const gap = 20; // px
+  const gapCount = Math.floor(peekRatio); // gaps between full cards
+  const cardWidth = containerWidth > 0
+    ? (containerWidth - gap * gapCount) / peekRatio
+    : 0;
+
+  const visible = isMobile ? 1 : 3;
+  const maxIdx = beyondCards.length - visible;
+  const clampedCurrent = Math.min(current, maxIdx);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const offset = clampedCurrent * (cardWidth + gap);
+
+  const startTimer = (max: number) => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCurrent((c) => (c >= max ? 0 : c + 1));
+    }, 4000);
+  };
+
+  useEffect(() => {
+    startTimer(maxIdx);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [maxIdx]);
+
+  const prev = () => { startTimer(maxIdx); setCurrent((c) => Math.max(0, c - 1)); };
+  const next = () => { startTimer(maxIdx); setCurrent((c) => Math.min(maxIdx, c + 1)); };
+
+  return (
+    <div className="mt-20 sm:mt-32">
+      <div className="flex items-center gap-4 mb-16">
+        <span className="text-white/75 text-[11px] tracking-[0.4em] uppercase font-normal">
+          // Beyond Code
+        </span>
+        <div className="flex-1 h-[1px] bg-gradient-to-r from-white/25 to-transparent" />
+      </div>
+
+      <p className="text-white/70 text-base sm:text-lg font-light leading-relaxed max-w-2xl mb-16">
+        Engineering was always the plan, just not this kind. I started with mechatronics, moved into
+        software by following what genuinely interested me, and the mindset carried over: curiosity,
+        systems thinking, and caring about the craft. All of it earned through doing, not following.
+      </p>
+      <div className="flex items-center gap-4 mb-8">
+        <div className="w-4 h-[1px] bg-white/45" />
+        <span className="text-white/65 text-[10px] tracking-[0.4em] uppercase font-normal">
+          values & identity
+        </span>
+        <div className="flex-1 h-[1px] bg-gradient-to-r from-white/40 to-transparent" />
+      </div>
+
+      {/* Carousel — mask-image fades right edge to reveal peek card */}
+      <div
+        ref={containerRef}
+        className="overflow-hidden pl-px"
+        style={clampedCurrent < maxIdx ? {
+          WebkitMaskImage: 'linear-gradient(to right, black 80%, rgba(0,0,0,0.45) 93%, transparent 100%)',
+          maskImage: 'linear-gradient(to right, black 80%, rgba(0,0,0,0.45) 93%, transparent 100%)',
+        } : {}}>
+        <div
+          className="flex transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+          style={{ gap: `${gap}px`, transform: `translateX(-${offset}px)` }}>
+          {beyondCards.map((item, i) => (
+            <div key={i} className="flex-shrink-0" style={{ width: `${cardWidth}px` }}>
+              <div className="border border-white/[0.10] hover:border-white/25 rounded-lg p-6 bg-black-200/30 hover:bg-white/[0.04] h-full transition-all duration-300 group/card">
+                <p className="text-white/55 text-[10px] tracking-[0.3em] uppercase font-light mb-3">
+                  {String(i + 1).padStart(2, '0')}
+                </p>
+                <h4 className="text-white/90 group-hover/card:text-white text-base font-light mb-3 transition-colors duration-300">{item.title}</h4>
+                <p className="text-white/65 group-hover/card:text-white/80 text-sm font-light leading-relaxed transition-colors duration-300">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="flex items-center justify-center gap-6 mt-8">
+        <button
+          onClick={prev}
+          disabled={clampedCurrent === 0}
+          className="w-9 h-9 flex items-center justify-center border border-white/30 rounded-full text-white/70 hover:text-white hover:border-white/60 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+
+        {/* Dot indicators */}
+        <div className="flex items-center gap-2">
+          {Array.from({ length: maxIdx + 1 }).map((_, i) => {
+            const isActive = i === clampedCurrent;
+            return (
+              <button
+                key={i}
+                onClick={() => { startTimer(maxIdx); setCurrent(i); }}
+                className={`relative rounded-full overflow-hidden transition-[width,height] duration-300 ease-out ${
+                  isActive
+                    ? 'w-8 h-1 bg-white/15'
+                    : 'w-1.5 h-1.5 bg-white/25 hover:bg-white/45'
+                }`}>
+                {isActive && (
+                  <span
+                    key={clampedCurrent}
+                    className="absolute inset-0 bg-white/75 rounded-full dot-progress"
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        <button
+          onClick={next}
+          disabled={clampedCurrent >= maxIdx}
+          className="w-9 h-9 flex items-center justify-center border border-white/30 rounded-full text-white/70 hover:text-white hover:border-white/60 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const stats = [
   { value: '6+', label: 'Years Experience' },
@@ -88,7 +258,7 @@ const About = () => {
       {/* Profile Label */}
       <div className="about-label flex items-center gap-4 mb-16">
         <span className="text-white/70 text-[11px] tracking-[0.4em] uppercase font-light">// Profile</span>
-        <div className="about-label-line flex-1 h-[1px] bg-gradient-to-r from-white/25 to-transparent origin-left" />
+        <div className="about-label-line flex-1 h-[1px] bg-gradient-to-r from-white/55 to-transparent origin-left" />
       </div>
 
       {/* Profile Frame */}
@@ -108,8 +278,8 @@ const About = () => {
           <div className="about-reveal max-w-2xl mb-12">
             <p className="text-white/70 text-base sm:text-lg font-light leading-relaxed">
               6+ years delivering scalable web applications and intelligent automation systems for enterprise clients
-              across Singapore and Southeast Asia. Currently at Rezerv building modern frontend experiences while
-              specializing in backend architecture, automation workflows, and DevOps practices.
+              across Singapore and Southeast Asia. Currently at Rezerv, leading frontend architecture while deepening
+              expertise in backend systems, DevOps, and automation.
             </p>
           </div>
 
@@ -181,8 +351,8 @@ const About = () => {
       {/* Education */}
       <div className="edu-section mt-20 sm:mt-32">
         <div className="flex items-center gap-4 mb-16">
-          <span className="text-white/60 text-[11px] tracking-[0.4em] uppercase font-light">// Education</span>
-          <div className="edu-label-line flex-1 h-[1px] bg-gradient-to-r from-white/25 to-transparent origin-left" />
+          <span className="text-white/75 text-[11px] tracking-[0.4em] uppercase font-normal">// Education</span>
+          <div className="edu-label-line flex-1 h-[1px] bg-gradient-to-r from-white/55 to-transparent origin-left" />
         </div>
 
         <div className="edu-content grid sm:grid-cols-2 grid-cols-1 gap-6">
@@ -259,44 +429,7 @@ const About = () => {
       </div>
 
       {/* Beyond Code */}
-      <div className="mt-20 sm:mt-32">
-        <div className="flex items-center gap-4 mb-16">
-          <span className="text-white/60 text-[11px] tracking-[0.4em] uppercase font-light">
-            // Beyond Code
-          </span>
-          <div className="flex-1 h-[1px] bg-gradient-to-r from-white/25 to-transparent" />
-        </div>
-
-        <p className="text-white/70 text-base sm:text-lg font-light leading-relaxed max-w-2xl mb-10">
-          Developer, engineer, author, scientist and a life long learner. Passionate in innovations,
-          inventions, contributions, R&amp;D and explorations.
-        </p>
-
-        <div className="grid sm:grid-cols-3 grid-cols-1 gap-6">
-          {[
-            {
-              title: 'Innovation & R&D',
-              desc: 'Driven by curiosity to explore emerging technologies, from AI/ML systems to novel architecture patterns that push boundaries.',
-            },
-            {
-              title: 'Writing & Knowledge Sharing',
-              desc: 'Documenting learnings, authoring technical content, and contributing to open-source projects that help the community grow.',
-            },
-            {
-              title: 'Lifelong Learning',
-              desc: 'Constantly expanding across disciplines, from mechatronics roots to software, systems thinking, and scientific exploration.',
-            },
-          ].map((item, i) => (
-            <div key={i} className="border border-white/[0.10] rounded-lg p-6 bg-black-200/30">
-              <p className="text-white/55 text-[10px] tracking-[0.3em] uppercase font-light mb-3">
-                {String(i + 1).padStart(2, '0')}
-              </p>
-              <h4 className="text-white/90 text-base font-light mb-3">{item.title}</h4>
-              <p className="text-white/65 text-sm font-light leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BeyondCode />
     </section>
   );
 };

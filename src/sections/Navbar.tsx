@@ -35,8 +35,8 @@ const NavItems = ({ onClick = () => {} }) => {
             <li key={item.id}>
               <Link
                 to={item.href}
-                className={`text-[11px] tracking-[0.2em] uppercase font-light transition-colors duration-300 ${
-                  isActive ? 'text-white' : 'text-white/70 hover:text-white/90'
+                className={`text-[11px] tracking-[0.2em] uppercase font-normal transition-colors duration-300 ${
+                  isActive ? 'text-white' : 'text-white/80 hover:text-white'
                 }`}
                 onClick={onClick}>
                 {item.name}
@@ -49,7 +49,7 @@ const NavItems = ({ onClick = () => {} }) => {
           <li key={item.id}>
             <a
               href={item.href}
-              className="text-[11px] tracking-[0.2em] uppercase font-light text-white/70 hover:text-white/90 transition-colors duration-300"
+              className="text-[11px] tracking-[0.2em] uppercase font-normal text-white/80 hover:text-white transition-colors duration-300"
               onClick={(e) => handleClick(e, item.href)}>
               {item.name}
             </a>
@@ -325,7 +325,7 @@ const Navbar = () => {
               {/* Status indicator */}
               <div className="flex items-center gap-2 ml-4 pl-4 border-l border-white/[0.18]">
                 <div className="w-1.5 h-1.5 rounded-full bg-green-400/80 shadow-[0_0_4px_1px_rgba(74,222,128,0.4)]" />
-                <span className="text-white/75 text-[11px] tracking-[0.2em] uppercase font-light">Available</span>
+                <span className="text-white/80 text-[11px] tracking-[0.2em] uppercase font-normal">Available</span>
               </div>
             </nav>
           </div>

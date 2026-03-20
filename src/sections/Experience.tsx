@@ -7,6 +7,28 @@ import { workCompanies } from '../constants/index';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const calcDuration = (durationStr: string): string => {
+  const parts = durationStr.split(' - ');
+  if (parts.length < 2) return '';
+
+  const start = new Date(parts[0].trim());
+  const end = parts[1].trim().toLowerCase() === 'present' ? new Date() : new Date(parts[1].trim());
+
+  if (isNaN(start.getTime()) || isNaN(end.getTime())) return '';
+
+  const totalMonths =
+    (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+
+  if (totalMonths < 1) return '1 month';
+
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  if (years === 0) return `${months} ${months === 1 ? 'month' : 'months'}`;
+  if (months === 0) return `${years} ${years === 1 ? 'yr' : 'yrs'}`;
+  return `${years} ${years === 1 ? 'yr' : 'yrs'} ${months} ${months === 1 ? 'month' : 'months'}`;
+};
+
 const WorkExperience = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -172,18 +194,18 @@ const WorkExperience = () => {
     <section ref={sectionRef} className="c-space my-20 sm:my-32" id="work">
       {/* Section label */}
       <div className="work-label flex items-center gap-4 mb-10 sm:mb-16">
-        <span className="text-white/70 text-[11px] tracking-[0.4em] uppercase font-light">
+        <span className="text-white/75 text-[11px] tracking-[0.4em] uppercase font-normal">
           // Experience
         </span>
-        <div className="work-label-line flex-1 h-[1px] bg-gradient-to-r from-white/25 to-transparent origin-left" />
+        <div className="work-label-line flex-1 h-[1px] bg-gradient-to-r from-white/55 to-transparent origin-left" />
       </div>
 
       {/* Status bar */}
       <div className="status-bar flex items-center justify-between mb-8 sm:mb-12">
-        <span className="text-white/60 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">
+        <span className="text-white/75 text-xs sm:text-sm tracking-[0.3em] uppercase font-medium">
           {totalPositions} Positions · {companyCount} Companies
         </span>
-        <span className="text-white/50 text-[9px] sm:text-[10px] tracking-[0.2em] uppercase font-mono font-medium">
+        <span className="text-white/65 text-[10px] sm:text-xs tracking-[0.2em] uppercase font-mono font-medium">
           Jan 2020 - Present
         </span>
       </div>
@@ -193,9 +215,9 @@ const WorkExperience = () => {
           ═══════════════════════════════════════════════ */}
       <div className="work-timeline relative hidden sm:block">
         {/* Timeline track */}
-        <div className="absolute left-[calc(4.5rem+19px)] top-0 bottom-0 w-[2px] bg-white/[0.05] rounded-full" />
+        <div className="absolute left-[calc(4.5rem+19px)] top-0 bottom-0 w-[2px] bg-white/[0.12] rounded-full" />
         {/* Timeline progress */}
-        <div className="timeline-progress absolute left-[calc(4.5rem+19px)] top-0 bottom-0 w-[2px] rounded-full origin-top bg-gradient-to-b from-blue-400/60 via-blue-500/35 to-cyan-400/15 shadow-[0_0_10px_rgba(59,130,246,0.3)]" />
+        <div className="timeline-progress absolute left-[calc(4.5rem+19px)] top-0 bottom-0 w-[2px] rounded-full origin-top bg-gradient-to-b from-blue-400/90 via-blue-500/60 to-cyan-400/25 shadow-[0_0_12px_rgba(59,130,246,0.5)]" />
 
         <div className="flex flex-col gap-14">
           {workCompanies.map((company) => {
@@ -244,7 +266,7 @@ const WorkExperience = () => {
                       {/* Connector */}
                       <div className="w-6 flex-shrink-0 flex items-start pt-[29px]">
                         {isFirst && (
-                          <div className="connector-line h-[1px] w-full bg-gradient-to-r from-blue-400/30 to-white/[0.06] origin-left" />
+                          <div className="connector-line h-[1px] w-full bg-gradient-to-r from-blue-400/70 to-white/[0.15] origin-left" />
                         )}
                       </div>
 
@@ -268,7 +290,7 @@ const WorkExperience = () => {
                                 {totalRoles} Roles · Career Progression
                               </p>
                             )}
-                            <div className="mt-3 h-[1px] bg-gradient-to-r from-blue-400/20 via-white/[0.06] to-transparent" />
+                            <div className="mt-3 h-[1px] bg-gradient-to-r from-blue-400/40 via-white/[0.12] to-transparent" />
                           </div>
                         )}
 
@@ -277,9 +299,16 @@ const WorkExperience = () => {
                             <h4 className="text-white/90 text-lg font-normal tracking-wide mb-1">
                               {role.pos}
                             </h4>
-                            <span className="inline-block px-3 py-0.5 bg-blue-500/[0.08] border border-blue-400/20 rounded-full text-blue-300/70 text-[9px] tracking-[0.15em] uppercase font-mono">
-                              {role.duration}
-                            </span>
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="inline-block px-3 py-0.5 bg-blue-500/[0.12] border border-blue-400/35 rounded-full text-blue-300/90 text-[9px] tracking-[0.15em] uppercase font-mono font-medium">
+                                {role.duration}
+                              </span>
+                              {calcDuration(role.duration) && (
+                                <span className="inline-block px-3 py-0.5 bg-blue-500/[0.12] border border-blue-400/35 rounded-full text-blue-300/90 text-[9px] tracking-[0.15em] uppercase font-mono font-medium">
+                                  {calcDuration(role.duration)}
+                                </span>
+                              )}
+                            </div>
                           </div>
                           <p className="text-white/55 text-sm font-light leading-relaxed mb-5">
                             {role.title}
@@ -348,9 +377,16 @@ const WorkExperience = () => {
                     <h4 className="text-white/90 text-[15px] font-normal tracking-wide mb-1.5 leading-snug">
                       {role.pos}
                     </h4>
-                    <span className="inline-block px-2.5 py-0.5 bg-blue-500/[0.08] border border-blue-400/20 rounded-full text-blue-300/70 text-[8px] tracking-[0.12em] uppercase font-mono">
-                      {role.duration}
-                    </span>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="inline-block px-2.5 py-0.5 bg-blue-500/[0.12] border border-blue-400/35 rounded-full text-blue-300/90 text-[8px] tracking-[0.12em] uppercase font-mono font-medium">
+                        {role.duration}
+                      </span>
+                      {calcDuration(role.duration) && (
+                        <span className="inline-block px-2.5 py-0.5 bg-blue-500/[0.12] border border-blue-400/35 rounded-full text-blue-300/90 text-[8px] tracking-[0.12em] uppercase font-mono font-medium">
+                          {calcDuration(role.duration)}
+                        </span>
+                      )}
+                    </div>
                   </div>
                   <p className="text-white/55 text-[13px] font-light leading-relaxed mb-4">
                     {role.title}
