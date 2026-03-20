@@ -10,9 +10,6 @@ const port = process.env.PORT || 3000;
 async function createServer() {
   const app = express();
 
-  // Parse JSON bodies for API routes
-  app.use(express.json());
-
   let vite;
   if (!isProduction) {
     const { createServer: createViteServer } = await import('vite');
@@ -29,52 +26,7 @@ async function createServer() {
     app.use(sirv(path.resolve(__dirname, 'dist/client'), { extensions: [] }));
   }
 
-  // ── Contact form API ──
-  app.post('/api/contact', async (req, res) => {
-    const { name, email, message } = req.body;
-
-    if (!name || !email || !message) {
-      return res.status(400).json({ error: 'All fields are required.' });
-    }
-
-    try {
-      const response = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: 'Portfolio Contact <onboarding@resend.dev>',
-          to: 'mthk97.dev@gmail.com',
-          reply_to: email,
-          subject: `Portfolio Contact from ${name}`,
-          text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
-          html: `
-            <div style="font-family: sans-serif; max-width: 600px;">
-              <h2 style="color: #333;">New message from your portfolio</h2>
-              <p><strong>Name:</strong> ${name}</p>
-              <p><strong>Email:</strong> ${email}</p>
-              <hr style="border: none; border-top: 1px solid #eee; margin: 16px 0;" />
-              <p style="white-space: pre-wrap;">${message}</p>
-            </div>
-          `,
-        }),
-      });
-
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.message || 'Resend API error');
-      }
-
-      res.json({ success: true });
-    } catch (error) {
-      console.error('Email send error:', error);
-      res.status(500).json({ error: 'Failed to send email.' });
-    }
-  });
-
-  // ── SSR catch-all (must be after API routes) ──
+  // ── SSR catch-all ──
   app.use('/{*splat}', async (req, res) => {
     const url = req.originalUrl;
 
