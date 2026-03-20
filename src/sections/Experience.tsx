@@ -37,7 +37,7 @@ const WorkExperience = () => {
       // ── 1. Section header line draw ──
       gsap.set('.work-label-line', { scaleX: 0 });
       gsap.to('.work-label-line', {
-        scrollTrigger: { trigger: '.work-label', start: 'top 88%' },
+        scrollTrigger: { trigger: '.work-label', start: 'top 95%' },
         scaleX: 1,
         duration: 1.4,
         ease: 'power3.inOut',
@@ -46,7 +46,7 @@ const WorkExperience = () => {
       // ── 2. Status bar fade ──
       gsap.set('.status-bar', { opacity: 0, y: 12 });
       gsap.to('.status-bar', {
-        scrollTrigger: { trigger: '.work-label', start: 'top 82%' },
+        scrollTrigger: { trigger: '.work-label', start: 'top 92%' },
         opacity: 1,
         y: 0,
         duration: 0.6,
@@ -59,7 +59,7 @@ const WorkExperience = () => {
       gsap.to('.timeline-progress', {
         scrollTrigger: {
           trigger: '.work-timeline',
-          start: 'top 70%',
+          start: 'top 95%',
           end: 'bottom 20%',
           scrub: 0.8,
         },
@@ -71,7 +71,7 @@ const WorkExperience = () => {
       gsap.utils.toArray<HTMLElement>('.year-marker').forEach((el) => {
         gsap.set(el, { opacity: 0 });
         gsap.to(el, {
-          scrollTrigger: { trigger: el, start: 'top 86%' },
+          scrollTrigger: { trigger: el, start: 'top 95%' },
           opacity: 1,
           duration: 0.6,
           ease: 'power2.out',
@@ -82,7 +82,7 @@ const WorkExperience = () => {
       gsap.utils.toArray<HTMLElement>('.timeline-node').forEach((el) => {
         gsap.set(el, { scale: 0, opacity: 0 });
         gsap.to(el, {
-          scrollTrigger: { trigger: el, start: 'top 86%' },
+          scrollTrigger: { trigger: el, start: 'top 95%' },
           scale: 1,
           opacity: 1,
           duration: 0.5,
@@ -95,7 +95,7 @@ const WorkExperience = () => {
         gsap.to(el, {
           scrollTrigger: {
             trigger: el,
-            start: 'top 70%',
+            start: 'top 95%',
             toggleActions: 'play none none reverse',
           },
           backgroundColor: 'rgba(59, 130, 246, 0.9)',
@@ -112,7 +112,7 @@ const WorkExperience = () => {
       gsap.utils.toArray<HTMLElement>('.node-ripple').forEach((el) => {
         gsap.set(el, { scale: 0.8, opacity: 0 });
         gsap.to(el, {
-          scrollTrigger: { trigger: el, start: 'top 70%' },
+          scrollTrigger: { trigger: el, start: 'top 95%' },
           scale: 3.5,
           opacity: 0,
           duration: 1.2,
@@ -127,7 +127,7 @@ const WorkExperience = () => {
       gsap.utils.toArray<HTMLElement>('.connector-line').forEach((el) => {
         gsap.set(el, { scaleX: 0 });
         gsap.to(el, {
-          scrollTrigger: { trigger: el, start: 'top 86%' },
+          scrollTrigger: { trigger: el, start: 'top 95%' },
           scaleX: 1,
           duration: 0.5,
           delay: 0.1,
@@ -139,7 +139,7 @@ const WorkExperience = () => {
       gsap.utils.toArray<HTMLElement>('.company-card').forEach((el) => {
         gsap.set(el, { opacity: 0, y: 44, scale: 0.97 });
         gsap.to(el, {
-          scrollTrigger: { trigger: el, start: 'top 88%' },
+          scrollTrigger: { trigger: el, start: 'top 95%' },
           opacity: 1,
           y: 0,
           scale: 1,
@@ -152,7 +152,7 @@ const WorkExperience = () => {
       gsap.utils.toArray<HTMLElement>('.mobile-card').forEach((el) => {
         gsap.set(el, { opacity: 0, y: 30 });
         gsap.to(el, {
-          scrollTrigger: { trigger: el, start: 'top 90%' },
+          scrollTrigger: { trigger: el, start: 'top 95%' },
           opacity: 1,
           y: 0,
           duration: 0.6,
@@ -164,7 +164,7 @@ const WorkExperience = () => {
       gsap.utils.toArray<HTMLElement>('.role-block').forEach((el) => {
         gsap.set(el, { opacity: 0, y: 20 });
         gsap.to(el, {
-          scrollTrigger: { trigger: el, start: 'top 90%' },
+          scrollTrigger: { trigger: el, start: 'top 95%' },
           opacity: 1,
           y: 0,
           duration: 0.5,

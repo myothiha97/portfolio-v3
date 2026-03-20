@@ -127,7 +127,7 @@ const Hero = () => {
   );
 
   return (
-    <section ref={containerRef} className="min-h-screen w-full flex flex-col relative overflow-hidden" id="home">
+    <section ref={containerRef} className="min-h-[100svh] w-full flex flex-col relative overflow-hidden" id="home">
       <ParticleField />
       <div className="absolute inset-0 hero-atmosphere" />
       <div className="absolute inset-0 hero-grain pointer-events-none" />

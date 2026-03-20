@@ -24,7 +24,7 @@ const Contact = () => {
     () => {
       // Label line draw
       gsap.from('.contact-label-line', {
-        scrollTrigger: { trigger: '.contact-label', start: 'top 85%' },
+        scrollTrigger: { trigger: '.contact-label', start: 'top 95%' },
         scaleX: 0,
         duration: 1.2,
         ease: 'power3.inOut',
@@ -32,7 +32,7 @@ const Contact = () => {
 
       // Heading + description
       gsap.from('.contact-heading', {
-        scrollTrigger: { trigger: '.contact-content', start: 'top 82%' },
+        scrollTrigger: { trigger: '.contact-content', start: 'top 95%' },
         opacity: 0,
         y: 24,
         duration: 0.7,
@@ -41,7 +41,7 @@ const Contact = () => {
 
       // Form panel
       gsap.from('.contact-form-panel', {
-        scrollTrigger: { trigger: '.contact-content', start: 'top 78%' },
+        scrollTrigger: { trigger: '.contact-content', start: 'top 95%' },
         opacity: 0,
         y: 32,
         duration: 0.8,
@@ -51,7 +51,7 @@ const Contact = () => {
 
       // Info panel staggered items
       gsap.from('.contact-info-item', {
-        scrollTrigger: { trigger: '.contact-info-panel', start: 'top 82%' },
+        scrollTrigger: { trigger: '.contact-info-panel', start: 'top 95%' },
         opacity: 0,
         x: 20,
         duration: 0.5,
