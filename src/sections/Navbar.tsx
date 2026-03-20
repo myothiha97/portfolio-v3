@@ -1,7 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 import { navLinks } from '../constants/index';
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const NavItems = ({ onClick = () => {} }) => {
   const location = useLocation();
@@ -13,7 +17,7 @@ const NavItems = ({ onClick = () => {} }) => {
     if (!el) return;
     const navbarHeight = 72;
     const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
-    window.scrollTo({ top, behavior: 'smooth' });
+    gsap.to(window, { scrollTo: { y: top, autoKill: false }, duration: 1.2, ease: 'power2.inOut' });
   };
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -73,7 +77,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
     if (!el) return;
     const navbarHeight = 72;
     const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
-    window.scrollTo({ top, behavior: 'smooth' });
+    gsap.to(window, { scrollTo: { y: top, autoKill: false }, duration: 1.2, ease: 'power2.inOut' });
   };
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -106,7 +110,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 
   return (
     <div
-      className={`fixed inset-0 z-40 sm:hidden transition-all duration-500 ${
+      className={`fixed inset-0 z-[60] sm:hidden transition-all duration-500 ${
         isOpen ? 'visible' : 'invisible pointer-events-none'
       }`}>
       {/* Backdrop */}
