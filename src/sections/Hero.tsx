@@ -42,9 +42,9 @@ const ParticleField = () => {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: Math.random() * 1.8 + 0.5,
-        opacity: Math.random() * 0.45 + 0.1,
-        speedY: -(Math.random() * 0.2 + 0.04),
-        speedX: (Math.random() - 0.5) * 0.12,
+        opacity: Math.random() * 0.5 + 0.3,
+        speedY: -(Math.random() * 0.28 + 0.08),
+        speedX: (Math.random() - 0.5) * 0.18,
         drift: Math.random() * Math.PI * 2,
         driftSpeed: Math.random() * 0.004 + 0.001,
       });
@@ -123,7 +123,7 @@ const Hero = () => {
       <div className="absolute inset-0 hero-grain pointer-events-none" />
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="hero-circle absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] md:w-[450px] md:h-[450px] rounded-full border border-white/[0.10]">
+        <div className="hero-circle absolute w-[220px] h-[220px] sm:w-[380px] sm:h-[380px] md:w-[450px] md:h-[450px] rounded-full border border-white/[0.10]">
           {/* Orbiting moon with strong localized glow on circle */}
           <div className="absolute -top-[3px] left-1/2 -translate-x-1/2">
             {/* Large diffused glow illuminating the circle outline */}
@@ -135,26 +135,26 @@ const Hero = () => {
           {/* Secondary smaller dot */}
           <div className="absolute top-1/2 -right-[3px] -translate-y-1/2 w-[3px] h-[3px] rounded-full bg-white/25" />
         </div>
-        <div className="hero-line absolute w-[120px] sm:w-[200px] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-y-[180px] sm:-translate-y-[240px]" />
-        <div className="hero-line absolute w-[80px] sm:w-[140px] h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent translate-y-[180px] sm:translate-y-[240px]" />
+        <div className="hero-line absolute w-[80px] sm:w-[200px] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-y-[140px] sm:-translate-y-[240px]" />
+        <div className="hero-line absolute w-[60px] sm:w-[140px] h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent translate-y-[140px] sm:translate-y-[240px]" />
       </div>
 
       <div className="w-full mx-auto flex flex-col items-center justify-center flex-1 c-space gap-5 z-10 relative">
-        <p className="hero-greeting sm:text-2xl text-lg font-light tracking-[0.2em] uppercase text-white/70 text-center font-generalsans opacity-0">
+        <p className="hero-greeting sm:text-2xl text-lg font-light tracking-[0.2em] uppercase text-white/70 text-center font-inter opacity-0">
           Hi, I am Myo <span className="waving-hand">👋</span>
         </p>
         <h1 className="hero-title hero_tag text-[#c8c2bc] opacity-0" style={{ letterSpacing: '0.04em' }}>
           Software Engineer
         </h1>
-        <p className="hero-subtitle text-white/55 text-center max-w-xl sm:text-base text-sm font-generalsans font-light tracking-wide leading-relaxed opacity-0">
-          Full Stack · Backend · DevOps · Automation
-          <br className="hidden sm:block" /> Python, Go, TypeScript
+        <p className="hero-subtitle text-white/55 text-center max-w-xl sm:text-base text-sm font-inter font-light tracking-wide leading-relaxed opacity-0">
+          Full Stack · Systems · DevOps · Automation
+          <br className="hidden sm:block" /> 6+ years building production systems for global brands
         </p>
       </div>
 
       <div className="hero-cta absolute bottom-7 left-0 right-0 w-full z-10 c-space opacity-0">
         <a href="#about" className="w-fit">
-          <Button name="Let's work together" isBeam containerClass="sm:w-fit w-full sm:min-w-96" />
+          <Button name="Let's work together" isBeam containerClass="sm:w-fit w-full sm:min-w-80" />
         </a>
       </div>
     </section>

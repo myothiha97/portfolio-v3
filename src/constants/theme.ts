@@ -26,8 +26,8 @@ export const theme = {
   },
 
   // Section labels (e.g. "// Profile", "// Tech Stack")
-  sectionLabel: 'text-white/70 text-[11px] tracking-[0.4em] uppercase font-light',
-  sectionLine: 'flex-1 h-[1px] bg-gradient-to-r from-white/25 to-transparent origin-left',
+  sectionLabel: 'text-white/75 text-[11px] tracking-[0.4em] uppercase font-normal',
+  sectionLine: 'flex-1 h-[1px] bg-gradient-to-r from-white/55 to-transparent origin-left',
 
   // Corner bracket decorations
   corner: {
