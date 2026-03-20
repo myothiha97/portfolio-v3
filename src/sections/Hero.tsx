@@ -42,9 +42,9 @@ const ParticleField = () => {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: Math.random() * 1.8 + 0.5,
-        opacity: Math.random() * 0.45 + 0.1,
-        speedY: -(Math.random() * 0.2 + 0.04),
-        speedX: (Math.random() - 0.5) * 0.12,
+        opacity: Math.random() * 0.5 + 0.3,
+        speedY: -(Math.random() * 0.28 + 0.08),
+        speedX: (Math.random() - 0.5) * 0.18,
         drift: Math.random() * Math.PI * 2,
         driftSpeed: Math.random() * 0.004 + 0.001,
       });
