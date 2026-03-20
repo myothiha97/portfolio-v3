@@ -29,7 +29,8 @@
     <style>
       *, *::before, *::after { box-sizing: border-box; }
       html, body { background: #010103; margin: 0; padding: 0; }
-      body { font-family: 'Inter', system-ui, sans-serif; overflow: hidden; }
+      body { font-family: 'Inter', system-ui, sans-serif; overflow: hidden; overscroll-behavior: none; touch-action: none; }
+      body.ready { touch-action: auto; }
       #root { opacity: 0; transition: opacity 0.5s ease-in; }
       #root.hydrated { opacity: 1; }
 

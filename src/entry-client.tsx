@@ -28,6 +28,8 @@ setTimeout(() => {
 
   // Reveal main content 0.5s after fade starts — syncs with the transition midpoint
   setTimeout(() => {
+    // Reset scroll in case the user managed to scroll during the loader
+    window.scrollTo(0, 0);
     root.classList.add('hydrated');
     window.dispatchEvent(new CustomEvent('portfolio:ready'));
   }, 500);
@@ -35,6 +37,8 @@ setTimeout(() => {
   loader.addEventListener('transitionend', () => {
     loader.remove();
     document.body.style.overflow = 'auto';
+    document.body.style.touchAction = 'auto';
+    document.body.classList.add('ready');
     if (typeof (window as any).__stopLoaderCanvas === 'function') {
       (window as any).__stopLoaderCanvas();
     }
@@ -44,6 +48,8 @@ setTimeout(() => {
   setTimeout(() => {
     document.getElementById('loader')?.remove();
     document.body.style.overflow = 'auto';
+    document.body.style.touchAction = 'auto';
+    document.body.classList.add('ready');
     root.classList.add('hydrated');
   }, 2000);
 }, MIN_DISPLAY);
