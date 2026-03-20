@@ -27,7 +27,8 @@ const ParticleField = () => {
 
     let animId: number;
     const particles: Particle[] = [];
-    const numParticles = 160;
+    const isMobile = window.innerWidth < 768;
+    const numParticles = isMobile ? 80 : 160;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -42,9 +43,9 @@ const ParticleField = () => {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: Math.random() * 1.8 + 0.5,
-        opacity: Math.random() * 0.45 + 0.1,
-        speedY: -(Math.random() * 0.2 + 0.04),
-        speedX: (Math.random() - 0.5) * 0.12,
+        opacity: isMobile ? Math.random() * 0.45 + 0.1 : Math.random() * 0.5 + 0.3,
+        speedY: isMobile ? -(Math.random() * 0.2 + 0.04) : -(Math.random() * 0.28 + 0.08),
+        speedX: isMobile ? (Math.random() - 0.5) * 0.12 : (Math.random() - 0.5) * 0.18,
         drift: Math.random() * Math.PI * 2,
         driftSpeed: Math.random() * 0.004 + 0.001,
       });
