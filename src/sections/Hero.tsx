@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Button from '../components/Button';
@@ -27,7 +27,8 @@ const ParticleField = () => {
 
     let animId: number;
     const particles: Particle[] = [];
-    const numParticles = 160;
+    const isMobile = window.innerWidth < 768;
+    const numParticles = isMobile ? 80 : 160;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -42,9 +43,9 @@ const ParticleField = () => {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: Math.random() * 1.8 + 0.5,
-        opacity: Math.random() * 0.5 + 0.3,
-        speedY: -(Math.random() * 0.28 + 0.08),
-        speedX: (Math.random() - 0.5) * 0.18,
+        opacity: isMobile ? Math.random() * 0.45 + 0.1 : Math.random() * 0.5 + 0.3,
+        speedY: isMobile ? -(Math.random() * 0.2 + 0.04) : -(Math.random() * 0.28 + 0.08),
+        speedX: isMobile ? (Math.random() - 0.5) * 0.12 : (Math.random() - 0.5) * 0.18,
         drift: Math.random() * Math.PI * 2,
         driftSpeed: Math.random() * 0.004 + 0.001,
       });
@@ -89,9 +90,18 @@ const ParticleField = () => {
 
 const Hero = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const onReady = () => setReady(true);
+    window.addEventListener('portfolio:ready', onReady, { once: true });
+    return () => window.removeEventListener('portfolio:ready', onReady);
+  }, []);
 
   useGSAP(
     () => {
+      if (!ready) return;
+
       const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
       tl.fromTo('.hero-line', { scaleX: 0 }, { scaleX: 1, duration: 1.5, stagger: 0.1, ease: 'power3.inOut' })
@@ -113,7 +123,7 @@ const Hero = () => {
         ease: 'none',
       });
     },
-    { scope: containerRef },
+    { scope: containerRef, dependencies: [ready] },
   );
 
   return (
