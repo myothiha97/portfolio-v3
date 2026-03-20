@@ -2,22 +2,458 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Myo Thiha Kyaw - Full-Stack Engineer. From Three.js animations to Go microservices to Docker orchestration." />
-    <meta property="og:title" content="Myo Thiha Kyaw - Full-Stack Engineer" />
-    <meta property="og:description" content="Senior engineer with 6+ years experience building across the full stack." />
-    <title>Myo Thiha Kyaw - Full-Stack Engineer</title>
+
+    <!-- Primary SEO -->
+    <title>Myo Thiha Kyaw — Full-Stack Engineer</title>
+    <meta name="description" content="Senior Full-Stack Engineer with 6+ years building production systems for global brands. Specialising in React, Node.js, Go, DevOps, and cloud infrastructure." />
+    <meta name="author" content="Myo Thiha Kyaw" />
+    <meta name="keywords" content="Full-Stack Engineer, React, Node.js, Go, TypeScript, DevOps, Bangkok, Software Engineer, Portfolio" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://myothiha.dev/" />
+    <meta property="og:title" content="Myo Thiha Kyaw — Full-Stack Engineer" />
+    <meta property="og:description" content="Senior Full-Stack Engineer with 6+ years building production systems for global brands." />
+    <meta property="og:image" content="https://myothiha.dev/assets/my-profile.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Myo Thiha Kyaw — Full-Stack Engineer" />
+    <meta name="twitter:description" content="Senior Full-Stack Engineer with 6+ years building production systems for global brands." />
+    <meta name="twitter:image" content="https://myothiha.dev/assets/my-profile.png" />
+
+    <link rel="canonical" href="https://myothiha.dev/" />
+
     <style>
-      /* Inline critical styles to prevent FOUC during SSR hydration */
-      html, body { background: #010103; margin: 0; }
-      body { font-family: 'Inter', sans-serif; }
-      #root { opacity: 0; transition: opacity 0.15s ease-in; }
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { background: #010103; margin: 0; padding: 0; }
+      body { font-family: 'Inter', system-ui, sans-serif; overflow: hidden; }
+      #root { opacity: 0; transition: opacity 0.5s ease-in; }
       #root.hydrated { opacity: 1; }
+
+      /* ════════════════════════════════════════
+         LOADER
+      ════════════════════════════════════════ */
+      #loader {
+        position: fixed;
+        inset: 0;
+        background: #010103;
+        z-index: 99999;
+        opacity: 1;
+        transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+      }
+      #loader.fade-out { opacity: 0; pointer-events: none; }
+
+      /* Canvas */
+      #loader-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+
+      /* Vignette — pulls focus to center */
+      #loader-vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 60% 60% at center, transparent 0%, rgba(1,1,3,0.55) 70%, rgba(1,1,3,0.88) 100%);
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      /* Scanlines */
+      #loader-scanlines {
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent 0px,
+          transparent 3px,
+          rgba(255,255,255,0.012) 3px,
+          rgba(255,255,255,0.012) 4px
+        );
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      /* Corner brackets */
+      .loader-bracket {
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        z-index: 5;
+      }
+      .loader-bracket::before,
+      .loader-bracket::after {
+        content: '';
+        position: absolute;
+        background: rgba(255,255,255,0.40);
+      }
+      .loader-bracket::before { width: 1px; height: 100%; }
+      .loader-bracket::after  { width: 100%; height: 1px; }
+
+      .loader-bracket.tl { top: 32px; left: 32px; }
+      .loader-bracket.tl::before { top: 0; left: 0; animation: bk-v 0.55s 0.2s ease forwards; transform: scaleY(0); transform-origin: top; }
+      .loader-bracket.tl::after  { top: 0; left: 0; animation: bk-h 0.55s 0.4s ease forwards; transform: scaleX(0); transform-origin: left; }
+
+      .loader-bracket.tr { top: 32px; right: 32px; }
+      .loader-bracket.tr::before { top: 0; right: 0; animation: bk-v 0.55s 0.2s ease forwards; transform: scaleY(0); transform-origin: top; }
+      .loader-bracket.tr::after  { top: 0; right: 0; animation: bk-h-r 0.55s 0.4s ease forwards; transform: scaleX(0); transform-origin: right; }
+
+      .loader-bracket.bl { bottom: 32px; left: 32px; }
+      .loader-bracket.bl::before { bottom: 0; left: 0; animation: bk-v-b 0.55s 0.2s ease forwards; transform: scaleY(0); transform-origin: bottom; }
+      .loader-bracket.bl::after  { bottom: 0; left: 0; animation: bk-h 0.55s 0.4s ease forwards; transform: scaleX(0); transform-origin: left; }
+
+      .loader-bracket.br { bottom: 32px; right: 32px; }
+      .loader-bracket.br::before { bottom: 0; right: 0; animation: bk-v-b 0.55s 0.2s ease forwards; transform: scaleY(0); transform-origin: bottom; }
+      .loader-bracket.br::after  { bottom: 0; right: 0; animation: bk-h-r 0.55s 0.4s ease forwards; transform: scaleX(0); transform-origin: right; }
+
+      @keyframes bk-v   { to { transform: scaleY(1); } }
+      @keyframes bk-v-b { to { transform: scaleY(1); } }
+      @keyframes bk-h   { to { transform: scaleX(1); } }
+      @keyframes bk-h-r { to { transform: scaleX(1); } }
+
+      /* ── Center stage ── */
+      #loader-center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 6;
+      }
+
+      /* Atmospheric glow behind content */
+      #loader-glow {
+        position: absolute;
+        width: 600px;
+        height: 300px;
+        background: radial-gradient(ellipse at center, rgba(120,160,220,0.06) 0%, transparent 70%);
+        pointer-events: none;
+        opacity: 0;
+        animation: glow-in 1.5s 0.5s ease forwards;
+      }
+      @keyframes glow-in { to { opacity: 1; } }
+
+      /* Orbit ring */
+      .loader-ring {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,0.14);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 36px;
+        opacity: 0;
+        animation: fade-up 0.7s 0.6s ease forwards;
+        flex-shrink: 0;
+      }
+      .loader-ring::before {
+        content: '';
+        position: absolute;
+        inset: -6px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,0.05);
+      }
+      .loader-ring span {
+        font-size: 22px;
+        font-weight: 700;
+        color: rgba(255,255,255,0.85);
+        letter-spacing: -0.5px;
+      }
+      .loader-orbit {
+        position: absolute;
+        inset: -16px;
+        border-radius: 50%;
+        border: 1px solid transparent;
+        border-top-color: rgba(255,255,255,0.30);
+        border-right-color: rgba(255,255,255,0.08);
+        animation: orbit-spin 2.4s linear infinite;
+      }
+      @keyframes orbit-spin { to { transform: rotate(360deg); } }
+
+      /* ── Name — word-by-word clip reveal ── */
+      #loader-name-wrap {
+        display: flex;
+        gap: 0.35em;
+        opacity: 0;
+        animation: fade-in-only 0.01s 0.9s forwards;
+      }
+      @keyframes fade-in-only { to { opacity: 1; } }
+
+      .loader-word-clip {
+        overflow: hidden;
+        display: inline-block;
+      }
+      .loader-word {
+        display: inline-block;
+        font-size: clamp(28px, 5vw, 46px);
+        font-weight: 200;
+        letter-spacing: 0.3em;
+        color: rgba(255,255,255,0.92);
+        text-transform: uppercase;
+        font-family: 'Inter', system-ui;
+        transform: translateY(110%);
+        opacity: 0;
+        animation: word-rise 0.75s ease forwards;
+      }
+      .loader-word:nth-child(1) { animation-delay: 0.95s; }
+      .loader-word:nth-child(2) { animation-delay: 1.25s; }
+      .loader-word:nth-child(3) { animation-delay: 1.55s; }
+      @keyframes word-rise {
+        from { transform: translateY(110%); opacity: 0; }
+        to   { transform: translateY(0);    opacity: 1; }
+      }
+
+      /* Role */
+      .loader-role {
+        font-size: 12px;
+        letter-spacing: 0.55em;
+        color: rgba(255,255,255,0.70);
+        text-transform: uppercase;
+        text-align: center;
+        margin-top: 14px;
+        opacity: 0;
+        transform: translateY(8px);
+        animation: fade-up 0.6s 2.0s ease forwards;
+      }
+
+      /* Separator line */
+      .loader-sep {
+        width: 1px;
+        height: 36px;
+        background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.18), transparent);
+        margin: 28px 0 24px;
+        opacity: 0;
+        animation: fade-up 0.4s 2.4s ease forwards;
+      }
+
+      /* ── Progress ── */
+      .loader-progress-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: clamp(220px, 32vw, 340px);
+        opacity: 0;
+        animation: fade-up 0.5s 2.6s ease forwards;
+      }
+      .loader-progress-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .loader-progress-tag {
+        font-size: 11px;
+        letter-spacing: 0.38em;
+        color: rgba(255,255,255,0.40);
+        text-transform: uppercase;
+      }
+      #loader-pct {
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        color: rgba(255,255,255,0.55);
+        font-variant-numeric: tabular-nums;
+      }
+      .loader-track {
+        width: 100%;
+        height: 2px;
+        background: rgba(255,255,255,0.10);
+        border-radius: 2px;
+        position: relative;
+        overflow: visible;
+      }
+      .loader-fill {
+        position: absolute;
+        top: 0; left: 0;
+        height: 100%;
+        border-radius: 2px;
+        width: 0%;
+        background: linear-gradient(to right, #1d4ed8, #3b82f6, #93c5fd);
+        animation: bar-fill 2.6s 2.7s cubic-bezier(0.25, 0, 0.35, 1) forwards;
+        box-shadow: 0 0 10px rgba(59,130,246,0.7), 0 0 20px rgba(59,130,246,0.25);
+      }
+      .loader-fill::after {
+        content: '';
+        position: absolute;
+        right: -1px; top: 50%;
+        transform: translateY(-50%);
+        width: 5px; height: 5px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 0 8px rgba(147,197,253,0.9), 0 0 20px rgba(59,130,246,0.5);
+      }
+      @keyframes bar-fill {
+        from { width: 0%; }
+        to   { width: 100%; }
+      }
+
+      @keyframes fade-up {
+        from { opacity: 0; transform: translateY(12px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
     </style>
   </head>
   <body>
+    <div id="loader">
+      <canvas id="loader-canvas"></canvas>
+      <div id="loader-vignette"></div>
+      <div id="loader-scanlines"></div>
+
+      <div class="loader-bracket tl"></div>
+      <div class="loader-bracket tr"></div>
+      <div class="loader-bracket bl"></div>
+      <div class="loader-bracket br"></div>
+
+      <div id="loader-center">
+        <div id="loader-glow"></div>
+
+        <div class="loader-ring">
+          <div class="loader-orbit"></div>
+          <span>M</span>
+        </div>
+
+        <!-- Word-by-word clip reveal -->
+        <div id="loader-name-wrap">
+          <div class="loader-word-clip"><span class="loader-word">Myo</span></div>
+          <div class="loader-word-clip"><span class="loader-word">Thiha</span></div>
+          <div class="loader-word-clip"><span class="loader-word">Kyaw</span></div>
+        </div>
+
+        <div class="loader-role">Software Engineer</div>
+
+        <div class="loader-sep"></div>
+
+        <div class="loader-progress-wrap">
+          <div class="loader-progress-meta">
+            <span class="loader-progress-tag">Initializing</span>
+            <span id="loader-pct">0%</span>
+          </div>
+          <div class="loader-track">
+            <div class="loader-fill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="root"><!--ssr-outlet--></div>
+
+    <script>
+      // ── Chiral network canvas — dynamic color ──
+      (function () {
+        const canvas = document.getElementById('loader-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let W, H, particles, raf;
+
+        const COUNT   = 60;
+        const MAX_DIST = 150;
+
+        // Palette: cool blues, teals, pale purples, near-white
+        const HUE_RANGES = [[195, 225], [165, 195], [230, 260], [0, 360]];
+
+        function randHue() {
+          const r = HUE_RANGES[Math.floor(Math.random() * (HUE_RANGES.length - 1))];
+          return r[0] + Math.random() * (r[1] - r[0]);
+        }
+
+        function resize() {
+          W = canvas.width  = window.innerWidth;
+          H = canvas.height = window.innerHeight;
+        }
+
+        function init() {
+          particles = Array.from({ length: COUNT }, () => ({
+            x:  Math.random() * W,
+            y:  Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35,
+            r:  Math.random() * 1.8 + 0.8,
+            hue: randHue(),
+            hueV: (Math.random() - 0.5) * 0.4, // hue drift per frame
+            sat: 50 + Math.random() * 40,
+            lit: 70 + Math.random() * 20,
+          }));
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, W, H);
+
+          particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0) p.x = W;
+            if (p.x > W) p.x = 0;
+            if (p.y < 0) p.y = H;
+            if (p.y > H) p.y = 0;
+            p.hue = (p.hue + p.hueV + 360) % 360;
+          });
+
+          // Connections
+          for (let i = 0; i < COUNT; i++) {
+            for (let j = i + 1; j < COUNT; j++) {
+              const dx = particles[i].x - particles[j].x;
+              const dy = particles[i].y - particles[j].y;
+              const d  = Math.sqrt(dx * dx + dy * dy);
+              if (d < MAX_DIST) {
+                const strength = 1 - d / MAX_DIST;
+                const alpha = strength * 0.45;
+                const midH = (particles[i].hue + particles[j].hue) / 2;
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `hsla(${midH}, 55%, 78%, ${alpha})`;
+                ctx.lineWidth = strength * 0.9;
+                ctx.stroke();
+              }
+            }
+          }
+
+          // Nodes
+          particles.forEach(p => {
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = `hsla(${p.hue}, ${p.sat}%, ${p.lit}%, 0.7)`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${p.hue}, ${p.sat}%, ${p.lit}%, 0.75)`;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          });
+
+          raf = requestAnimationFrame(draw);
+        }
+
+        resize();
+        init();
+        draw();
+        window.addEventListener('resize', () => { resize(); init(); });
+        window.__stopLoaderCanvas = () => cancelAnimationFrame(raf);
+      })();
+
+      // ── Percentage counter ──
+      (function () {
+        const pct = document.getElementById('loader-pct');
+        if (!pct) return;
+        let start = null;
+        const dur   = 2600;
+        const delay = 2700;
+        function tick(ts) {
+          if (!start) start = ts;
+          const p = Math.min((ts - start) / dur, 1);
+          const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+          pct.textContent = Math.round(e * 100) + '%';
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        setTimeout(() => requestAnimationFrame(tick), delay);
+      })();
+    </script>
+
     <script type="module" src="/src/entry-client.tsx"></script>
   </body>
 </html>
