@@ -25,3 +25,9 @@ dist-ssr
 
 # env
 .env
+
+# Playwright MCP
+.playwright-mcp/
+
+# Test screenshots
+*.png
