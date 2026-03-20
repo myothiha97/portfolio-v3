@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node --env-file=.env server.js",
     "dev:client": "vite",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
-    "preview": "NODE_ENV=production node server.js",
+    "preview": "NODE_ENV=production node --env-file=.env server.js",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "gsap": "^3.12.5",
     "leva": "^0.9.35",
     "maath": "^0.10.8",
+    "nodemailer": "^8.0.3",
     "prettier": "^3.3.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

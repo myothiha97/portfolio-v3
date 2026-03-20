@@ -140,8 +140,8 @@ const Skills = () => {
   return (
     <section ref={sectionRef} className="c-space my-20 sm:my-32" id="skills">
       <div className="skills-label flex items-center gap-4 mb-8 sm:mb-12">
-        <span className="text-white/70 text-[11px] tracking-[0.4em] uppercase font-light">// Tech Stack</span>
-        <div className="skills-label-line flex-1 h-[1px] bg-gradient-to-r from-white/25 to-transparent origin-left" />
+        <span className="text-white/75 text-[11px] tracking-[0.4em] uppercase font-normal">// Tech Stack</span>
+        <div className="skills-label-line flex-1 h-[1px] bg-gradient-to-r from-white/55 to-transparent origin-left" />
       </div>
 
       {/* Status bar */}
