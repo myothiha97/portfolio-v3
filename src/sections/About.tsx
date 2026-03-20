@@ -90,12 +90,12 @@ const BeyondCode = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           // Short initial delay so the user sees the first card, then slides begin
-          initialTimerRef.current = setTimeout(() => startTimer(maxIdx), 1500);
+          initialTimerRef.current = setTimeout(() => startTimer(maxIdx), 300);
         } else {
           stopTimer();
         }
       },
-      { threshold: 0.3 },
+      { threshold: 0.1 },
     );
 
     observer.observe(el);
@@ -215,14 +215,14 @@ const About = () => {
     () => {
       // Existing Profile animations
       gsap.from('.about-label-line', {
-        scrollTrigger: { trigger: '.about-label', start: 'top 85%' },
+        scrollTrigger: { trigger: '.about-label', start: 'top 95%' },
         scaleX: 0,
         duration: 1.2,
         ease: 'power3.inOut',
       });
 
       gsap.from('.about-reveal', {
-        scrollTrigger: { trigger: '.about-content', start: 'top 80%' },
+        scrollTrigger: { trigger: '.about-content', start: 'top 92%' },
         opacity: 0,
         y: 30,
         duration: 0.8,
@@ -231,7 +231,7 @@ const About = () => {
       });
 
       gsap.from('.about-stat', {
-        scrollTrigger: { trigger: '.about-stats', start: 'top 85%' },
+        scrollTrigger: { trigger: '.about-stats', start: 'top 95%' },
         opacity: 0,
         y: 20,
         duration: 0.6,
@@ -240,7 +240,7 @@ const About = () => {
       });
 
       gsap.from('.about-corner', {
-        scrollTrigger: { trigger: '.about-frame', start: 'top 80%' },
+        scrollTrigger: { trigger: '.about-frame', start: 'top 92%' },
         opacity: 0,
         scale: 0.8,
         duration: 0.5,
@@ -250,7 +250,7 @@ const About = () => {
 
       // Detailed bio + social links
       gsap.from('.about-detail-reveal', {
-        scrollTrigger: { trigger: '.about-detail', start: 'top 85%' },
+        scrollTrigger: { trigger: '.about-detail', start: 'top 95%' },
         opacity: 0,
         y: 20,
         duration: 0.7,
@@ -260,14 +260,14 @@ const About = () => {
 
       // Education animations
       gsap.from('.edu-label-line', {
-        scrollTrigger: { trigger: '.edu-section', start: 'top 80%' },
+        scrollTrigger: { trigger: '.edu-section', start: 'top 92%' },
         scaleX: 0,
         duration: 1.2,
         ease: 'power3.inOut',
       });
 
       gsap.from('.edu-content', {
-        scrollTrigger: { trigger: '.edu-section', start: 'top 80%' },
+        scrollTrigger: { trigger: '.edu-section', start: 'top 92%' },
         opacity: 0,
         y: 30,
         duration: 0.8,

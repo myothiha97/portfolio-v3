@@ -30,7 +30,7 @@ const Skills = () => {
       // ── 1. Section label line draw ──
       gsap.set('.skills-label-line', { scaleX: 0 });
       gsap.to('.skills-label-line', {
-        scrollTrigger: { trigger: '.skills-label', start: 'top 88%' },
+        scrollTrigger: { trigger: '.skills-label', start: 'top 95%' },
         scaleX: 1,
         duration: 1.4,
         ease: 'power3.inOut',
@@ -39,7 +39,7 @@ const Skills = () => {
       // ── 2. Status bar — split left/right slide ──
       gsap.set('.skills-status-left', { opacity: 0, x: -30 });
       gsap.to('.skills-status-left', {
-        scrollTrigger: { trigger: '.skills-label', start: 'top 82%' },
+        scrollTrigger: { trigger: '.skills-label', start: 'top 95%' },
         opacity: 1,
         x: 0,
         duration: 0.7,
@@ -49,7 +49,7 @@ const Skills = () => {
 
       gsap.set('.skills-status-right', { opacity: 0, x: 30 });
       gsap.to('.skills-status-right', {
-        scrollTrigger: { trigger: '.skills-label', start: 'top 82%' },
+        scrollTrigger: { trigger: '.skills-label', start: 'top 95%' },
         opacity: 1,
         x: 0,
         duration: 0.7,
@@ -112,7 +112,7 @@ const Skills = () => {
         tiles.forEach((tile, tIdx) => {
           gsap.set(tile, { opacity: 0, y: 14, scale: 0.92 });
           gsap.to(tile, {
-            scrollTrigger: { trigger: card, start: 'top 85%' },
+            scrollTrigger: { trigger: card, start: 'top 95%' },
             opacity: 1,
             y: 0,
             scale: 1,

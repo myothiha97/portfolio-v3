@@ -8,19 +8,22 @@ const NavItems = ({ onClick = () => {} }) => {
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
 
+  const scrollToSection = (href: string) => {
+    const el = document.querySelector(href) as HTMLElement;
+    if (!el) return;
+    const navbarHeight = 72;
+    const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
+      e.preventDefault();
       if (isHome) {
-        e.preventDefault();
-        const el = document.querySelector(href);
-        el?.scrollIntoView({ behavior: 'smooth' });
+        scrollToSection(href);
       } else {
-        e.preventDefault();
         navigate('/');
-        setTimeout(() => {
-          const el = document.querySelector(href);
-          el?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        setTimeout(() => scrollToSection(href), 100);
       }
     }
     onClick();
@@ -65,22 +68,28 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
 
+  const scrollToSection = (href: string) => {
+    const el = document.querySelector(href) as HTMLElement;
+    if (!el) return;
+    const navbarHeight = 72;
+    const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
+      e.preventDefault();
+      onClose();
+      // Wait for the menu close animation (500ms) before scrolling
       if (isHome) {
-        e.preventDefault();
-        const el = document.querySelector(href);
-        el?.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => scrollToSection(href), 520);
       } else {
-        e.preventDefault();
         navigate('/');
-        setTimeout(() => {
-          const el = document.querySelector(href);
-          el?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        setTimeout(() => scrollToSection(href), 520);
       }
+    } else {
+      onClose();
     }
-    onClose();
   };
 
   // Lock body scroll when menu is open
@@ -88,10 +97,10 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = 'auto';
     }
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
 

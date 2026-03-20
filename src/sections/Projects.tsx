@@ -229,14 +229,14 @@ const Projects = () => {
   useGSAP(
     () => {
       gsap.from('.projects-label-line', {
-        scrollTrigger: { trigger: '.projects-label', start: 'top 85%' },
+        scrollTrigger: { trigger: '.projects-label', start: 'top 95%' },
         scaleX: 0,
         duration: 1.2,
         ease: 'power3.inOut',
       });
 
       gsap.from('.project-entrance', {
-        scrollTrigger: { trigger: '.project-card', start: 'top 80%' },
+        scrollTrigger: { trigger: '.project-card', start: 'top 92%' },
         opacity: 0,
         y: 40,
         duration: 0.8,
