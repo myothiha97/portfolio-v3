@@ -36,6 +36,7 @@ setTimeout(() => {
 
   loader.addEventListener('transitionend', () => {
     loader.remove();
+    document.documentElement.style.overflow = 'auto';
     document.body.style.overflow = 'auto';
     document.body.style.touchAction = 'auto';
     document.body.classList.add('ready');
@@ -47,6 +48,7 @@ setTimeout(() => {
   // Fallback in case transitionend doesn't fire
   setTimeout(() => {
     document.getElementById('loader')?.remove();
+    document.documentElement.style.overflow = 'auto';
     document.body.style.overflow = 'auto';
     document.body.style.touchAction = 'auto';
     document.body.classList.add('ready');
