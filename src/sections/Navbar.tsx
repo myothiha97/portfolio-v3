@@ -1,26 +1,20 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import gsap from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 import { navLinks } from '../constants/index';
 
-gsap.registerPlugin(ScrollToPlugin);
+const scrollToSection = (href: string) => {
+  const el = document.querySelector(href) as HTMLElement;
+  if (!el) return;
+  const navbarHeight = 72;
+  const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+  window.scrollTo({ top, behavior: 'smooth' });
+};
 
 const NavItems = ({ onClick = () => {} }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
-
-  const scrollToSection = (href: string) => {
-    const el = document.querySelector(href) as HTMLElement;
-    if (!el) return;
-    const navbarHeight = 72;
-    const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
-    const distance = Math.abs(top - window.scrollY);
-    const duration = Math.min(Math.max(distance / 4000, 0.25), 0.8);
-    gsap.to(window, { scrollTo: { y: top, autoKill: false }, duration, ease: 'power2.out' });
-  };
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -72,22 +66,9 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
 
-  const scrollToSection = (href: string) => {
-    const el = document.querySelector(href) as HTMLElement;
-    if (!el) return;
-    const navbarHeight = 72;
-    const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
-    const distance = Math.abs(top - window.scrollY);
-    const duration = Math.min(Math.max(distance / 2500, 0.6), 1.8);
-    gsap.to(window, { scrollTo: { y: top, autoKill: false }, duration, ease: 'power2.inOut' });
-  };
-
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     onClose();
-    // Restore overflow immediately so GSAP can scroll before React re-renders
-    document.documentElement.style.overflow = 'auto';
-    document.body.style.overflow = 'auto';
     if (isHome) {
       scrollToSection(href);
     } else {
@@ -166,17 +147,19 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
           </span>
           <button
             onClick={onClose}
-            className="relative w-8 h-8 flex items-center justify-center group"
+            className={`relative w-8 h-8 flex items-center justify-center group transition-opacity duration-150 ${
+              isOpen ? 'opacity-100' : 'opacity-0'
+            }`}
             aria-label="Close menu">
             {/* Animated X lines */}
             <span
               className={`absolute w-5 h-[1px] bg-white/60 group-hover:bg-white/90 transition-all duration-400 ${
-                isOpen ? 'rotate-45 delay-300' : 'rotate-0 -translate-y-1'
+                isOpen ? 'rotate-45 delay-300' : 'rotate-45'
               }`}
             />
             <span
               className={`absolute w-5 h-[1px] bg-white/60 group-hover:bg-white/90 transition-all duration-400 ${
-                isOpen ? '-rotate-45 delay-300' : 'rotate-0 translate-y-1'
+                isOpen ? '-rotate-45 delay-300' : '-rotate-45'
               }`}
             />
           </button>
@@ -268,10 +251,15 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 const Navbar = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [menuClosing, setMenuClosing] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
-  const closeMenu = useCallback(() => setIsOpen(false), []);
+  const closeMenu = useCallback(() => {
+    setIsOpen(false);
+    setMenuClosing(true);
+    setTimeout(() => setMenuClosing(false), 500);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -288,6 +276,8 @@ const Navbar = () => {
     return () => window.removeEventListener('keydown', handleEsc);
   }, [isOpen, closeMenu]);
 
+  const headerHidden = isOpen || menuClosing;
+
   return (
     <>
       <header
@@ -298,7 +288,10 @@ const Navbar = () => {
         <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/[0.18] to-transparent" />
 
         <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center py-5 mx-auto c-space">
+          <div
+            className={`flex justify-between items-center py-5 mx-auto c-space transition-opacity duration-200 ${
+              headerHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            }`}>
             {/* Logo area */}
             <Link
               to="/"
