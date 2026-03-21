@@ -29,8 +29,8 @@
     <style>
       *, *::before, *::after { box-sizing: border-box; }
       html, body { background: #010103; margin: 0; padding: 0; }
-      body { font-family: 'Inter', system-ui, sans-serif; overflow: hidden; overscroll-behavior: none; touch-action: none; }
-      body.ready { touch-action: auto; }
+      body { font-family: 'Inter', system-ui, sans-serif; overscroll-behavior: none; touch-action: none; }
+      body.ready { touch-action: auto; overscroll-behavior: auto; }
       #root { opacity: 0; transition: opacity 0.5s ease-in; }
       #root.hydrated { opacity: 1; }
 
@@ -300,6 +300,11 @@
         to   { opacity: 1; transform: translateY(0); }
       }
     </style>
+    <script>
+      // Lock scroll immediately before any JS loads — inline style overrides CSS
+      document.documentElement.style.overflow = 'hidden';
+      document.body && (document.body.style.overflow = 'hidden');
+    </script>
   </head>
   <body>
     <div id="loader">

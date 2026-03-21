@@ -17,18 +17,18 @@ const NavItems = ({ onClick = () => {} }) => {
     if (!el) return;
     const navbarHeight = 72;
     const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
-    gsap.to(window, { scrollTo: { y: top, autoKill: false }, duration: 1.2, ease: 'power2.inOut' });
+    const distance = Math.abs(top - window.scrollY);
+    const duration = Math.min(Math.max(distance / 4000, 0.25), 0.8);
+    gsap.to(window, { scrollTo: { y: top, autoKill: false }, duration, ease: 'power2.out' });
   };
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
-      e.preventDefault();
-      if (isHome) {
-        scrollToSection(href);
-      } else {
-        navigate('/');
-        setTimeout(() => scrollToSection(href), 100);
-      }
+    e.preventDefault();
+    if (isHome) {
+      scrollToSection(href);
+    } else {
+      navigate('/');
+      setTimeout(() => scrollToSection(href), 100);
     }
     onClick();
   };
@@ -55,7 +55,7 @@ const NavItems = ({ onClick = () => {} }) => {
         return (
           <li key={item.id}>
             <a
-              href={item.href}
+              href="#"
               className="text-[11px] tracking-[0.2em] uppercase font-normal text-white/80 hover:text-white transition-colors duration-300"
               onClick={(e) => handleClick(e, item.href)}>
               {item.name}
@@ -77,22 +77,19 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
     if (!el) return;
     const navbarHeight = 72;
     const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
-    gsap.to(window, { scrollTo: { y: top, autoKill: false }, duration: 1.2, ease: 'power2.inOut' });
+    const distance = Math.abs(top - window.scrollY);
+    const duration = Math.min(Math.max(distance / 2500, 0.6), 1.8);
+    gsap.to(window, { scrollTo: { y: top, autoKill: false }, duration, ease: 'power2.inOut' });
   };
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
-      e.preventDefault();
-      onClose();
-      // Wait for the menu close animation (500ms) before scrolling
-      if (isHome) {
-        setTimeout(() => scrollToSection(href), 520);
-      } else {
-        navigate('/');
-        setTimeout(() => scrollToSection(href), 520);
-      }
+    e.preventDefault();
+    onClose();
+    if (isHome) {
+      scrollToSection(href);
     } else {
-      onClose();
+      navigate('/');
+      setTimeout(() => scrollToSection(href), 100);
     }
   };
 
@@ -206,7 +203,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
             {navLinks.map((item, index) => (
               <li key={item.id}>
                 <a
-                  href={item.href}
+                  href="#"
                   onClick={(e) => handleClick(e, item.href)}
                   className={`group flex items-center gap-5 py-3.5 transition-all duration-500 ${
                     isOpen
