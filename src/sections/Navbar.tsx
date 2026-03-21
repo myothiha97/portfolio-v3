@@ -18,7 +18,7 @@ const NavItems = ({ onClick = () => {} }) => {
     const navbarHeight = 72;
     const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
     const distance = Math.abs(top - window.scrollY);
-    const duration = Math.min(Math.max(distance / 3000, 0.4), 1.2);
+    const duration = Math.min(Math.max(distance / 4000, 0.25), 0.8);
     gsap.to(window, { scrollTo: { y: top, autoKill: false }, duration, ease: 'power2.out' });
   };
 
