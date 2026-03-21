@@ -17,7 +17,9 @@ const NavItems = ({ onClick = () => {} }) => {
     if (!el) return;
     const navbarHeight = 72;
     const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
-    gsap.to(window, { scrollTo: { y: top, autoKill: false }, duration: 1.2, ease: 'power2.inOut' });
+    const distance = Math.abs(top - window.scrollY);
+    const duration = Math.min(Math.max(distance / 2500, 0.6), 1.8);
+    gsap.to(window, { scrollTo: { y: top, autoKill: false }, duration, ease: 'power2.inOut' });
   };
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -77,19 +79,20 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
     if (!el) return;
     const navbarHeight = 72;
     const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
-    gsap.to(window, { scrollTo: { y: top, autoKill: false }, duration: 1.2, ease: 'power2.inOut' });
+    const distance = Math.abs(top - window.scrollY);
+    const duration = Math.min(Math.max(distance / 2500, 0.6), 1.8);
+    gsap.to(window, { scrollTo: { y: top, autoKill: false }, duration, ease: 'power2.inOut' });
   };
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
       e.preventDefault();
       onClose();
-      // Wait for the menu close animation (500ms) before scrolling
       if (isHome) {
-        setTimeout(() => scrollToSection(href), 520);
+        scrollToSection(href);
       } else {
         navigate('/');
-        setTimeout(() => scrollToSection(href), 520);
+        setTimeout(() => scrollToSection(href), 100);
       }
     } else {
       onClose();
