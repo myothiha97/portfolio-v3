@@ -85,6 +85,9 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     onClose();
+    // Restore overflow immediately so GSAP can scroll before React re-renders
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
     if (isHome) {
       scrollToSection(href);
     } else {
