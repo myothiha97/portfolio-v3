@@ -67,8 +67,6 @@ const BeyondCode = () => {
 
   const offset = clampedCurrent * (cardWidth + gap);
 
-  const initialTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
   const startTimer = (max: number) => {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
@@ -78,7 +76,6 @@ const BeyondCode = () => {
 
   const stopTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
-    if (initialTimerRef.current) clearTimeout(initialTimerRef.current);
   };
 
   // Only run the auto-slide timer when the carousel is visible in the viewport
@@ -89,8 +86,7 @@ const BeyondCode = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Short initial delay so the user sees the first card, then slides begin
-          initialTimerRef.current = setTimeout(() => startTimer(maxIdx), 300);
+          startTimer(maxIdx);
         } else {
           stopTimer();
         }

@@ -163,9 +163,16 @@ const Hero = () => {
       </div>
 
       <div className="hero-cta absolute bottom-7 left-0 right-0 w-full z-10 c-space opacity-0">
-        <a href="#about" className="w-fit">
+        <button
+          className="block mx-auto w-fit"
+          onClick={() => {
+            const el = document.querySelector('#about') as HTMLElement;
+            if (!el) return;
+            const top = el.getBoundingClientRect().top + window.scrollY - 72;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }}>
           <Button name="Let's work together" isBeam containerClass="sm:w-fit w-full sm:min-w-80" />
-        </a>
+        </button>
       </div>
     </section>
   );
