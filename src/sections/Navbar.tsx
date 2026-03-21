@@ -195,7 +195,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
           className={`mt-12 mb-8 transition-all duration-500 delay-200 ${
             isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}>
-          <span className="text-white/25 text-[9px] tracking-[0.35em] uppercase font-light">
+          <span className="text-white/50 text-[9px] tracking-[0.35em] uppercase font-light">
             // Navigation
           </span>
         </div>
@@ -217,15 +217,15 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                     transitionDelay: isOpen ? `${250 + index * 70}ms` : `${(navLinks.length - index) * 30}ms`,
                   }}>
                   {/* Index number */}
-                  <span className="text-white/15 text-[10px] tracking-[0.2em] font-mono w-6 group-hover:text-white/30 transition-colors duration-300">
+                  <span className="text-white/35 text-[10px] tracking-[0.2em] font-mono w-6 group-hover:text-white/60 transition-colors duration-300">
                     {String(index + 1).padStart(2, '0')}
                   </span>
 
                   {/* Accent dash */}
-                  <span className="w-4 h-[1px] bg-white/10 group-hover:w-8 group-hover:bg-white/30 transition-all duration-300" />
+                  <span className="w-4 h-[1px] bg-white/25 group-hover:w-8 group-hover:bg-white/50 transition-all duration-300" />
 
                   {/* Link text */}
-                  <span className="text-white/70 text-[22px] tracking-[0.08em] uppercase font-light group-hover:text-white group-hover:tracking-[0.14em] transition-all duration-300">
+                  <span className="text-white/90 text-[22px] tracking-[0.08em] uppercase font-light group-hover:text-white group-hover:tracking-[0.14em] transition-all duration-300">
                     {item.name}
                   </span>
                 </a>
@@ -251,11 +251,11 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
             }`}>
             <div className="flex items-center gap-2.5">
               <div className="w-1.5 h-1.5 rounded-full bg-green-400/80 shadow-[0_0_6px_2px_rgba(74,222,128,0.3)]" />
-              <span className="text-white/50 text-[10px] tracking-[0.25em] uppercase font-light">
+              <span className="text-white/70 text-[10px] tracking-[0.25em] uppercase font-light">
                 Available for work
               </span>
             </div>
-            <span className="text-white/20 text-[9px] tracking-[0.2em] font-mono">
+            <span className="text-white/40 text-[9px] tracking-[0.2em] font-mono">
               2026
             </span>
           </div>
