@@ -184,7 +184,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 
         {/* Divider line */}
         <div
-          className={`h-[1px] bg-gradient-to-r from-white/[0.12] via-white/[0.06] to-transparent transition-all duration-600 ${
+          className={`h-[1px] bg-gradient-to-r from-white/40 via-white/20 to-transparent transition-all duration-600 ${
             isOpen ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
           }`}
           style={{ transformOrigin: 'left' }}
@@ -238,7 +238,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         <div className="pb-10">
           {/* Divider */}
           <div
-            className={`h-[1px] bg-gradient-to-r from-white/[0.08] via-white/[0.04] to-transparent mb-6 transition-all duration-600 delay-500 ${
+            className={`h-[1px] bg-gradient-to-r from-white/30 via-white/15 to-transparent mb-6 transition-all duration-600 delay-500 ${
               isOpen ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
             }`}
             style={{ transformOrigin: 'left' }}
@@ -255,7 +255,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                 Available for work
               </span>
             </div>
-            <span className="text-white/40 text-[9px] tracking-[0.2em] font-mono">
+            <span className="text-white/60 text-[9px] tracking-[0.2em] font-mono">
               2026
             </span>
           </div>
