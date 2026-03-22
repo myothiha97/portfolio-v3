@@ -11,7 +11,48 @@ const scrollToSection = (href: string) => {
   window.scrollTo({ top, behavior: 'smooth' });
 };
 
-const NavItems = ({ onClick = () => {} }) => {
+// Live clock — UTC+7 (Indochina Time)
+const useLiveClock = () => {
+  const [time, setTime] = useState('');
+  useEffect(() => {
+    const update = () => {
+      const now = new Date();
+      const utc7 = new Date(now.getTime() + 7 * 60 * 60 * 1000);
+      setTime(utc7.toISOString().slice(11, 19));
+    };
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+};
+
+// Tracks which section is currently in view
+const useActiveSection = () => {
+  const [active, setActive] = useState('home');
+  useEffect(() => {
+    const sections = navLinks
+      .filter((l) => l.href.startsWith('#'))
+      .map((l) => document.querySelector(l.href) as HTMLElement)
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: '-15% 0px -75% 0px' },
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+  return active;
+};
+
+// Desktop-only terminal-style nav
+const DesktopNavItems = ({ activeSection }: { activeSection: string }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
@@ -24,36 +65,48 @@ const NavItems = ({ onClick = () => {} }) => {
       navigate('/');
       setTimeout(() => scrollToSection(href), 100);
     }
-    onClick();
   };
 
   return (
-    <ul className="flex flex-col items-center gap-4 sm:flex-row md:gap-8 relative z-20">
-      {navLinks.map((item) => {
-        if (item.href.startsWith('/')) {
-          const isActive = location.pathname === item.href;
-          return (
-            <li key={item.id}>
-              <Link
-                to={item.href}
-                className={`text-[11px] tracking-[0.2em] uppercase font-normal transition-colors duration-300 ${
-                  isActive ? 'text-white' : 'text-white/80 hover:text-white'
-                }`}
-                onClick={onClick}>
-                {item.name}
-              </Link>
-            </li>
-          );
-        }
+    <ul className="flex items-center">
+      {navLinks.map((item, index) => {
+        const sectionId = item.href.replace('#', '');
+        const isActive = item.href.startsWith('#')
+          ? activeSection === sectionId
+          : location.pathname === item.href;
 
         return (
-          <li key={item.id}>
-            <a
-              href="#"
-              className="text-[11px] tracking-[0.2em] uppercase font-normal text-white/80 hover:text-white transition-colors duration-300"
-              onClick={(e) => handleClick(e, item.href)}>
-              {item.name}
-            </a>
+          <li key={item.id} className="flex items-center">
+            {index > 0 && (
+              <span className="text-white/[0.18] mx-2.5 font-mono text-[10px] select-none">·</span>
+            )}
+            {item.href.startsWith('/') ? (
+              <Link
+                to={item.href}
+                className={`font-mono text-[10px] tracking-wide flex items-center gap-1 transition-colors duration-300 ${
+                  isActive ? 'text-white' : 'text-white/40 hover:text-white/70'
+                }`}>
+                <span className={`transition-colors duration-300 ${isActive ? 'text-white/50' : 'text-white/[0.18]'}`}>
+                  {String(index + 1).padStart(2, '0')}/
+                </span>
+                {item.name.toLowerCase()}
+              </Link>
+            ) : (
+              <a
+                href="#"
+                onClick={(e) => handleClick(e, item.href)}
+                className={`font-mono text-[10px] tracking-wide flex items-center gap-1 transition-all duration-300 ${
+                  isActive ? 'text-white' : 'text-white/40 hover:text-white/70'
+                }`}>
+                {isActive && (
+                  <span className="text-white/50 text-[9px]">▶</span>
+                )}
+                <span className={`transition-colors duration-300 ${isActive ? 'text-white/50' : 'text-white/[0.18]'}`}>
+                  {String(index + 1).padStart(2, '0')}/
+                </span>
+                {item.name.toLowerCase()}
+              </a>
+            )}
           </li>
         );
       })}
@@ -253,6 +306,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menuClosing, setMenuClosing] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const clock = useLiveClock();
+  const activeSection = useActiveSection();
 
   const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
   const closeMenu = useCallback(() => {
@@ -267,7 +322,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close on Escape key
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) closeMenu();
@@ -284,15 +338,16 @@ const Navbar = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled ? 'bg-[#010103]/95 backdrop-blur-md' : 'bg-transparent'
         }`}>
-        {/* Top thin accent line */}
+        {/* Top accent line */}
         <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/[0.18] to-transparent" />
 
         <div className="max-w-7xl mx-auto">
           <div
-            className={`flex justify-between items-center py-5 mx-auto c-space transition-opacity duration-200 ${
+            className={`flex justify-between items-center py-4 mx-auto c-space transition-opacity duration-200 ${
               headerHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'
             }`}>
-            {/* Logo area */}
+
+            {/* ── Left: terminal prompt logo ── */}
             <Link
               to="/"
               onClick={(e) => {
@@ -301,14 +356,24 @@ const Navbar = () => {
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
               }}
-              className="flex items-center gap-3 group">
-              <div className="relative" />
-              <span className="text-white/85 text-[10px] sm:text-[11px] tracking-[0.25em] sm:tracking-[0.35em] uppercase font-light group-hover:text-white transition-colors">
-                Myo Thiha Kyaw
+              className="flex items-center gap-0 group shrink-0">
+              <span className="font-mono text-[11px] text-white/35 group-hover:text-white/50 transition-colors duration-300">[</span>
+              <span className="font-mono text-[11px] text-white/75 group-hover:text-white/90 transition-colors duration-300">myo@sys</span>
+              <span className="font-mono text-[11px] text-white/35 group-hover:text-white/50 transition-colors duration-300">:~</span>
+              <span className="font-mono text-[11px] text-white/35 group-hover:text-white/50 transition-colors duration-300">]$</span>
+              <span className="font-mono text-[12px] text-white/50 ml-1 animate-pulse">▋</span>
+              {/* Current section path — fades in on scroll */}
+              <span
+                className={`font-mono text-[10px] text-white/30 ml-2.5 transition-all duration-500 ${
+                  scrolled && activeSection !== 'home'
+                    ? 'opacity-100 translate-x-0'
+                    : 'opacity-0 -translate-x-1'
+                }`}>
+                ~/{activeSection}
               </span>
             </Link>
 
-            {/* Mobile toggle — animated hamburger */}
+            {/* ── Mobile hamburger ── */}
             <button
               onClick={toggleMenu}
               className="relative w-8 h-8 flex flex-col items-center justify-center gap-[5px] sm:hidden group"
@@ -325,27 +390,32 @@ const Navbar = () => {
               />
             </button>
 
-            {/* Desktop nav */}
-            <nav className="sm:flex hidden items-center gap-8">
-              <NavItems />
-              {/* Status indicator */}
-              <div className="flex items-center gap-2 ml-4 pl-4 border-l border-white/[0.18]">
-                <div className="w-1.5 h-1.5 rounded-full bg-green-400/80 shadow-[0_0_4px_1px_rgba(74,222,128,0.4)]" />
-                <span className="text-white/80 text-[11px] tracking-[0.2em] uppercase font-normal">Available</span>
-              </div>
+            {/* ── Desktop nav center ── */}
+            <nav className="sm:flex hidden items-center">
+              <DesktopNavItems activeSection={activeSection} />
             </nav>
+
+            {/* ── Right: system status + clock ── */}
+            <div className="sm:flex hidden items-center gap-3 shrink-0">
+              <span className="font-mono text-[10px] text-white/[0.18] select-none">—</span>
+              <div className="flex items-center gap-1.5">
+                <div className="w-1.5 h-1.5 rounded-full bg-green-400/80 shadow-[0_0_4px_1px_rgba(74,222,128,0.4)]" />
+                <span className="font-mono text-[10px] text-white/50 tracking-wider">SYS_READY</span>
+              </div>
+              <span className="font-mono text-[10px] text-white/[0.18] select-none">—</span>
+              <span className="font-mono text-[10px] text-white/35 tabular-nums tracking-wider">{clock}</span>
+            </div>
           </div>
         </div>
 
-        {/* Bottom line (appears on scroll) */}
+        {/* Bottom separator (on scroll) */}
         <div
-          className={`h-[1px] w-full bg-gradient-to-r from-transparent via-white/[0.04] to-transparent transition-opacity duration-500 ${
+          className={`h-[1px] w-full bg-gradient-to-r from-transparent via-white/[0.06] to-transparent transition-opacity duration-500 ${
             scrolled ? 'opacity-100' : 'opacity-0'
           }`}
         />
       </header>
 
-      {/* Full-screen mobile menu overlay */}
       <MobileMenu isOpen={isOpen} onClose={closeMenu} />
     </>
   );
