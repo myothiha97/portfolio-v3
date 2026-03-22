@@ -340,9 +340,9 @@ const Navbar = () => {
           scrolled ? 'bg-[#010103]/95 backdrop-blur-md' : 'bg-transparent'
         }`}>
         {/* Scroll progress bar */}
-        <div className="h-[1px] w-full relative bg-transparent">
+        <div className="h-[2px] w-full relative bg-white/[0.06]">
           <div
-            className="absolute top-0 left-0 h-full bg-white/40 transition-all duration-75"
+            className="absolute top-0 left-0 h-full bg-white transition-all duration-75 shadow-[0_0_6px_1px_rgba(255,255,255,0.6)]"
             style={{ width: `${scrollProgress * 100}%` }}
           />
         </div>
