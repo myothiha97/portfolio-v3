@@ -78,15 +78,15 @@ const DesktopNavItems = ({ activeSection }: { activeSection: string }) => {
         return (
           <li key={item.id} className="flex items-center">
             {index > 0 && (
-              <span className="text-white/[0.18] mx-2.5 font-mono text-[10px] select-none">·</span>
+              <span className="text-white/30 mx-3 font-mono text-[12px] select-none">·</span>
             )}
             {item.href.startsWith('/') ? (
               <Link
                 to={item.href}
-                className={`font-mono text-[10px] tracking-wide flex items-center gap-1 transition-colors duration-300 ${
-                  isActive ? 'text-white' : 'text-white/40 hover:text-white/70'
+                className={`font-mono text-[12px] tracking-wide flex items-center gap-1 transition-colors duration-300 ${
+                  isActive ? 'text-white' : 'text-white/55 hover:text-white/80'
                 }`}>
-                <span className={`transition-colors duration-300 ${isActive ? 'text-white/50' : 'text-white/[0.18]'}`}>
+                <span className={`transition-colors duration-300 ${isActive ? 'text-white/60' : 'text-white/30'}`}>
                   {String(index + 1).padStart(2, '0')}/
                 </span>
                 {item.name.toLowerCase()}
@@ -95,13 +95,13 @@ const DesktopNavItems = ({ activeSection }: { activeSection: string }) => {
               <a
                 href="#"
                 onClick={(e) => handleClick(e, item.href)}
-                className={`font-mono text-[10px] tracking-wide flex items-center gap-1 transition-all duration-300 ${
-                  isActive ? 'text-white' : 'text-white/40 hover:text-white/70'
+                className={`font-mono text-[12px] tracking-wide flex items-center gap-1 transition-all duration-300 ${
+                  isActive ? 'text-white' : 'text-white/55 hover:text-white/80'
                 }`}>
                 {isActive && (
-                  <span className="text-white/50 text-[9px]">▶</span>
+                  <span className="text-white/60 text-[10px]">▶</span>
                 )}
-                <span className={`transition-colors duration-300 ${isActive ? 'text-white/50' : 'text-white/[0.18]'}`}>
+                <span className={`transition-colors duration-300 ${isActive ? 'text-white/60' : 'text-white/30'}`}>
                   {String(index + 1).padStart(2, '0')}/
                 </span>
                 {item.name.toLowerCase()}
@@ -357,14 +357,14 @@ const Navbar = () => {
                 }
               }}
               className="flex items-center gap-0 group shrink-0">
-              <span className="font-mono text-[11px] text-white/35 group-hover:text-white/50 transition-colors duration-300">[</span>
-              <span className="font-mono text-[11px] text-white/75 group-hover:text-white/90 transition-colors duration-300">myo@sys</span>
-              <span className="font-mono text-[11px] text-white/35 group-hover:text-white/50 transition-colors duration-300">:~</span>
-              <span className="font-mono text-[11px] text-white/35 group-hover:text-white/50 transition-colors duration-300">]$</span>
-              <span className="font-mono text-[12px] text-white/50 ml-1 animate-pulse">▋</span>
+              <span className="font-mono text-[13px] text-white/50 group-hover:text-white/65 transition-colors duration-300">[</span>
+              <span className="font-mono text-[13px] text-white/90 group-hover:text-white transition-colors duration-300">myo.thiha.kyaw</span>
+              <span className="font-mono text-[13px] text-white/50 group-hover:text-white/65 transition-colors duration-300">:~</span>
+              <span className="font-mono text-[13px] text-white/50 group-hover:text-white/65 transition-colors duration-300">]$</span>
+              <span className="font-mono text-[14px] text-white/65 ml-1 animate-pulse">▋</span>
               {/* Current section path — fades in on scroll */}
               <span
-                className={`font-mono text-[10px] text-white/30 ml-2.5 transition-all duration-500 ${
+                className={`font-mono text-[12px] text-white/45 ml-3 transition-all duration-500 ${
                   scrolled && activeSection !== 'home'
                     ? 'opacity-100 translate-x-0'
                     : 'opacity-0 -translate-x-1'
@@ -395,15 +395,15 @@ const Navbar = () => {
               <DesktopNavItems activeSection={activeSection} />
             </nav>
 
-            {/* ── Right: system status + clock ── */}
+            {/* ── Right: status + clock ── */}
             <div className="sm:flex hidden items-center gap-3 shrink-0">
-              <span className="font-mono text-[10px] text-white/[0.18] select-none">—</span>
-              <div className="flex items-center gap-1.5">
+              <span className="font-mono text-[12px] text-white/30 select-none">—</span>
+              <div className="flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-green-400/80 shadow-[0_0_4px_1px_rgba(74,222,128,0.4)]" />
-                <span className="font-mono text-[10px] text-white/50 tracking-wider">SYS_READY</span>
+                <span className="font-mono text-[12px] text-white/70 tracking-wider">Available</span>
               </div>
-              <span className="font-mono text-[10px] text-white/[0.18] select-none">—</span>
-              <span className="font-mono text-[10px] text-white/35 tabular-nums tracking-wider">{clock}</span>
+              <span className="font-mono text-[12px] text-white/30 select-none">—</span>
+              <span className="font-mono text-[12px] text-white/55 tabular-nums tracking-wider">{clock}</span>
             </div>
           </div>
         </div>
