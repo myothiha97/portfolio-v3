@@ -11,22 +11,6 @@ const scrollToSection = (href: string) => {
   window.scrollTo({ top, behavior: 'smooth' });
 };
 
-// Live clock — UTC+7 (Indochina Time)
-const useLiveClock = () => {
-  const [time, setTime] = useState('');
-  useEffect(() => {
-    const update = () => {
-      const now = new Date();
-      const utc7 = new Date(now.getTime() + 7 * 60 * 60 * 1000);
-      setTime(utc7.toISOString().slice(11, 19));
-    };
-    update();
-    const id = setInterval(update, 1000);
-    return () => clearInterval(id);
-  }, []);
-  return time;
-};
-
 // Tracks which section is currently in view
 const useActiveSection = () => {
   const [active, setActive] = useState('home');
@@ -51,8 +35,22 @@ const useActiveSection = () => {
   return active;
 };
 
-// Desktop-only terminal-style nav
-const DesktopNavItems = ({ activeSection }: { activeSection: string }) => {
+// Scroll progress 0–1
+const useScrollProgress = () => {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const update = () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(total > 0 ? scrolled / total : 0);
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+  return progress;
+};
+
+const NavItems = ({ activeSection, onClick = () => {} }: { activeSection: string; onClick?: () => void }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
@@ -65,47 +63,47 @@ const DesktopNavItems = ({ activeSection }: { activeSection: string }) => {
       navigate('/');
       setTimeout(() => scrollToSection(href), 100);
     }
+    onClick();
   };
 
   return (
-    <ul className="flex items-center">
-      {navLinks.map((item, index) => {
+    <ul className="flex flex-col items-center gap-4 sm:flex-row md:gap-8 relative z-20">
+      {navLinks.map((item) => {
         const sectionId = item.href.replace('#', '');
         const isActive = item.href.startsWith('#')
           ? activeSection === sectionId
           : location.pathname === item.href;
 
-        return (
-          <li key={item.id} className="flex items-center">
-            {index > 0 && (
-              <span className="text-white/30 mx-3 font-mono text-[12px] select-none">·</span>
-            )}
-            {item.href.startsWith('/') ? (
+        if (item.href.startsWith('/')) {
+          return (
+            <li key={item.id} className="relative">
               <Link
                 to={item.href}
-                className={`font-mono text-[12px] tracking-wide flex items-center gap-1 transition-colors duration-300 ${
-                  isActive ? 'text-white' : 'text-white/55 hover:text-white/80'
-                }`}>
-                <span className={`transition-colors duration-300 ${isActive ? 'text-white/60' : 'text-white/30'}`}>
-                  {String(index + 1).padStart(2, '0')}/
-                </span>
-                {item.name.toLowerCase()}
+                className={`text-[11px] tracking-[0.2em] uppercase font-normal transition-colors duration-300 ${
+                  isActive ? 'text-white' : 'text-white/60 hover:text-white/90'
+                }`}
+                onClick={onClick}>
+                {item.name}
               </Link>
-            ) : (
-              <a
-                href="#"
-                onClick={(e) => handleClick(e, item.href)}
-                className={`font-mono text-[12px] tracking-wide flex items-center gap-1 transition-all duration-300 ${
-                  isActive ? 'text-white' : 'text-white/55 hover:text-white/80'
-                }`}>
-                {isActive && (
-                  <span className="text-white/60 text-[10px]">▶</span>
-                )}
-                <span className={`transition-colors duration-300 ${isActive ? 'text-white/60' : 'text-white/30'}`}>
-                  {String(index + 1).padStart(2, '0')}/
-                </span>
-                {item.name.toLowerCase()}
-              </a>
+              {isActive && (
+                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-white/70" />
+              )}
+            </li>
+          );
+        }
+
+        return (
+          <li key={item.id} className="relative">
+            <a
+              href="#"
+              className={`text-[11px] tracking-[0.2em] uppercase font-normal transition-colors duration-300 ${
+                isActive ? 'text-white' : 'text-white/60 hover:text-white/90'
+              }`}
+              onClick={(e) => handleClick(e, item.href)}>
+              {item.name}
+            </a>
+            {isActive && (
+              <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-white/70" />
             )}
           </li>
         );
@@ -114,7 +112,7 @@ const DesktopNavItems = ({ activeSection }: { activeSection: string }) => {
   );
 };
 
-const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+const MobileMenu = ({ isOpen, onClose, activeSection }: { isOpen: boolean; onClose: () => void; activeSection: string }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
@@ -130,7 +128,6 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
     }
   };
 
-  // Lock body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -204,7 +201,6 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
               isOpen ? 'opacity-100' : 'opacity-0'
             }`}
             aria-label="Close menu">
-            {/* Animated X lines */}
             <span
               className={`absolute w-5 h-[1px] bg-white/60 group-hover:bg-white/90 transition-all duration-400 ${
                 isOpen ? 'rotate-45 delay-300' : 'rotate-45'
@@ -236,43 +232,49 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
           </span>
         </div>
 
-        {/* Nav links — staggered animation */}
+        {/* Nav links */}
         <nav className="flex-1">
           <ul className="flex flex-col gap-1">
-            {navLinks.map((item, index) => (
-              <li key={item.id}>
-                <a
-                  href="#"
-                  onClick={(e) => handleClick(e, item.href)}
-                  className={`group flex items-center gap-5 py-3.5 transition-all duration-500 ${
-                    isOpen
-                      ? 'opacity-100 translate-x-0'
-                      : 'opacity-0 translate-x-[-20px]'
-                  }`}
-                  style={{
-                    transitionDelay: isOpen ? `${250 + index * 70}ms` : `${(navLinks.length - index) * 30}ms`,
-                  }}>
-                  {/* Index number */}
-                  <span className="text-white/35 text-[10px] tracking-[0.2em] font-mono w-6 group-hover:text-white/60 transition-colors duration-300">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
+            {navLinks.map((item, index) => {
+              const sectionId = item.href.replace('#', '');
+              const isActive = item.href.startsWith('#')
+                ? activeSection === sectionId
+                : false;
 
-                  {/* Accent dash */}
-                  <span className="w-4 h-[1px] bg-white/25 group-hover:w-8 group-hover:bg-white/50 transition-all duration-300" />
-
-                  {/* Link text */}
-                  <span className="text-white/90 text-[22px] tracking-[0.08em] uppercase font-light group-hover:text-white group-hover:tracking-[0.14em] transition-all duration-300">
-                    {item.name}
-                  </span>
-                </a>
-              </li>
-            ))}
+              return (
+                <li key={item.id}>
+                  <a
+                    href="#"
+                    onClick={(e) => handleClick(e, item.href)}
+                    className={`group flex items-center gap-5 py-3.5 transition-all duration-500 ${
+                      isOpen
+                        ? 'opacity-100 translate-x-0'
+                        : 'opacity-0 translate-x-[-20px]'
+                    }`}
+                    style={{
+                      transitionDelay: isOpen ? `${250 + index * 70}ms` : `${(navLinks.length - index) * 30}ms`,
+                    }}>
+                    <span className="text-white/35 text-[10px] tracking-[0.2em] font-mono w-6 group-hover:text-white/60 transition-colors duration-300">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="w-4 h-[1px] bg-white/25 group-hover:w-8 group-hover:bg-white/50 transition-all duration-300" />
+                    <span className={`text-[22px] tracking-[0.08em] uppercase font-light group-hover:tracking-[0.14em] transition-all duration-300 ${
+                      isActive ? 'text-white' : 'text-white/90 group-hover:text-white'
+                    }`}>
+                      {item.name}
+                    </span>
+                    {isActive && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/60 ml-1" />
+                    )}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
         {/* Bottom section */}
         <div className="pb-10">
-          {/* Divider */}
           <div
             className={`h-[1px] bg-gradient-to-r from-white/30 via-white/15 to-transparent mb-6 transition-all duration-600 delay-500 ${
               isOpen ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
@@ -280,7 +282,6 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
             style={{ transformOrigin: 'left' }}
           />
 
-          {/* Status + info */}
           <div
             className={`flex items-center justify-between transition-all duration-500 delay-[600ms] ${
               isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
@@ -306,8 +307,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menuClosing, setMenuClosing] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const clock = useLiveClock();
   const activeSection = useActiveSection();
+  const scrollProgress = useScrollProgress();
 
   const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
   const closeMenu = useCallback(() => {
@@ -338,16 +339,21 @@ const Navbar = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled ? 'bg-[#010103]/95 backdrop-blur-md' : 'bg-transparent'
         }`}>
-        {/* Top accent line */}
-        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/[0.18] to-transparent" />
+        {/* Scroll progress bar */}
+        <div className="h-[1px] w-full relative bg-transparent">
+          <div
+            className="absolute top-0 left-0 h-full bg-white/40 transition-all duration-75"
+            style={{ width: `${scrollProgress * 100}%` }}
+          />
+        </div>
 
         <div className="max-w-7xl mx-auto">
           <div
-            className={`flex justify-between items-center py-4 mx-auto c-space transition-opacity duration-200 ${
+            className={`flex justify-between items-center py-5 mx-auto c-space transition-opacity duration-200 ${
               headerHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'
             }`}>
 
-            {/* ── Left: terminal prompt logo ── */}
+            {/* Logo */}
             <Link
               to="/"
               onClick={(e) => {
@@ -356,24 +362,13 @@ const Navbar = () => {
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
               }}
-              className="flex items-center gap-0 group shrink-0">
-              <span className="font-mono text-[13px] text-white/50 group-hover:text-white/65 transition-colors duration-300">[</span>
-              <span className="font-mono text-[13px] text-white/90 group-hover:text-white transition-colors duration-300">myo.thiha.kyaw</span>
-              <span className="font-mono text-[13px] text-white/50 group-hover:text-white/65 transition-colors duration-300">:~</span>
-              <span className="font-mono text-[13px] text-white/50 group-hover:text-white/65 transition-colors duration-300">]$</span>
-              <span className="font-mono text-[14px] text-white/65 ml-1 animate-pulse">▋</span>
-              {/* Current section path — fades in on scroll */}
-              <span
-                className={`font-mono text-[12px] text-white/45 ml-3 transition-all duration-500 ${
-                  scrolled && activeSection !== 'home'
-                    ? 'opacity-100 translate-x-0'
-                    : 'opacity-0 -translate-x-1'
-                }`}>
-                ~/{activeSection}
+              className="flex items-center gap-3 group">
+              <span className="text-white/85 text-[10px] sm:text-[11px] tracking-[0.25em] sm:tracking-[0.35em] uppercase font-light group-hover:text-white transition-colors">
+                Myo Thiha Kyaw
               </span>
             </Link>
 
-            {/* ── Mobile hamburger ── */}
+            {/* Mobile toggle */}
             <button
               onClick={toggleMenu}
               className="relative w-8 h-8 flex flex-col items-center justify-center gap-[5px] sm:hidden group"
@@ -390,25 +385,18 @@ const Navbar = () => {
               />
             </button>
 
-            {/* ── Desktop nav center ── */}
-            <nav className="sm:flex hidden items-center">
-              <DesktopNavItems activeSection={activeSection} />
-            </nav>
-
-            {/* ── Right: status + clock ── */}
-            <div className="sm:flex hidden items-center gap-3 shrink-0">
-              <span className="font-mono text-[12px] text-white/30 select-none">—</span>
-              <div className="flex items-center gap-2">
+            {/* Desktop nav */}
+            <nav className="sm:flex hidden items-center gap-8">
+              <NavItems activeSection={activeSection} />
+              <div className="flex items-center gap-2 ml-4 pl-4 border-l border-white/[0.18]">
                 <div className="w-1.5 h-1.5 rounded-full bg-green-400/80 shadow-[0_0_4px_1px_rgba(74,222,128,0.4)]" />
-                <span className="font-mono text-[12px] text-white/70 tracking-wider">Available</span>
+                <span className="text-white/80 text-[11px] tracking-[0.2em] uppercase font-normal">Available</span>
               </div>
-              <span className="font-mono text-[12px] text-white/30 select-none">—</span>
-              <span className="font-mono text-[12px] text-white/55 tabular-nums tracking-wider">{clock}</span>
-            </div>
+            </nav>
           </div>
         </div>
 
-        {/* Bottom separator (on scroll) */}
+        {/* Bottom separator on scroll */}
         <div
           className={`h-[1px] w-full bg-gradient-to-r from-transparent via-white/[0.06] to-transparent transition-opacity duration-500 ${
             scrolled ? 'opacity-100' : 'opacity-0'
@@ -416,7 +404,7 @@ const Navbar = () => {
         />
       </header>
 
-      <MobileMenu isOpen={isOpen} onClose={closeMenu} />
+      <MobileMenu isOpen={isOpen} onClose={closeMenu} activeSection={activeSection} />
     </>
   );
 };
