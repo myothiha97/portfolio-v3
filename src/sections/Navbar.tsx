@@ -35,21 +35,6 @@ const useActiveSection = () => {
   return active;
 };
 
-// Scroll progress 0–1
-const useScrollProgress = () => {
-  const [progress, setProgress] = useState(0);
-  useEffect(() => {
-    const update = () => {
-      const scrolled = window.scrollY;
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(total > 0 ? scrolled / total : 0);
-    };
-    window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
-  }, []);
-  return progress;
-};
-
 const NavItems = ({ activeSection, onClick = () => {} }: { activeSection: string; onClick?: () => void }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -308,7 +293,7 @@ const Navbar = () => {
   const [menuClosing, setMenuClosing] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const activeSection = useActiveSection();
-  const scrollProgress = useScrollProgress();
+
 
   const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
   const closeMenu = useCallback(() => {
@@ -339,14 +324,6 @@ const Navbar = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled ? 'bg-[#010103]/95 backdrop-blur-md' : 'bg-transparent'
         }`}>
-        {/* Scroll progress bar */}
-        <div className="h-[2px] w-full relative bg-white/[0.06]">
-          <div
-            className="absolute top-0 left-0 h-full bg-white transition-all duration-75 shadow-[0_0_6px_1px_rgba(255,255,255,0.6)]"
-            style={{ width: `${scrollProgress * 100}%` }}
-          />
-        </div>
-
         <div className="max-w-7xl mx-auto">
           <div
             className={`flex justify-between items-center py-5 mx-auto c-space transition-opacity duration-200 ${
